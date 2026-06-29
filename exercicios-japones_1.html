@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習 · Exercícios por Lição — Japonês (1–7)</title>
+<style>
+  :root{
+    --ink:#141d33;--ink-2:#1d2945;--ink-3:#26345a;--tink:#101729;
+    --persimmon:#e0623a;--persimmon-d:#c44e2a;
+    --celadon:#6fa088;--celadon-d:#4f7d68;--rose:#c8504e;
+    --text-paper:#e9e6dc;--text-mut:#a6b0c9;
+    --radius:14px;--line:rgba(233,230,220,.12);
+    --f-jp:'Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo','MS PGothic',sans-serif;
+    --f-disp:Georgia,'Hoefler Text','Times New Roman',serif;
+    --f-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(1200px 600px at 80% -10%,#1c2950 0%,transparent 55%),radial-gradient(900px 500px at -10% 110%,#20183a 0%,transparent 50%),var(--ink);
+    color:var(--text-paper);font-family:var(--f-body);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
+  .jp{font-family:var(--f-jp)}
+  .wrap{max-width:780px;margin:0 auto;padding:22px 18px 90px}
+  header.top{padding:12px 2px 16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--persimmon);font-weight:600}
+  h1.title{font-family:var(--f-disp);font-weight:700;line-height:.98;font-size:clamp(1.8rem,6vw,2.8rem);margin:.18em 0 .12em;color:#fff}
+  h1.title .jc{font-family:var(--f-jp);color:var(--persimmon);font-size:.58em;margin-right:.18em}
+  .sub{color:var(--text-mut);font-size:.93rem;max-width:62ch}
+
+  .crumb{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-mut);margin-bottom:12px;flex-wrap:wrap}
+  .crumb a{color:#8fb0e0;cursor:pointer}
+  .crumb .sep{opacity:.5}
+
+  .menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+  .lcard{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:15px;cursor:pointer;transition:.15s;text-align:left;color:inherit;font-family:inherit}
+  .lcard:hover{border-color:#46598c;transform:translateY(-2px)}
+  .lcard .ln{font-family:var(--f-disp);font-size:1.5rem;font-weight:700;color:#fff;display:flex;align-items:baseline;gap:6px}
+  .lcard .ln small{font-size:.55em;color:var(--persimmon);font-weight:600;letter-spacing:.04em}
+  .lcard .lt{font-size:.84rem;color:var(--text-mut);margin-top:4px}
+  .lcard .lb{font-size:.72rem;color:var(--persimmon);margin-top:8px;font-weight:600}
+
+  .blist{display:grid;gap:10px}
+  .bcard{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:.15s;text-align:left;color:inherit;font-family:inherit;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .bcard:hover{border-color:#46598c}
+  .bcard .bl{font-weight:600;color:#fff;font-size:1rem}
+  .bcard .bd{font-size:.82rem;color:var(--text-mut);margin-top:2px}
+  .bcard .bmeta{text-align:right;flex:none}
+  .typetag{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--celadon);background:rgba(111,160,136,.12);padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .bcard .cnt{font-size:.72rem;color:var(--text-mut);margin-top:5px}
+  .bcard .best{color:var(--persimmon);font-weight:600}
+
+  .btn{appearance:none;border:1px solid var(--ink-3);background:var(--ink-2);color:var(--text-paper);font-family:inherit;font-weight:600;font-size:.85rem;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:#46598c}
+  .btn.accent{background:var(--persimmon);border-color:var(--persimmon);color:#fff}
+  .btn.accent:hover{background:var(--persimmon-d);border-color:var(--persimmon-d)}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.5;cursor:default}
+
+  .modtitle{font-family:var(--f-disp);font-size:1.2rem;color:#fff;font-weight:600;margin:2px 2px 2px}
+  .barwrap{height:5px;border-radius:99px;background:var(--ink-2);overflow:hidden;margin:10px 2px 4px}
+  .barwrap i{display:block;height:100%;background:linear-gradient(90deg,var(--persimmon),var(--persimmon-d));transition:width .3s}
+  .meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-mut);margin:0 2px 16px}
+  .meta b{color:var(--celadon)}
+
+  .qcard{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:20px}
+  .prompt{font-size:1rem;color:var(--text-mut);margin-bottom:6px}
+  .promptpt{font-size:1.2rem;color:#fff;margin-bottom:4px}
+  .promptplain{font-size:1.05rem;color:#fff;margin-bottom:4px;line-height:1.55}
+  .qjp{font-family:var(--f-jp);font-size:1.7rem;color:#fff;line-height:1.5;margin:6px 0}
+  .qkana{font-family:var(--f-jp);color:var(--text-mut);font-size:.95rem}
+  .qpt{color:var(--text-paper);font-size:1rem;margin-top:6px;font-style:italic}
+
+  .opts{display:grid;gap:9px;margin-top:16px}
+  .opt{appearance:none;text-align:left;border:1px solid var(--ink-3);background:var(--tink);color:var(--text-paper);font-family:var(--f-jp);font-size:1.1rem;font-weight:500;padding:13px 15px;border-radius:10px;cursor:pointer;transition:.13s}
+  .opt:hover{border-color:#46598c}
+  .opt.ok{border-color:var(--celadon);background:rgba(111,160,136,.16);color:#fff}
+  .opt.bad{border-color:var(--rose);background:rgba(200,80,78,.14)}
+  .opt:disabled{cursor:default}
+
+  .build{min-height:54px;border:2px dashed #3a4a76;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;margin:14px 0;background:var(--tink)}
+  .build:empty::before{content:'monte a frase aqui';color:var(--text-mut);font-size:.85rem;font-style:italic;align-self:center;padding:6px}
+  .pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chunk{appearance:none;border:1px solid var(--ink-3);background:var(--ink-2);color:#fff;font-family:var(--f-jp);font-size:1.15rem;padding:9px 13px;border-radius:9px;cursor:pointer;transition:.12s}
+  .chunk:hover{border-color:var(--persimmon)}
+  .chunk.placed{background:var(--persimmon);border-color:var(--persimmon)}
+
+  .sentence{font-family:var(--f-jp);font-size:1.4rem;line-height:2;color:#fff;margin-bottom:6px}
+  .gap{display:inline-flex;align-items:center;justify-content:center;min-width:2.1em;height:1.7em;margin:0 .08em;border-radius:8px;border:2px dashed #4a5a86;background:var(--tink);color:var(--persimmon);font-family:var(--f-jp);font-weight:700;font-size:.9em;cursor:pointer;vertical-align:-.35em;padding:0 .2em;transition:.12s}
+  .gap.active{border-style:solid;border-color:var(--persimmon);box-shadow:0 0 0 3px rgba(224,98,58,.22)}
+  .gap.ok{border-style:solid;border-color:var(--celadon);color:var(--celadon);background:rgba(111,160,136,.12)}
+  .gap.bad{border-style:solid;border-color:var(--rose);color:#f0a3a1;background:rgba(200,80,78,.12)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+  .chip{appearance:none;border:1px solid var(--ink-3);background:var(--tink);color:var(--persimmon);font-family:var(--f-jp);font-weight:700;font-size:1.05rem;min-width:2.6em;padding:7px 10px;border-radius:9px;cursor:pointer}
+  .chip:hover{border-color:var(--persimmon)}
+
+  .reveal-ans{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .reveal-ans.show{display:block}
+  .selfrate{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+
+  .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  .feedback{margin-top:14px;padding:11px 13px;border-radius:10px;font-size:.92rem;display:none}
+  .feedback.show{display:block}
+  .feedback.right{background:rgba(111,160,136,.14);border:1px solid var(--celadon-d);color:#cfe6da}
+  .feedback.wrong{background:rgba(200,80,78,.12);border:1px solid #8a3b3a;color:#f0c7c6}
+  .feedback .ans{color:#fff;font-family:var(--f-jp)}
+  .feedback .note{display:block;margin-top:5px;color:var(--text-mut);font-style:italic;font-family:var(--f-body)}
+
+  .done{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:28px 20px;text-align:center}
+  .done .big{font-family:var(--f-disp);font-size:2.4rem;color:#fff;font-weight:700}
+  .done .lbl{color:var(--text-mut);margin:4px 0 18px}
+  .done .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+  footer.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:var(--text-mut);font-size:.8rem;text-align:center}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:3px solid var(--persimmon);outline-offset:2px;border-radius:6px}
+  @media(max-width:560px){.qjp{font-size:1.45rem}.sentence{font-size:1.2rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Exercícios · Lições 1–7</div>
+    <h1 class="title"><span class="jc">練習</span>Exercícios por Lição</h1>
+    <p class="sub" id="subtitle">Cada exercício gera <b>50 itens novos a cada vez</b> que você o abre — prática praticamente ilimitada, sempre corrigida na hora. Escolha uma lição.</p>
+  </header>
+  <div id="stage"></div>
+  <footer class="foot">Os itens são gerados a partir do vocabulário e das regras das Lições 1–7. Em tradução, versão, conjugação e formas com て, a resposta é um modelo — outras formas podem servir. Os exercícios seguem os do livro (B1, B2, C1…).</footer>
+</div>
+
+<script>
+/* =========================================================
+   MOTOR (pools + conjugação + geradores) — validado em Node
+   ========================================================= */
+const VERBS=[
+ {s:"会う",r:"あう",g:1,pt:"encontrar-se"},{s:"歩く",r:"あるく",g:1,pt:"andar"},{s:"行く",r:"いく",g:1,pt:"ir",irr:"iku"},
+ {s:"売る",r:"うる",g:1,pt:"vender"},{s:"買う",r:"かう",g:1,pt:"comprar"},{s:"書く",r:"かく",g:1,pt:"escrever"},
+ {s:"聞く",r:"きく",g:1,pt:"ouvir / perguntar"},{s:"切る",r:"きる",g:1,pt:"cortar"},{s:"泳ぐ",r:"およぐ",g:1,pt:"nadar"},
+ {s:"飲む",r:"のむ",g:1,pt:"beber"},{s:"読む",r:"よむ",g:1,pt:"ler"},{s:"話す",r:"はなす",g:1,pt:"falar"},
+ {s:"遊ぶ",r:"あそぶ",g:1,pt:"brincar"},{s:"飛ぶ",r:"とぶ",g:1,pt:"voar"},{s:"死ぬ",r:"しぬ",g:1,pt:"morrer"},
+ {s:"立つ",r:"たつ",g:1,pt:"levantar-se"},{s:"持つ",r:"もつ",g:1,pt:"segurar / levar"},{s:"取る",r:"とる",g:1,pt:"pegar"},
+ {s:"帰る",r:"かえる",g:1,pt:"voltar"},{s:"走る",r:"はしる",g:1,pt:"correr"},{s:"終わる",r:"おわる",g:1,pt:"terminar"},
+ {s:"止まる",r:"とまる",g:1,pt:"parar"},{s:"貸す",r:"かす",g:1,pt:"emprestar"},{s:"脱ぐ",r:"ぬぐ",g:1,pt:"tirar (roupa)"},
+ {s:"なる",r:"なる",g:1,pt:"tornar-se"},{s:"入る",r:"はいる",g:1,pt:"entrar"},{s:"洗う",r:"あらう",g:1,pt:"lavar"},
+ {s:"勝つ",r:"かつ",g:1,pt:"vencer"},{s:"作る",r:"つくる",g:1,pt:"fazer / criar"},{s:"使う",r:"つかう",g:1,pt:"usar"},
+ {s:"探す",r:"さがす",g:1,pt:"procurar"},{s:"撮る",r:"とる",g:1,pt:"fotografar"},
+ {s:"食べる",r:"たべる",g:2,pt:"comer"},{s:"見る",r:"みる",g:2,pt:"ver"},{s:"起きる",r:"おきる",g:2,pt:"acordar"},
+ {s:"寝る",r:"ねる",g:2,pt:"dormir"},{s:"着る",r:"きる",g:2,pt:"vestir-se"},{s:"教える",r:"おしえる",g:2,pt:"ensinar"},
+ {s:"覚える",r:"おぼえる",g:2,pt:"memorizar"},{s:"借りる",r:"かりる",g:2,pt:"tomar emprestado"},
+ {s:"出かける",r:"でかける",g:2,pt:"sair"},{s:"入れる",r:"いれる",g:2,pt:"pôr dentro"},{s:"育てる",r:"そだてる",g:2,pt:"criar"},
+ {s:"調べる",r:"しらべる",g:2,pt:"pesquisar"},{s:"考える",r:"かんがえる",g:2,pt:"pensar"},
+ {s:"する",r:"する",g:3,pt:"fazer"},{s:"来る",r:"くる",g:3,pt:"vir",irr:"kuru"},
+ {s:"勉強する",r:"べんきょうする",g:3,pt:"estudar"},{s:"結婚する",r:"けっこんする",g:3,pt:"casar-se"},
+ {s:"質問する",r:"しつもんする",g:3,pt:"fazer perguntas"},{s:"練習する",r:"れんしゅうする",g:3,pt:"treinar"},
+ {s:"約束する",r:"やくそくする",g:3,pt:"prometer"},
+ {s:"ある",r:"ある",g:1,pt:"haver (inanimado)",irr:"aru"},{s:"いる",r:"いる",g:2,pt:"haver (animado)"}
+];
+const GO={"う":{i:"い",a:"わ",ta:"った"},"く":{i:"き",a:"か",ta:"いた"},"ぐ":{i:"ぎ",a:"が",ta:"いだ"},
+ "す":{i:"し",a:"さ",ta:"した"},"つ":{i:"ち",a:"た",ta:"った"},"ぬ":{i:"に",a:"な",ta:"んだ"},
+ "ぶ":{i:"び",a:"ば",ta:"んだ"},"む":{i:"み",a:"ま",ta:"んだ"},"る":{i:"り",a:"ら",ta:"った"}};
+function conjVerb(v){
+  if(v.irr==="aru")return{nai:"ない",ta:"あった",nakatta:"なかった",masu:"あります",mashita:"ありました",masen:"ありません",masendeshita:"ありませんでした"};
+  if(v.g===3){
+    if(v.s.endsWith("する")){const b=v.s.slice(0,-2);return{nai:b+"しない",ta:b+"した",nakatta:b+"しなかった",masu:b+"します",mashita:b+"しました",masen:b+"しません",masendeshita:b+"しませんでした"};}
+    if(v.irr==="kuru")return{nai:"来ない",ta:"来た",nakatta:"来なかった",masu:"来ます",mashita:"来ました",masen:"来ません",masendeshita:"来ませんでした"};
+  }
+  if(v.g===2){const st=v.s.slice(0,-1);return{nai:st+"ない",ta:st+"た",nakatta:st+"なかった",masu:st+"ます",mashita:st+"ました",masen:st+"ません",masendeshita:st+"ませんでした"};}
+  const last=v.s.slice(-1),st=v.s.slice(0,-1),T=GO[last];
+  let ta=st+T.ta;if(v.irr==="iku")ta=st+"った";
+  return{nai:st+T.a+"ない",ta:ta,nakatta:st+T.a+"なかった",masu:st+T.i+"ます",mashita:st+T.i+"ました",masen:st+T.i+"ません",masendeshita:st+T.i+"ませんでした"};
+}
+const ADJ_I=[["青い","あおい","azul"],["赤い","あかい","vermelho"],["新しい","あたらしい","novo"],["暑い","あつい","quente (clima)"],["甘い","あまい","doce"],["忙しい","いそがしい","ocupado"],["大きい","おおきい","grande"],["悲しい","かなしい","triste"],["黄色い","きいろい","amarelo"],["黒い","くろい","preto"],["寒い","さむい","frio (clima)"],["白い","しろい","branco"],["涼しい","すずしい","fresco"],["狭い","せまい","estreito"],["高い","たかい","alto / caro"],["楽しい","たのしい","divertido"],["冷たい","つめたい","gelado"],["遠い","とおい","longe"],["広い","ひろい","amplo"],["古い","ふるい","velho"],["難しい","むずかしい","difícil"],["安い","やすい","barato"],["若い","わかい","jovem"],["小さい","ちいさい","pequeno"],["重い","おもい","pesado"],["軽い","かるい","leve"],["長い","ながい","longo"],["短い","みじかい","curto"],["速い","はやい","rápido"],["遅い","おそい","lento / tarde"],["近い","ちかい","perto"],["低い","ひくい","baixo"],["強い","つよい","forte"],["弱い","よわい","fraco"],["暗い","くらい","escuro"],["悪い","わるい","ruim"],["いい","いい","bom"]];
+const ADJ_NA=[["安全","あんぜん","seguro"],["簡単","かんたん","simples"],["危険","きけん","perigoso"],["きれい","きれい","limpo / bonito"],["経済的","けいざいてき","econômico"],["元気","げんき","saudável / animado"],["静か","しずか","silencioso"],["実用的","じつようてき","prático"],["上手","じょうず","hábil"],["親切","しんせつ","gentil"],["好き","すき","gostar (de)"],["得意","とくい","ponto forte"],["苦手","にがて","ponto fraco"],["にぎやか","にぎやか","agitado / animado"],["複雑","ふくざつ","complexo"],["不便","ふべん","de difícil acesso"],["下手","へた","ruim (em algo)"],["便利","べんり","prático / fácil acesso"],["無駄","むだ","desperdício"],["有名","ゆうめい","famoso"],["必要","ひつよう","necessário"],["嫌い","きらい","detestar"]];
+function conjAdjI(a){const s=a[0];if(s==="いい")return{neg:"よくない",past:"よかった",pastneg:"よくなかった",te:"よくて"};const st=s.slice(0,-1);return{neg:st+"くない",past:st+"かった",pastneg:st+"くなかった",te:st+"くて"};}
+function conjAdjNa(a){const s=a[0];return{neg:s+"ではない",past:s+"だった",pastneg:s+"ではなかった",te:s+"で"};}
+const NOUNS=[["テスト","prova"],["犬","cachorro"],["学生","estudante"],["先生","professor"],["友達","amigo"],["医者","médico"],["本","livro"],["車","carro"],["店","loja"],["夜","noite"],["休み","folga / férias"],["雨","chuva"]];
+const ANTO=[["いい","悪い"],["新しい","古い"],["安い","高い"],["強い","弱い"],["広い","狭い"],["高い","低い"],["遠い","近い"],["重い","軽い"],["明るい","暗い"],["熱い","冷たい"],["速い","遅い"],["暑い","寒い"],["長い","短い"],["大きい","小さい"],["難しい","やさしい"],["危険","安全"],["うるさい","静か"],["嫌い","好き"],["不便","便利"],["下手","上手"],["苦手","得意"]];
+const CT={
+ つ:["","ひとつ","ふたつ","みっつ","よっつ","いつつ","むっつ","ななつ","やっつ","ここのつ","とお"],
+ 人:["","ひとり","ふたり","さんにん","よにん","ごにん","ろくにん","ななにん","はちにん","きゅうにん","じゅうにん"],
+ 本:["","いっぽん","にほん","さんぼん","よんほん","ごほん","ろっぽん","ななほん","はっぽん","きゅうほん","じゅっぽん"],
+ 枚:["","いちまい","にまい","さんまい","よんまい","ごまい","ろくまい","ななまい","はちまい","きゅうまい","じゅうまい"],
+ 冊:["","いっさつ","にさつ","さんさつ","よんさつ","ごさつ","ろくさつ","ななさつ","はっさつ","きゅうさつ","じゅっさつ"],
+ 匹:["","いっぴき","にひき","さんびき","よんひき","ごひき","ろっぴき","ななひき","はっぴき","きゅうひき","じゅっぴき"],
+ 台:["","いちだい","にだい","さんだい","よんだい","ごだい","ろくだい","ななだい","はちだい","きゅうだい","じゅうだい"],
+ 回:["","いっかい","にかい","さんかい","よんかい","ごかい","ろっかい","ななかい","はっかい","きゅうかい","じゅっかい"],
+ 頭:["","いっとう","にとう","さんとう","よんとう","ごとう","ろくとう","ななとう","はっとう","きゅうとう","じゅっとう"],
+ 個:["","いっこ","にこ","さんこ","よんこ","ごこ","ろっこ","ななこ","はちこ","きゅうこ","じゅっこ"]
+};
+const NC=[["本","冊","livro(s)","読む","Leio"],["雑誌","冊","revista(s)","買う","Compro"],["辞書","冊","dicionário(s)","借りる","Pego emprestado"],["ノート","冊","caderno(s)","買う","Compro"],
+ ["紙","枚","folha(s) de papel","切る","Corto"],["絵","枚","quadro(s)","売る","Vendo"],["シャツ","枚","camisa(s)","洗う","Lavo"],["写真","枚","foto(s)","撮る","Tiro"],
+ ["犬","匹","cachorro(s)","いる","Há"],["魚","匹","peixe(s)","いる","Há"],["小鳥","匹","passarinho(s)","いる","Há"],
+ ["牛","頭","boi(s)","いる","Há"],["馬","頭","cavalo(s)","いる","Há"],
+ ["子供","人","criança(s)","いる","Há"],["学生","人","estudante(s)","いる","Há"],["友達","人","amigo(s)","いる","Há"],
+ ["車","台","carro(s)","買う","Compro"],["自動車","台","automóvel(is)","ある","Há"],["テレビ","台","televisor(es)","買う","Compro"],
+ ["ビール","本","cerveja(s)","飲む","Bebo"],["ボールペン","本","caneta(s)","もらう","Ganho"],["かさ","本","guarda-chuva(s)","持つ","Levo"],
+ ["りんご","個","maçã(s)","食べる","Como"],["たまご","個","ovo(s)","買う","Compro"],["みかん","個","laranja(s)","食べる","Como"]];
+
+const SUBJ=[["子供","A criança"],["学生","O estudante"],["友達","O amigo"],["先生","O professor"],["男の人","O homem"],["女の人","A mulher"],["大学生","O universitário"]];
+const PLACE=[["公園","no parque"],["学校","na escola"],["図書館","na biblioteca"],["教室","na sala de aula"],["大学","na universidade"],["家","em casa"],["店","na loja"],["キッチン","na cozinha"]];
+const OBJV=[["本","um livro","読む",1,"lê","leu"],["新聞","o jornal","読む",1,"lê","leu"],["雑誌","uma revista","買う",1,"compra","comprou"],["映画","um filme","見る",2,"vê","viu"],["音楽","música","聞く",1,"ouve","ouviu"],["ごはん","comida","食べる",2,"come","comeu"],["コーヒー","café","飲む",1,"bebe","bebeu"],["漢字","kanji","書く",1,"escreve","escreveu"],["野菜","verduras","切る",1,"corta","cortou"]];
+function vform(surface,g,tense){const found=VERBS.find(x=>x.s===surface)||{s:surface,g:g};const c=conjVerb(found);return tense==="past"?c.ta:tense==="polite"?c.masu:surface;}
+
+const G3=["Grupo 1","Grupo 2","Grupo 3"];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function genVerbGroup(){const v=rnd(VERBS.filter(x=>x.s!=="ある"&&x.s!=="いる"));return{jp:v.s,kana:v.r,pt:v.pt,options:G3,answer:"Grupo "+v.g};}
+function genVerbConj(){const v=rnd(VERBS.filter(x=>x.irr!=="aru"));const c=conjVerb(v);return{p:`${v.s} (${v.r}) — Grupo ${v.g}<br>negativo · passado · passado negativo:`,a:`${c.nai} / ${c.ta} / ${c.nakatta}`};}
+function genPolite(past){const v=rnd(VERBS.filter(x=>x.irr!=="aru"));const c=conjVerb(v);return past?{p:`${v.s} (${v.r}) → polida (passado):`,a:c.mashita}:{p:`${v.s} (${v.r}) → polida (presente):`,a:c.masu};}
+function genAdjIFlex(){const a=rnd(ADJ_I);const c=conjAdjI(a);const forms=[["presente negativo",c.neg],["passado",c.past],["passado negativo",c.pastneg]];const f=rnd(forms);return{p:`${a[0]} (${a[1]}) — ${a[2]}<br>${f[0]}:`,a:f[1]};}
+function genAdjIQuadro(){const a=rnd(ADJ_I);const c=conjAdjI(a);return{p:`${a[0]} (${a[1]}) — ${a[2]}<br>presente neg. · passado · passado neg.:`,a:`${c.neg} / ${c.past} / ${c.pastneg}`};}
+function genAdjNaQuadro(){const a=rnd(ADJ_NA);const c=conjAdjNa(a);return{p:`${a[0]} — ${a[2]}<br>presente neg. · passado · passado neg.:`,a:`${c.neg} / ${c.past} / ${c.pastneg}`};}
+function genNominal(){const n=rnd(NOUNS);return{p:`${n[0]} — "${n[1]}"<br>presente · passado · neg. presente · neg. passado:`,a:`${n[0]}だ / ${n[0]}だった / ${n[0]}ではない / ${n[0]}ではなかった`};}
+function genTe(){let a=rnd(ADJ_I),b=rnd(ADJ_I);while(b[0]===a[0])b=rnd(ADJ_I);return{p:`${a[0]} ＋ ${b[0]}<br>(una com て)`,a:conjAdjI(a).te+b[0]};}
+function genAnto(){const p=rnd(ANTO);const flip=Math.random()<.5;const q=flip?p[0]:p[1],ans=flip?p[1]:p[0];const pool=ADJ_I.map(x=>x[0]).concat(ADJ_NA.map(x=>x[0])).filter(x=>x!==q&&x!==ans);const d=shuf(pool).slice(0,2);return{prompt:`Oposto de ${q}:`,options:shuf([ans,d[0],d[1]]),answer:ans};}
+function genVocabNa(){const a=rnd(ADJ_NA);const pool=ADJ_NA.filter(x=>x[0]!==a[0]).map(x=>x[0]);const d=shuf(pool).slice(0,2);return{prompt:a[2],options:shuf([a[0],d[0],d[1]]),answer:a[0]};}
+function genVocabI(){const a=rnd(ADJ_I);const pool=ADJ_I.filter(x=>x[0]!==a[0]).map(x=>x[0]);const d=shuf(pool).slice(0,2);return{prompt:a[2],options:shuf([a[0],d[0],d[1]]),answer:a[0]};}
+function genCounter(){for(let t=0;t<25;t++){const n=rnd(NC);const num=1+Math.floor(Math.random()*10);const ctr=n[1];const correct=CT[ctr][num];const others=shuf(Object.keys(CT).filter(k=>k!==ctr));const d=[];for(const k of others){const r=CT[k][num];if(r&&r!==correct&&!d.includes(r))d.push(r);if(d.length===2)break;}if(d.length<2)continue;const verb=n[3];const animate=["いる","ある"].includes(verb);return{jp:`${n[0]}${animate?"が":"を"} ＿ ${verb}。`,pt:`${n[4]} ${num} ${n[2]}.`,options:shuf([correct,d[0],d[1]]),answer:correct,note:`${n[2]} → contador ${ctr}.`};}return{jp:"本を ＿ 読む。",pt:"Leio 1 livro.",options:["いっさつ","いっぽん","いちまい"],answer:"いっさつ"};}
+function genCounterProd(){const n=rnd(NC);const num=1+Math.floor(Math.random()*10);return{p:`${n[0]}を ＿ ${n[3]}。（${num}）<br><span style="color:var(--text-mut);font-size:.85rem">${n[2]}</span>`,a:`${CT[n[1]][num]}（${num}${n[1]==="つ"?"":n[1]}）`};}
+
+const INTRANS=[["子供が","遊ぶ","A criança brinca."],["雨が","降る","Chove."],["授業が","終わる","A aula termina."],["魚が","泳ぐ","O peixe nada."],["マラソンランナーが","走る","O maratonista corre."],["風が","吹く","O vento sopra."],["鳥が","飛ぶ","O pássaro voa."],["ドアが","閉まる","A porta fecha."],["学生が","勉強する","O estudante estuda."],["机が","ある","Há uma carteira."],["バスが","止まる","O ônibus para."],["先生が","来る","O professor vem."],["友達が","帰る","O amigo volta."],["花が","咲く","A flor desabrocha."],["人が","立つ","A pessoa se levanta."],["子供が","寝る","A criança dorme."]];
+const INTRANS_POOL=[...new Set(INTRANS.map(x=>x[1]))];
+function genCompleteVerb(){const it=rnd(INTRANS);const pool=INTRANS_POOL.filter(v=>v!==it[1]);const d=shuf(pool).slice(0,2);return{jp:`${it[0]} ＿。`,pt:it[2],options:shuf([it[1],d[0],d[1]]),answer:it[1]};}
+
+const DEMO=[["isto (perto de mim)","これ"],["isso (perto de você)","それ"],["aquilo (longe dos dois)","あれ"],["aqui","ここ"],["aí / ali","そこ"],["lá (longe)","あそこ"],["qual / quais","どれ"],["onde","どこ"],["qual lado? (informal)","どっち"],["qual lado? (formal)","どちら"],["deste lado (informal)","こっち"],["de que tipo?","どんな"],["quando?","いつ"],["este ___ (+ subst.)","この"],["esse ___ (+ subst.)","その"],["aquele ___ (+ subst.)","あの"]];
+function genDemo(){const it=rnd(DEMO);const pool=DEMO.filter(x=>x[1]!==it[1]).map(x=>x[1]);const d=shuf(pool).slice(0,2);return{prompt:it[0],options:shuf([it[1],d[0],d[1]]),answer:it[1]};}
+
+const NI=[["六時に起きる。","tempo"],["学校に行く。","destino"],["庭に犬がいる。","existência/local"],["教師になる。","resultado"],["友達に話す。","referência"],["毎朝七時に出かける。","tempo"],["図書館に本がある。","existência/local"],["医者になる。","resultado"],["先生に聞く。","referência"],["日本に行く。","destino"],["机の上にかばんがある。","existência/local"],["九時に寝る。","tempo"]];
+const NI_OPTS=["tempo","destino","existência/local","resultado","referência"];
+function genNiClass(){const it=rnd(NI);return{jp:it[0],pt:"Qual a função da partícula に?",options:NI_OPTS,answer:it[1]};}
+
+const TOKUI=[["わたしは漢字が ＿ です。","得意","Falando do próprio ponto forte."],["友達は料理が ＿ です。","上手","Observando a habilidade de outra pessoa."],["母は歌が ＿ です。","得意","A própria pessoa fala do que faz bem."],["先生は字が ＿ です。","上手","Elogiando a habilidade de outro."],["妹はスポーツが ＿ です。","得意","Ponto forte de alguém próximo (visto como próprio)."],["あの人は運転が ＿ です。","上手","Observando alguém dirigir bem."],["わたしは料理が ＿ です。","得意","Próprio ponto forte."],["田中さんは日本語が ＿ です。","上手","Observando a habilidade de outro."]];
+function genTokui(){const it=rnd(TOKUI);return{jp:it[0],pt:it[2],options:["得意","上手"],answer:it[1]};}
+
+const TOPIC=[["地下鉄","O metrô"],["大学","A universidade"],["この店","Esta loja"],["教室","A sala"],["この車","Este carro"],["公園","O parque"],["あのレストラン","Aquele restaurante"],["駅","A estação"]];
+function genAdj2Pred(kind){const t=rnd(TOPIC),a=rnd(ADJ_NA.filter(x=>!["好き","嫌い","得意","苦手","上手","下手"].includes(x[0])));
+ const jpAff=`${t[0]}は${a[0]}だ。`,jpNeg=`${t[0]}は${a[0]}ではない。`;
+ const ptAff=`${t[1]} é ${a[2]}.`,ptNeg=`${t[1]} não é ${a[2]}.`;
+ if(kind==="neg")return{p:jpAff,a:jpNeg};
+ if(kind==="trad")return{p:jpAff,a:ptAff};
+ if(kind==="vers")return{p:ptAff,a:jpAff};
+}
+function genTeSentence(kind){const t=rnd(TOPIC);let a=rnd(ADJ_I),b=rnd(ADJ_I);while(b[0]===a[0])b=rnd(ADJ_I);
+ const jp=`${t[0]}は${conjAdjI(a).te}${b[0]}。`;const pt=`${t[1]} é ${a[2]} e ${b[2]}.`;
+ if(kind==="order"){const chunks=[`${t[0]}は`,conjAdjI(a).te,`${b[0]}。`];return{chunks:chunks,answer:chunks.slice(),pt:pt};}
+ if(kind==="fill"){return{seg:[`${t[0]}は${conjAdjI(a).te}`,{g:1}],answers:[b[0]],t:pt};}
+ if(kind==="trad")return{p:jp,a:pt};
+ if(kind==="vers")return{p:pt,a:jp};
+}
+
+function makeSentence(tense){const s=rnd(SUBJ),pl=rnd(PLACE),ov=rnd(OBJV);const vj=vform(ov[2],ov[3],tense);const pt=`${s[1]} ${tense==="past"?ov[5]:ov[4]} ${ov[1]} ${pl[1]}`;return{parts:[[s[0],"が"],[pl[0],"で"],[ov[0],"を"]],verb:vj,pt:pt};}
+function genOrder(tense){const m=makeSentence(tense);const chunks=m.parts.map(p=>p[0]+p[1]).concat(m.verb+"。");return{chunks:chunks,answer:chunks.slice(),pt:m.pt+"."};}
+function genFill(tense){const m=makeSentence(tense);const seg=[];m.parts.forEach(p=>{seg.push(p[0]);seg.push({g:1});});seg.push(m.verb+"。");return{seg:seg,answers:m.parts.map(p=>p[1]),t:m.pt+"."};}
+function genTrad(tense){const m=makeSentence(tense);return{p:m.parts.map(p=>p[0]+p[1]).join("")+m.verb+"。",a:m.pt+"."};}
+function genVers(tense){const m=makeSentence(tense);return{p:m.pt+".",a:m.parts.map(p=>p[0]+p[1]).join("")+m.verb+"。"};}
+
+/* partículas L4 (com に) e L7 (を・と・で・の・に, が/は escritos) */
+const FILL4=[
+ ()=>{const a=rnd(["犬","小鳥","猫","魚"]),p=rnd(["庭","部屋","教室","公園"]);return{seg:[a,{g:1},p,{g:1},"いる。"],answers:["が","に"],t:`Há ${a==="犬"?"um cachorro":a==="小鳥"?"um passarinho":a==="猫"?"um gato":"um peixe"} no local.`};},
+ ()=>{const m=makeSentence("past");const seg=[];m.parts.forEach(x=>{seg.push(x[0]);seg.push({g:1});});seg.push(m.verb+"。");return{seg:seg,answers:m.parts.map(x=>x[1]),t:m.pt+"."};},
+ ()=>{const h=rnd(["六時","七時","八時","九時"]);return{seg:["毎朝"+h,{g:1},"起きる。"],answers:["に"],t:`Acordo às ${h.replace("時"," h")} todas as manhãs.`};},
+ ()=>{const s=rnd(SUBJ),p=rnd(["学校","大学","図書館","日本"]);return{seg:[s[0],{g:1},p,{g:1},"行く。"],answers:["が","に"],t:`${s[1]} vai ao destino.`};},
+ ()=>{const prof=rnd(["教師","医者","先生"]);return{seg:[prof,{g:1},"なる。"],answers:["に"],t:`Torno-me ${prof==="医者"?"médico":"professor"}.`};}
+];
+function genFill4(){return rnd(FILL4)();}
+const FILL7=[
+ ()=>{const x=rnd(["屋根","木","机","いす"]),y=rnd(["鳥","ねこ","本"]);return{seg:[x,{g:1},"上",{g:1},y+"がある。"],answers:["の","に"],t:`Há algo em cima de ${x==="屋根"?"telhado":x==="木"?"árvore":x==="机"?"mesa":"cadeira"}.`};},
+ ()=>{const p=rnd(["図書館","教室","家","大学"]),o=rnd(["新聞","本","雑誌"]);return{seg:[p,{g:1},o,{g:1},"読んだ。"],answers:["で","を"],t:`Li algo no local.`};},
+ ()=>{const p=rnd(["教室","公園","学校"]);return{seg:[p,{g:1},"クラスメート",{g:1},"話した。"],answers:["で","と"],t:`Conversei com o colega no local.`};},
+ ()=>{return{seg:["口",{g:1},"中",{g:1},"何もない。"],answers:["の","に"],t:"Não há nada na boca."};},
+ ()=>{const p=rnd(["大学","公園","学校"]);return{seg:[p,{g:1},"キャンパス",{g:1},"広場がある。"],answers:["の","に"],t:"Há uma praça no campus."};}
+];
+function genFill7(){return rnd(FILL7)();}
+
+/* =========================================================
+   ESTRUTURA POR LIÇÃO (cada bloco gera 50 itens)
+   ========================================================= */
+const N=50;
+const LICOES=[
+ {n:1,title:"Verbos e partículas de caso",blocks:[
+   {ref:"Ex. B1 — Grupos de verbos",type:"mc",desc:"Classifique o verbo em Grupo 1/2/3.",gen:genVerbGroup,count:N},
+   {ref:"Ex. B2 — Complete com o verbo",type:"mc",desc:"Escolha o verbo que combina com o sujeito.",gen:genCompleteVerb,count:N},
+   {ref:"Ex. B (Texto 3) — Partículas",type:"fill",desc:"Complete com が・を・で.",set:["が","を","と","で","の","に"],gen:()=>genFill("pres"),count:N},
+   {ref:"Ex. B3 — Montar a frase",type:"order",desc:"Ordene os blocos.",gen:()=>genOrder("pres"),count:N},
+   {ref:"Ex. C1 — Tradução (日→PT)",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genTrad("pres"),count:N},
+   {ref:"Ex. C2 — Versão (PT→日)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês.",gen:()=>genVers("pres"),count:N}
+ ]},
+ {n:2,title:"Adjetivos 1 e demonstrativos",blocks:[
+   {ref:"Ex. B1 — Adjetivos: flexão",type:"reveal",pstyle:"plain",desc:"Diga a forma pedida do adjetivo-い.",gen:genAdjIFlex,count:N},
+   {ref:"Ex. B2 — Vocabulário (adj. い)",type:"mc",desc:"Qual a palavra japonesa?",gen:genVocabI,count:N},
+   {ref:"Ex. B1 (Texto 2) — Demonstrativos",type:"mc",desc:"こそあど e interrogativos: PT → 日本語.",gen:genDemo,count:N},
+   {ref:"Ex. C2 — Tradução (日→PT)",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genTrad("pres"),count:N},
+   {ref:"Ex. C1 — Versão (PT→日)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês.",gen:()=>genVers("pres"),count:N}
+ ]},
+ {n:3,title:"Substantivos, adnomes e contadores",blocks:[
+   {ref:"Ex. B1 — Predicado nominal (quadro)",type:"reveal",pstyle:"plain",desc:"Complete as quatro formas.",gen:genNominal,count:N},
+   {ref:"Ex. B1 (Texto 3) — Contadores: escolha",type:"mc",desc:"Escolha o numeral + sufixo correto.",gen:genCounter,count:N},
+   {ref:"Ex. B2 — Numeral + sufixo (produção)",type:"reveal",pstyle:"plain",desc:"Diga o numeral com o contador certo.",gen:genCounterProd,count:N},
+   {ref:"Ex. B3 — Montar a frase",type:"order",desc:"Ordene os blocos.",gen:()=>genOrder("pres"),count:N},
+   {ref:"Ex. C1 — Versão (PT→日)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês.",gen:()=>genVers("pres"),count:N}
+ ]},
+ {n:4,title:"Passado た e negação ない",blocks:[
+   {ref:"Ex. B1 — Conjugação ない・た・なかった",type:"reveal",pstyle:"plain",desc:"Diga as três formas do verbo.",gen:genVerbConj,count:N},
+   {ref:"Ex. B1 — Classifique a partícula に",type:"mc",desc:"Qual a função de に na frase?",gen:genNiClass,count:N},
+   {ref:"Ex. B2 — Partículas (com に)",type:"fill",desc:"Complete com が・を・と・で・の・に.",set:["が","を","と","で","の","に"],gen:genFill4,count:N},
+   {ref:"Ex. C1 — Tradução (passado)",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genTrad("past"),count:N},
+   {ref:"Ex. C2 — Versão (passado)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês (passado).",gen:()=>genVers("past"),count:N}
+ ]},
+ {n:5,title:"Adjetivos 2 e auxiliar da",blocks:[
+   {ref:"Ex. A1 — Vocabulário (adj. 2)",type:"mc",desc:"Qual a palavra japonesa?",gen:genVocabNa,count:N},
+   {ref:"Ex. A2 — Antônimos",type:"mc",desc:"Escolha o oposto.",gen:genAnto,count:N},
+   {ref:"Ex. A3 — 得意 ou 上手?",type:"mc",desc:"得意 = próprio ponto forte; 上手 = habilidade observada em outro.",gen:genTokui,count:N},
+   {ref:"Ex. B1 — Quadro (adj. 2)",type:"reveal",pstyle:"plain",desc:"presente neg. / passado / passado neg.",gen:genAdjNaQuadro,count:N},
+   {ref:"Ex. B2 — Forma negativa (presente)",type:"reveal",pstyle:"jp",desc:"Passe a frase para o negativo presente.",gen:()=>genAdj2Pred("neg"),count:N},
+   {ref:"Ex. C1 — Tradução (adj. 2)",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genAdj2Pred("trad"),count:N},
+   {ref:"Ex. C2 — Versão (adj. 2)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês.",gen:()=>genAdj2Pred("vers"),count:N}
+ ]},
+ {n:6,title:"Adjetivos e partícula て",blocks:[
+   {ref:"Ex. de revisão — Antônimos",type:"mc",desc:"Escolha o adjetivo oposto.",gen:genAnto,count:N},
+   {ref:"Ligação com て — junte os adjetivos",type:"reveal",pstyle:"plain",desc:"Una os dois adjetivos com て.",gen:genTe,count:N},
+   {ref:"Ex. B1 — Quadro (4 formas, adj. い)",type:"reveal",pstyle:"plain",desc:"presente neg. / passado / passado neg.",gen:genAdjIQuadro,count:N},
+   {ref:"Ex. B3 — Montar a frase (com て)",type:"order",desc:"Ordene os blocos.",gen:()=>genTeSentence("order"),count:N},
+   {ref:"Ex. C3 — Tradução com て",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genTeSentence("trad"),count:N},
+   {ref:"Ex. C1 — Versão com て",type:"reveal",pstyle:"pt",desc:"Passe para o japonês.",gen:()=>genTeSentence("vers"),count:N}
+ ]},
+ {n:7,title:"Forma polida ます",blocks:[
+   {ref:"Ex. B1 — Forma polida (presente)",type:"reveal",pstyle:"jp",desc:"Reescreva na forma polida (ます).",gen:()=>genPolite(false),count:N},
+   {ref:"Ex. B1 (Texto 2) — Polida (passado)",type:"reveal",pstyle:"jp",desc:"Reescreva na forma polida do passado.",gen:()=>genPolite(true),count:N},
+   {ref:"Ex. B3 — Partículas",type:"fill",desc:"Complete com を・と・で・の・に.",set:["を","と","で","の","に"],gen:genFill7,count:N},
+   {ref:"Ex. C1 — Tradução (polida)",type:"reveal",pstyle:"jp",desc:"Traduza para o português.",gen:()=>genTrad("polite"),count:N},
+   {ref:"Ex. C2 — Versão (polida)",type:"reveal",pstyle:"pt",desc:"Passe para o japonês na forma polida.",gen:()=>genVers("polite"),count:N}
+ ]}
+];
+
+/* =========================================================
+   ENGINE / RENDER (2 níveis: lições → blocos → drill)
+   ========================================================= */
+const stage=document.getElementById('stage');
+const sub=document.getElementById('subtitle');
+let curL=0,block=null,qi=0,score=0,best={};
+const typeLabel={mc:"Múltipla escolha",order:"Montar frase",fill:"Partículas",reveal:"Autocorreção"};
+
+function showLessons(){
+  block=null;sub.style.display='';
+  let h='<div class="menu">';
+  LICOES.forEach((L,i)=>{h+=`<button class="lcard" data-i="${i}"><div class="ln">${L.n}<small>LIÇÃO</small></div><div class="lt">${L.title}</div><div class="lb">${L.blocks.length} exercícios · ${N}+ itens cada</div></button>`;});
+  h+='</div>';stage.innerHTML=h;
+  [...stage.querySelectorAll('.lcard')].forEach(c=>c.addEventListener('click',()=>showBlocks(+c.dataset.i)));
+}
+function showBlocks(i){
+  curL=i;block=null;sub.style.display='none';
+  const L=LICOES[i];
+  let h=`<div class="crumb"><a id="cbHome">Lições</a><span class="sep">›</span><span>Lição ${L.n} — ${L.title}</span></div><div class="blist">`;
+  L.blocks.forEach((b,bi)=>{const cnt=b.gen?(b.count||N):b.items.length;const bk=best[i+'-'+bi];
+    h+=`<button class="bcard" data-bi="${bi}"><div><div class="bl">${b.ref}</div><div class="bd">${b.desc||''}</div></div>
+      <div class="bmeta"><span class="typetag">${typeLabel[b.type]}</span><div class="cnt">${cnt} itens${bk!=null?' · <span class="best">recorde '+bk+'/'+cnt+'</span>':''}</div></div></button>`;});
+  h+='</div>';stage.innerHTML=h;
+  stage.querySelector('#cbHome').addEventListener('click',showLessons);
+  [...stage.querySelectorAll('.bcard')].forEach(c=>c.addEventListener('click',()=>openBlock(+c.dataset.bi)));
+}
+function openBlock(bi){
+  block=LICOES[curL].blocks[bi];block._bi=bi;
+  if(block.gen){const out=[],seen=new Set();let t=0,n=block.count||N;while(out.length<n&&t<n*40){t++;const it=block.gen();const k=JSON.stringify(it);if(seen.has(k))continue;seen.add(k);out.push(it);}while(out.length<n)out.push(block.gen());block.items=out;}
+  qi=0;score=0;renderQ();
+}
+function frame(inner){const L=LICOES[curL];const pct=Math.round(qi/block.items.length*100);
+  return `<div class="crumb"><a id="cbHome">Lições</a><span class="sep">›</span><a id="cbLes">Lição ${L.n}</a><span class="sep">›</span><span>${block.ref}</span></div>
+    <div class="modtitle">${block.ref}</div><div class="barwrap"><i style="width:${pct}%"></i></div>
+    <div class="meta"><span>Questão ${Math.min(qi+1,block.items.length)} de ${block.items.length}</span><span>Acertos: <b>${score}</b></span></div>${inner}`;}
+function wireCrumb(){const a=document.getElementById('cbHome');if(a)a.addEventListener('click',showLessons);const b=document.getElementById('cbLes');if(b)b.addEventListener('click',()=>showBlocks(curL));}
+function nextRow(){return `<div class="actions"><button class="btn accent" id="next">${qi+1>=block.items.length?'Ver resultado':'Próxima →'}</button></div>`;}
+function wireNext(){const n=document.getElementById('next');if(n)n.addEventListener('click',()=>{qi++;renderQ();});}
+
+function renderQ(){
+  if(qi>=block.items.length){renderDone();return;}
+  if(block.type==='mc')renderMC();else if(block.type==='order')renderOrder();else if(block.type==='fill')renderFill();else renderReveal();
+  wireCrumb();
+}
+function renderMC(){
+  const it=block.items[qi];const opts=shuf(it.options);
+  stage.innerHTML=frame(`<div class="qcard">
+    ${it.prompt?`<div class="promptpt">${it.prompt}</div>`:''}
+    ${it.jp?`<div class="qjp jp">${it.jp}</div>`:''}
+    ${it.kana?`<div class="qkana jp">${it.kana}</div>`:''}
+    ${it.pt?`<div class="qpt">${it.pt}</div>`:''}
+    <div class="opts">${opts.map(o=>`<button class="opt jp" data-o="${o}">${o}</button>`).join('')}</div>
+    <div class="feedback"></div></div>`);
+  const fb=stage.querySelector('.feedback');
+  stage.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    if(stage.querySelector('.opt:disabled'))return;
+    stage.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.dataset.o===it.answer)x.classList.add('ok');});
+    const right=b.dataset.o===it.answer;if(!right)b.classList.add('bad');else score++;
+    fb.className='feedback show '+(right?'right':'wrong');
+    fb.innerHTML=(right?'Correto! ':`A resposta é <span class="ans">${it.answer}</span>. `)+(it.note?`<span class="note">${it.note}</span>`:'');
+    fb.insertAdjacentHTML('afterend',nextRow());wireNext();
+  }));
+}
+function renderOrder(){
+  const it=block.items[qi];const pool=shuf(it.chunks.map((c,idx)=>({c,idx})));
+  stage.innerHTML=frame(`<div class="qcard"><div class="prompt">${it.pt}</div>
+    <div class="build" id="build"></div>
+    <div class="pool" id="pool">${pool.map(p=>`<button class="chunk jp" data-idx="${p.idx}">${p.c}</button>`).join('')}</div>
+    <div class="actions"><button class="btn accent" id="check">Verificar</button><button class="btn ghost" id="clear">Limpar</button></div>
+    <div class="feedback"></div></div>`);
+  const build=stage.querySelector('#build'),poolEl=stage.querySelector('#pool'),fb=stage.querySelector('.feedback');let placed=[];
+  function refresh(){build.innerHTML=placed.map((p,i)=>`<button class="chunk placed jp" data-pi="${i}">${p.c}</button>`).join('');
+    poolEl.querySelectorAll('.chunk').forEach(ch=>{ch.style.display=placed.some(p=>p.idx==ch.dataset.idx)?'none':'';});
+    build.querySelectorAll('.chunk').forEach(ch=>ch.addEventListener('click',()=>{placed.splice(+ch.dataset.pi,1);refresh();}));}
+  poolEl.querySelectorAll('.chunk').forEach(ch=>ch.addEventListener('click',()=>{placed.push({c:ch.textContent,idx:ch.dataset.idx});refresh();}));
+  stage.querySelector('#clear').addEventListener('click',()=>{placed=[];refresh();fb.className='feedback';});
+  stage.querySelector('#check').addEventListener('click',()=>{
+    if(placed.length<it.chunks.length){fb.className='feedback show wrong';fb.innerHTML='Use todos os blocos.';return;}
+    const ok=placed.map(p=>p.c).join('')===it.answer.join('');if(ok)score++;
+    fb.className='feedback show '+(ok?'right':'wrong');
+    fb.innerHTML=ok?`Perfeito! <span class="ans">${it.answer.join('')}</span>`:`Ordem certa: <span class="ans">${it.answer.join('')}</span><span class="note">O verbo/predicado vem por último.</span>`;
+    stage.querySelector('#check').disabled=true;fb.insertAdjacentHTML('afterend',nextRow());wireNext();
+  });
+  refresh();
+}
+function renderFill(){
+  const it=block.items[qi];let gi=0,sent='<div class="sentence jp">';
+  it.seg.forEach(x=>{if(typeof x==='string')sent+=`<span>${x}</span>`;else{sent+=`<button class="gap" data-gap="${gi}">＿</button>`;gi++;}});
+  sent+='</div>';
+  stage.innerHTML=frame(`<div class="qcard">${sent}
+    <div class="chips">${block.set.map(p=>`<button class="chip jp" data-chip="${p}">${p}</button>`).join('')}</div>
+    <div class="actions"><button class="btn accent" id="check">Verificar</button><button class="btn ghost" id="clear">Limpar</button></div>
+    <div class="feedback"></div></div>`);
+  const gaps=[...stage.querySelectorAll('.gap')],fb=stage.querySelector('.feedback');let active=0;
+  const setA=i=>{active=i;gaps.forEach((g,k)=>g.classList.toggle('active',k===i));};setA(0);
+  gaps.forEach((g,k)=>g.addEventListener('click',()=>setA(k)));
+  stage.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{const g=gaps[active];if(!g)return;g.textContent=c.dataset.chip;g.dataset.val=c.dataset.chip;g.classList.remove('ok','bad');if(active<gaps.length-1)setA(active+1);}));
+  stage.querySelector('#clear').addEventListener('click',()=>{gaps.forEach(g=>{g.textContent='＿';g.dataset.val='';g.classList.remove('ok','bad');});fb.className='feedback';setA(0);});
+  stage.querySelector('#check').addEventListener('click',()=>{
+    if(gaps.some(g=>!g.dataset.val)){fb.className='feedback show wrong';fb.innerHTML='Preencha todas as lacunas.';return;}
+    let ok=true;gaps.forEach((g,k)=>{const good=g.dataset.val===it.answers[k];g.classList.remove('ok','bad');g.classList.add(good?'ok':'bad');if(!good)ok=false;});
+    if(ok){score++;fb.className='feedback show right';fb.innerHTML=`Correto! <span class="note">${it.t}</span>`;stage.querySelector('#check').disabled=true;fb.insertAdjacentHTML('afterend',nextRow());wireNext();}
+    else{fb.className='feedback show wrong';fb.innerHTML='As lacunas em vermelho estão erradas — corrija e verifique de novo.';}
+  });
+}
+function renderReveal(){
+  const it=block.items[qi];const ps=block.pstyle||'jp';
+  const promptCls=ps==='pt'?'promptpt':ps==='plain'?'promptplain':'qjp jp';
+  stage.innerHTML=frame(`<div class="qcard">
+    <div class="${promptCls}">${it.p}</div>
+    ${it.pk?`<div class="qkana jp">${it.pk}</div>`:''}
+    <div class="actions"><button class="btn accent" id="reveal">Mostrar resposta</button></div>
+    <div class="reveal-ans" id="rev">
+      <div class="qjp jp" style="font-size:1.4rem">${it.a}</div>
+      ${it.ak?`<div class="qkana jp">${it.ak}</div>`:''}
+      ${it.note?`<div class="qpt" style="color:var(--text-mut)">${it.note}</div>`:''}
+      <div class="selfrate"><span style="font-size:.85rem;color:var(--text-mut)">Você acertou?</span>
+        <button class="btn" id="miss">Errei</button><button class="btn accent" id="hit">Acertei</button></div>
+    </div></div>`);
+  stage.querySelector('#reveal').addEventListener('click',()=>{stage.querySelector('#rev').classList.add('show');stage.querySelector('#reveal').disabled=true;});
+  const adv=h=>{if(h)score++;qi++;renderQ();};
+  stage.querySelector('#hit').addEventListener('click',()=>adv(true));
+  stage.querySelector('#miss').addEventListener('click',()=>adv(false));
+}
+function renderDone(){
+  const total=block.items.length;const key=curL+'-'+block._bi;if(best[key]==null||score>best[key])best[key]=score;
+  const pct=Math.round(score/total*100);
+  const msg=pct>=90?'Excelente!':pct>=70?'Muito bem!':pct>=50?'Bom — revise os erros.':'Vale revisar a lição e refazer.';
+  stage.innerHTML=`<div class="done"><div class="big">${score} / ${total}</div><div class="lbl">${block.ref} · ${msg}</div>
+    <div class="row"><button class="btn accent" id="again">Gerar 50 novos</button><button class="btn ghost" id="bl">← Exercícios da Lição ${LICOES[curL].n}</button><button class="btn ghost" id="hm">Lições</button></div></div>`;
+  stage.querySelector('#again').addEventListener('click',()=>openBlock(block._bi));
+  stage.querySelector('#bl').addEventListener('click',()=>showBlocks(curL));
+  stage.querySelector('#hm').addEventListener('click',showLessons);
+}
+showLessons();
+</script>
+</body>
+</html>
