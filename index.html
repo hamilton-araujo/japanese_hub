@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本語 · Japanese Hub</title>
+<style>
+  :root{
+    --ink:#141d33;--ink-2:#1d2945;--ink-3:#26345a;--tink:#101729;
+    --persimmon:#e0623a;--persimmon-d:#c44e2a;
+    --celadon:#6fa088;--celadon-d:#4f7d68;
+    --text-paper:#e9e6dc;--text-mut:#a6b0c9;
+    --indigo-link:#8fb0e0;
+    --radius:14px;--line:rgba(233,230,220,.12);
+    --f-jp:'Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo','MS PGothic',sans-serif;
+    --f-disp:Georgia,'Hoefler Text','Times New Roman',serif;
+    --f-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 600px at 80% -10%,#1c2950 0%,transparent 55%),
+               radial-gradient(900px 500px at -10% 110%,#20183a 0%,transparent 50%),
+               var(--ink);
+    color:var(--text-paper);font-family:var(--f-body);line-height:1.5;
+    min-height:100vh;-webkit-font-smoothing:antialiased;
+  }
+  .jp{font-family:var(--f-jp)}
+  .wrap{max-width:780px;margin:0 auto;padding:48px 18px 90px}
+
+  header{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:40px}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--persimmon);font-weight:600;margin-bottom:.6em}
+  h1{font-family:var(--f-disp);font-weight:700;line-height:.98;font-size:clamp(2.2rem,7vw,3.4rem);color:#fff;margin-bottom:.3em}
+  h1 .jc{font-family:var(--f-jp);color:var(--persimmon);font-size:.55em;margin-right:.2em}
+  .sub{color:var(--text-mut);font-size:.95rem;max-width:58ch}
+
+  .section-title{
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--text-mut);font-weight:600;margin-bottom:16px;
+  }
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+  .card{
+    display:block;text-decoration:none;
+    background:var(--ink-2);border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 24px;
+    transition:border-color .18s,transform .18s,box-shadow .18s;
+    position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(224,98,58,.07) 0%,transparent 60%);
+    opacity:0;transition:opacity .18s;
+  }
+  .card:hover{border-color:var(--persimmon);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+  .card:hover::before{opacity:1}
+
+  .card-kana{font-family:var(--f-jp);font-size:1.8rem;color:var(--persimmon);margin-bottom:10px;display:block}
+  .card-title{font-family:var(--f-disp);font-size:1.15rem;color:#fff;font-weight:700;margin-bottom:6px}
+  .card-desc{font-size:.87rem;color:var(--text-mut);line-height:1.55}
+  .card-arrow{
+    position:absolute;bottom:20px;right:22px;
+    font-size:.85rem;color:var(--indigo-link);opacity:.7;
+    transition:opacity .18s,transform .18s;
+  }
+  .card:hover .card-arrow{opacity:1;transform:translateX(3px)}
+
+  .tag{
+    display:inline-block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    background:rgba(111,160,136,.15);color:var(--celadon);
+    border:1px solid rgba(111,160,136,.3);border-radius:6px;
+    padding:2px 8px;margin-bottom:10px;
+  }
+
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:.78rem;color:var(--text-mut);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">日本語勉強</div>
+    <h1><span class="jc jp">日本語</span>Japanese Hub</h1>
+    <p class="sub">Materiais de estudo de japonês — teoria, vocabulário e exercícios práticos organizados por lição.</p>
+  </header>
+
+  <p class="section-title">Módulos disponíveis</p>
+
+  <div class="cards">
+
+    <a class="card" href="estudo-japones.html">
+      <span class="tag">Teoria</span>
+      <span class="card-kana jp">助詞</span>
+      <div class="card-title">Estudo de Japonês</div>
+      <p class="card-desc">Vocabulário, partículas, adnomes e pronomes. Referência completa com tabelas e exemplos.</p>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" href="exercicios-japones_1.html">
+      <span class="tag">Prática</span>
+      <span class="card-kana jp">練習</span>
+      <div class="card-title">Exercícios — Lições 1–7</div>
+      <p class="card-desc">Exercícios interativos organizados por lição para fixar vocabulário e gramática.</p>
+      <span class="card-arrow">→</span>
+    </a>
+
+  </div>
+
+  <footer>Japanese Hub · Estudo pessoal de japonês</footer>
+</div>
+</body>
+</html>
