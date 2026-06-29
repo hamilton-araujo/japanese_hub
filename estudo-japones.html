@@ -749,78 +749,8 @@ function renderKana(){
 }
 renderKana();
 function refreshLesCat(){
-  buildSeg(document.getElementById('filLes'),lessons(),curLes,v=>{curLes=v;curCat="all";function renderRateFil(){
-  buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
-}
-function updateCounts(){
-  let h=0,m=0,e=0,n=0,due=0,nw=0,sched=0;const now=Date.now();
-  VOCAB.forEach(v=>{const k=cardKey(v);const r=ratings[k];if(r==="hard")h++;else if(r==="med")m++;else if(r==="easy")e++;else n++;
-    const st=srs[k];if(!st)nw++;else if(st.due<=now)due++;else sched++;});
-  countsEl.innerHTML='<span class="c-hard">Difícil <b>'+h+'</b></span><span class="c-med">Médio <b>'+m+'</b></span><span class="c-easy">Fácil <b>'+e+'</b></span><span>Sem marca <b>'+n+'</b></span>';
-  const sm=document.getElementById('srsmeta');if(sm)sm.innerHTML='Revisão espaçada · a revisar agora: <b>'+(due+nw)+'</b> &nbsp;(novas: '+nw+' · agendadas: '+sched+')';
-}
-function rate(level){
-  if(!deck.length)return;
-  const c=deck[idx];const k=cardKey(c);
-  ratings[k]=level;srs[k]=schedule(srs[k],level);saveAll();card.classList.remove('flipped');
-  if(ratingFilter==="due"){
-    if(level==="hard"){const cc=deck.splice(idx,1)[0];deck.splice(Math.min(deck.length,idx+3),0,cc);if(idx>=deck.length)idx=0;render();}
-    else{deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
-  } else if(ratingFilter!=="all"&&ratingFilter!==level){deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
-  else{next();}
-  updateCounts();
-}
-rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
-const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
-function schedule(st,level){
-  let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
-  if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
-  else if(level==="med"){interval=interval<1?1:Math.round(interval*ease);reps++;}
-  else{ease+=0.15;interval=interval<1?3:Math.round(interval*ease*1.3);reps++;}
-  const due=interval===0?Date.now()+600000:Date.now()+interval*86400000;
-  return {ease:Math.round(ease*100)/100,interval,reps,due};
-}
-function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
-function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
-function saveAll(){if(!deck.length)return;const c=deck[idx];if(!c.id)return;const k=cardKey(c);const st=srs[k];_saveQ.push({device_id:window._DID,word_id:c.id,rating:ratings[k]||'hard',ease:+(st?.ease||2.5).toFixed(2),interval:+(st?.interval||0),reps:+(st?.reps||0),due:+(st?.due||0),updated_at:new Date().toISOString()});clearTimeout(_saveT2);_saveT2=setTimeout(async()=>{const rows=_saveQ.splice(0);if(!rows.length)return;try{await _SB.from('user_progress').upsert(rows,{onConflict:'device_id,word_id'});}catch(e){console.warn('SRS save:',e);}},500);}
-async function loadAll(){try{const{data:vd}=await _SB.from('vocabulary').select('id,kanji,kana,portuguese,lesson,category');if(vd&&vd.length){const vm={};vd.forEach(v=>{const k='L'+v.lesson+'/'+(v.kanji||v.kana||'')+'/'+v.portuguese;vm[k]=v.id;});VOCAB.forEach(v=>{const k=v.les+'/'+(v.jp||'')+'/'+v.pt;if(vm[k])v.id=vm[k];});}const{data:pd}=await _SB.from('user_progress').select('*').eq('device_id',window._DID);if(pd){pd.forEach(p=>{const w=VOCAB.find(v=>v.id===p.word_id);if(w){const k=cardKey(w);ratings[k]=p.rating;srs[k]={ease:+p.ease,interval:+p.interval,reps:+p.reps,due:+p.due};}});}}catch(e){console.warn('Supabase offline:',e);}rebuildDeck();updateCounts();}
-refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();});
-  buildSeg(document.getElementById('filCat'),cats(),curCat,v=>{curCat=v;function renderRateFil(){
-  buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
-}
-function updateCounts(){
-  let h=0,m=0,e=0,n=0,due=0,nw=0,sched=0;const now=Date.now();
-  VOCAB.forEach(v=>{const k=cardKey(v);const r=ratings[k];if(r==="hard")h++;else if(r==="med")m++;else if(r==="easy")e++;else n++;
-    const st=srs[k];if(!st)nw++;else if(st.due<=now)due++;else sched++;});
-  countsEl.innerHTML='<span class="c-hard">Difícil <b>'+h+'</b></span><span class="c-med">Médio <b>'+m+'</b></span><span class="c-easy">Fácil <b>'+e+'</b></span><span>Sem marca <b>'+n+'</b></span>';
-  const sm=document.getElementById('srsmeta');if(sm)sm.innerHTML='Revisão espaçada · a revisar agora: <b>'+(due+nw)+'</b> &nbsp;(novas: '+nw+' · agendadas: '+sched+')';
-}
-function rate(level){
-  if(!deck.length)return;
-  const c=deck[idx];const k=cardKey(c);
-  ratings[k]=level;srs[k]=schedule(srs[k],level);saveAll();card.classList.remove('flipped');
-  if(ratingFilter==="due"){
-    if(level==="hard"){const cc=deck.splice(idx,1)[0];deck.splice(Math.min(deck.length,idx+3),0,cc);if(idx>=deck.length)idx=0;render();}
-    else{deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
-  } else if(ratingFilter!=="all"&&ratingFilter!==level){deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
-  else{next();}
-  updateCounts();
-}
-rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
-const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
-function schedule(st,level){
-  let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
-  if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
-  else if(level==="med"){interval=interval<1?1:Math.round(interval*ease);reps++;}
-  else{ease+=0.15;interval=interval<1?3:Math.round(interval*ease*1.3);reps++;}
-  const due=interval===0?Date.now()+600000:Date.now()+interval*86400000;
-  return {ease:Math.round(ease*100)/100,interval,reps,due};
-}
-function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
-function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
-function saveAll(){if(!deck.length)return;const c=deck[idx];if(!c.id)return;const k=cardKey(c);const st=srs[k];_saveQ.push({device_id:window._DID,word_id:c.id,rating:ratings[k]||'hard',ease:+(st?.ease||2.5).toFixed(2),interval:+(st?.interval||0),reps:+(st?.reps||0),due:+(st?.due||0),updated_at:new Date().toISOString()});clearTimeout(_saveT2);_saveT2=setTimeout(async()=>{const rows=_saveQ.splice(0);if(!rows.length)return;try{await _SB.from('user_progress').upsert(rows,{onConflict:'device_id,word_id'});}catch(e){console.warn('SRS save:',e);}},500);}
-async function loadAll(){try{const{data:vd}=await _SB.from('vocabulary').select('id,kanji,kana,portuguese,lesson,category');if(vd&&vd.length){const vm={};vd.forEach(v=>{const k='L'+v.lesson+'/'+(v.kanji||v.kana||'')+'/'+v.portuguese;vm[k]=v.id;});VOCAB.forEach(v=>{const k=v.les+'/'+(v.jp||'')+'/'+v.pt;if(vm[k])v.id=vm[k];});}const{data:pd}=await _SB.from('user_progress').select('*').eq('device_id',window._DID);if(pd){pd.forEach(p=>{const w=VOCAB.find(v=>v.id===p.word_id);if(w){const k=cardKey(w);ratings[k]=p.rating;srs[k]={ease:+p.ease,interval:+p.interval,reps:+p.reps,due:+p.due};}});}}catch(e){console.warn('Supabase offline:',e);}rebuildDeck();updateCounts();}
-refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();});
+  buildSeg(document.getElementById('filLes'),lessons(),curLes,v=>{curLes=v;curCat="all";refreshLesCat();rebuildDeck();});
+  buildSeg(document.getElementById('filCat'),cats(),curCat,v=>{curCat=v;rebuildDeck();});
 }
 function renderRateFil(){
   buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
@@ -844,7 +774,6 @@ function rate(level){
   updateCounts();
 }
 rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
-const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
 function schedule(st,level){
   let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
   if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
@@ -856,7 +785,7 @@ function schedule(st,level){
 function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
 function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
 function saveAll(){if(!deck.length)return;const c=deck[idx];if(!c.id)return;const k=cardKey(c);const st=srs[k];_saveQ.push({device_id:window._DID,word_id:c.id,rating:ratings[k]||'hard',ease:+(st?.ease||2.5).toFixed(2),interval:+(st?.interval||0),reps:+(st?.reps||0),due:+(st?.due||0),updated_at:new Date().toISOString()});clearTimeout(_saveT2);_saveT2=setTimeout(async()=>{const rows=_saveQ.splice(0);if(!rows.length)return;try{await _SB.from('user_progress').upsert(rows,{onConflict:'device_id,word_id'});}catch(e){console.warn('SRS save:',e);}},500);}
-async function loadAll(){try{const{data:vd}=await _SB.from('vocabulary').select('id,kanji,kana,portuguese,lesson,category');if(vd&&vd.length){const vm={};vd.forEach(v=>{const k='L'+v.lesson+'/'+(v.kanji||v.kana||'')+'/'+v.portuguese;vm[k]=v.id;});VOCAB.forEach(v=>{const k=v.les+'/'+(v.jp||'')+'/'+v.pt;if(vm[k])v.id=vm[k];});}const{data:pd}=await _SB.from('user_progress').select('*').eq('device_id',window._DID);if(pd){pd.forEach(p=>{const w=VOCAB.find(v=>v.id===p.word_id);if(w){const k=cardKey(w);ratings[k]=p.rating;srs[k]={ease:+p.ease,interval:+p.interval,reps:+p.reps,due:+p.due};}});}}catch(e){console.warn('Supabase offline:',e);}rebuildDeck();updateCounts();}
+async function loadAll(){try{const{data:vd}=await _SB.from('vocabulary').select('id,kanji,kana,portuguese,lesson,category');if(vd&&vd.length){const vm={};vd.forEach(v=>{const k='L'+v.lesson+'/'+(v.kanji||v.kana||'')+'/'+v.portuguese;vm[k]=v.id;});VOCAB.forEach(v=>{const k=v.les+'/'+(v.jp||'')+'/'+v.pt;if(vm[k])v.id=vm[k];});}const{data:pd}=await _SB.from('user_progress').select('*').eq('device_id',window._DID);if(pd){pd.forEach(p=>{const w=VOCAB.find(v=>v.id===p.word_id);if(w){const k=cardKey(w);ratings[k]=p.rating;srs[k]={ease:+p.ease,interval:+p.interval,reps:+p.reps,due:+p.due};}});}}catch(e){console.warn('Supabase offline:',e);}refreshLesCat();rebuildDeck();updateCounts();}
 refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();
 
 /* ============================================================
