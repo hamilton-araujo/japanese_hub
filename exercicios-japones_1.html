@@ -163,6 +163,9 @@ const VERBS_L={
     {s:"泳ぐ",r:"およぐ",g:1,pt:"nadar"},
     {s:"待つ",r:"まつ",g:1,pt:"esperar"},
     {s:"送る",r:"おくる",g:1,pt:"enviar"},
+    {s:"降る",r:"ふる",g:1,pt:"cair (chuva/neve)"},
+    {s:"吹く",r:"ふく",g:1,pt:"soprar (vento)"},
+    {s:"咲く",r:"さく",g:1,pt:"florescer"},
   ],
   3:[
     {s:"遊ぶ",r:"あそぶ",g:1,pt:"brincar"},
@@ -175,6 +178,8 @@ const VERBS_L={
     {s:"入れる",r:"いれる",g:2,pt:"pôr dentro"},
     {s:"出す",r:"だす",g:1,pt:"tirar / enviar"},
     {s:"呼ぶ",r:"よぶ",g:1,pt:"chamar"},
+    {s:"閉まる",r:"しまる",g:1,pt:"fechar (intrans.)"},
+    {s:"出る",r:"でる",g:2,pt:"sair / nascer"},
   ],
   4:[
     {s:"止まる",r:"とまる",g:1,pt:"parar"},
@@ -187,6 +192,10 @@ const VERBS_L={
     {s:"飛ぶ",r:"とぶ",g:1,pt:"voar"},
     {s:"死ぬ",r:"しぬ",g:1,pt:"morrer"},
     {s:"急ぐ",r:"いそぐ",g:1,pt:"apressar-se"},
+    {s:"泣く",r:"なく",g:1,pt:"chorar"},
+    {s:"始まる",r:"はじまる",g:1,pt:"começar (intrans.)"},
+    {s:"流れる",r:"ながれる",g:2,pt:"fluir"},
+    {s:"吠える",r:"ほえる",g:2,pt:"latir"},
   ],
   5:[
     {s:"勝つ",r:"かつ",g:1,pt:"vencer"},
@@ -338,71 +347,69 @@ const NC=[
 /* =========================================================
    POOLS EXPANDIDOS DE FRASES
    ========================================================= */
-const SUBJ=[
-  ["子供","A criança"],["学生","O estudante"],["友達","O amigo"],["先生","O professor"],
-  ["男の人","O homem"],["女の人","A mulher"],["大学生","O universitário"],
-  ["弟","O irmão mais novo"],["姉","A irmã mais velha"],["母","A mãe"],
-  ["父","O pai"],["兄","O irmão mais velho"],["妹","A irmã mais nova"],
-  ["田中さん","O Tanaka"],["山田さん","A Yamada"],["鈴木さん","O Suzuki"],
-  ["先輩","O senpai"],["田中先生","O professor Tanaka"],["子猫","O gatinho"],
-  ["赤ちゃん","O bebê"],
-];
-const PLACE=[
-  ["公園","no parque"],["学校","na escola"],["図書館","na biblioteca"],
-  ["教室","na sala de aula"],["大学","na universidade"],["家","em casa"],
-  ["店","na loja"],["キッチン","na cozinha"],["駅","na estação"],
-  ["病院","no hospital"],["スーパー","no supermercado"],["カフェ","no café"],
-  ["部屋","no quarto"],["会社","na empresa"],["食堂","no refeitório"],
-  ["プール","na piscina"],["体育館","no ginásio"],["廊下","no corredor"],
-  ["庭","no jardim"],["海","no mar"],
-];
-const OBJV=[
-  ["本","um livro","読む",1,"lê","leu"],
-  ["新聞","o jornal","読む",1,"lê","leu"],
-  ["雑誌","uma revista","買う",1,"compra","comprou"],
-  ["映画","um filme","見る",2,"vê","viu"],
-  ["音楽","música","聞く",1,"ouve","ouviu"],
-  ["ごはん","comida","食べる",2,"come","comeu"],
-  ["コーヒー","café","飲む",1,"bebe","bebeu"],
-  ["漢字","kanji","書く",1,"escreve","escreveu"],
-  ["手紙","uma carta","書く",1,"escreve","escreveu"],
-  ["テレビ","a TV","見る",2,"assiste","assistiu"],
-  ["水","água","飲む",1,"bebe","bebeu"],
-  ["ケーキ","bolo","食べる",2,"come","comeu"],
-  ["お茶","chá","飲む",1,"toma","tomou"],
-  ["パン","pão","食べる",2,"come","comeu"],
-  ["ノート","um caderno","買う",1,"compra","comprou"],
-  ["りんご","uma maçã","食べる",2,"come","comeu"],
-  ["問題","um problema","話す",1,"fala sobre","falou sobre"],
-  ["映画のチケット","um ingresso","買う",1,"compra","comprou"],
-  ["写真","uma foto","見る",2,"vê","viu"],
-  ["レポート","um relatório","書く",1,"escreve","escreveu"],
-  ["メール","um e-mail","書く",1,"escreve","escreveu"],
-  ["歌","uma música","聞く",1,"ouve","ouviu"],
-];
+/* vocabulário de frases organizado por lição (acumulativo) */
+const SUBJ_L={
+  1:[["子供","A criança"],["学生","O estudante"],["友達","O amigo"],["先生","O professor"],["男の人","O homem"],["女の人","A mulher"]],
+  2:[["大学生","O universitário"],["弟","O irmão mais novo"],["姉","A irmã mais velha"],["兄","O irmão mais velho"],["妹","A irmã mais nova"]],
+  3:[["母","A mãe"],["父","O pai"],["田中さん","O Tanaka"],["山田さん","A Yamada"]],
+  4:[["鈴木さん","O Suzuki"],["先輩","O senpai"]],
+  5:[["田中先生","O professor Tanaka"],["後輩","O kouhai"]],
+  6:[["子猫","O gatinho"],["赤ちゃん","O bebê"]],
+};
+const PLACE_L={
+  1:[["公園","no parque"],["学校","na escola"],["家","em casa"],["店","na loja"],["部屋","no quarto"],["庭","no jardim"]],
+  2:[["図書館","na biblioteca"],["教室","na sala de aula"],["大学","na universidade"],["キッチン","na cozinha"],["廊下","no corredor"]],
+  3:[["駅","na estação"],["病院","no hospital"],["スーパー","no supermercado"],["食堂","no refeitório"]],
+  4:[["会社","na empresa"],["カフェ","no café"],["体育館","no ginásio"],["プール","na piscina"]],
+  5:[["海","no mar"]],
+};
+const OBJV_L={
+  1:[
+    ["本","um livro","読む",1,"lê","leu"],["新聞","o jornal","読む",1,"lê","leu"],
+    ["雑誌","uma revista","買う",1,"compra","comprou"],["映画","um filme","見る",2,"vê","viu"],
+    ["音楽","música","聞く",1,"ouve","ouviu"],["ごはん","comida","食べる",2,"come","comeu"],
+    ["コーヒー","café","飲む",1,"bebe","bebeu"],["漢字","kanji","書く",1,"escreve","escreveu"],
+    ["水","água","飲む",1,"bebe","bebeu"],["お茶","chá","飲む",1,"toma","tomou"],
+    ["パン","pão","食べる",2,"come","comeu"],["ノート","um caderno","買う",1,"compra","comprou"],
+    ["りんご","uma maçã","食べる",2,"come","comeu"],["歌","uma música","聞く",1,"ouve","ouviu"],
+  ],
+  2:[
+    ["手紙","uma carta","書く",1,"escreve","escreveu"],["テレビ","a TV","見る",2,"assiste","assistiu"],
+    ["ケーキ","bolo","食べる",2,"come","comeu"],["映画のチケット","um ingresso","買う",1,"compra","comprou"],
+  ],
+  3:[
+    ["写真","uma foto","見る",2,"vê","viu"],["問題","um problema","話す",1,"fala sobre","falou sobre"],
+  ],
+  4:[
+    ["レポート","um relatório","書く",1,"escreve","escreveu"],["メール","um e-mail","書く",1,"escreve","escreveu"],
+  ],
+};
+const NOUNS_L={
+  1:[["テスト","prova"],["犬","cachorro"],["学生","estudante"],["先生","professor"],["友達","amigo"],["本","livro"],["車","carro"],["店","loja"],["夜","noite"],["雨","chuva"]],
+  2:[["医者","médico"],["映画","filme"],["音楽","música"],["休み","folga / férias"]],
+  3:[["旅行","viagem"],["電車","trem"],["バス","ônibus"],["仕事","trabalho"]],
+  4:[["病院","hospital"],["図書館","biblioteca"],["空港","aeroporto"],["朝","manhã"],["昼","meio-dia"],["夕方","tarde / entardecer"]],
+  5:[["海","mar"],["山","montanha"],["川","rio"],["春","primavera"],["夏","verão"],["秋","outono"],["冬","inverno"]],
+  6:[["料理","culinária"],["スポーツ","esporte"]],
+  7:[["日本語","japonês"]],
+};
+const TOPIC_L={
+  2:[["この本","Este livro"],["この映画","Este filme"],["あの音楽","Aquela música"],["この車","Este carro"],["公園","O parque"]],
+  3:[["この店","Esta loja"],["教室","A sala"],["あの公園","Aquele parque"],["この道","Esta rua"]],
+  4:[["大学","A universidade"],["駅","A estação"],["あのレストラン","Aquele restaurante"],["あの病院","Aquele hospital"]],
+  5:[["地下鉄","O metrô"],["この仕事","Este trabalho"],["このアパート","Este apartamento"]],
+  6:[["この街","Esta cidade"],["あの電車","Aquele trem"]],
+};
 
-const NOUNS_ALL=[
-  ["テスト","prova"],["犬","cachorro"],["学生","estudante"],["先生","professor"],
-  ["友達","amigo"],["医者","médico"],["本","livro"],["車","carro"],
-  ["店","loja"],["夜","noite"],["休み","folga / férias"],["雨","chuva"],
-  ["映画","filme"],["音楽","música"],["旅行","viagem"],["仕事","trabalho"],
-  ["病院","hospital"],["図書館","biblioteca"],["電車","trem"],["バス","ônibus"],
-  ["空港","aeroporto"],["海","mar"],["山","montanha"],["川","rio"],
-  ["春","primavera"],["夏","verão"],["秋","outono"],["冬","inverno"],
-  ["朝","manhã"],["昼","meio-dia"],["夕方","tarde / entardecer"],
-  ["料理","culinária"],["スポーツ","esporte"],["日本語","japonês"],
-];
-
-const TOPIC=[
-  ["地下鉄","O metrô"],["大学","A universidade"],["この店","Esta loja"],
-  ["教室","A sala"],["この車","Este carro"],["公園","O parque"],
-  ["あのレストラン","Aquele restaurante"],["駅","A estação"],
-  ["この道","Esta rua"],["あの病院","Aquele hospital"],
-  ["この映画","Este filme"],["この本","Este livro"],
-  ["あの音楽","Aquela música"],["この仕事","Este trabalho"],
-  ["このアパート","Este apartamento"],["あの公園","Aquele parque"],
-  ["この街","Esta cidade"],["あの電車","Aquele trem"],
-];
+function subjUpTo(n){let r=[];for(let i=1;i<=n;i++)r=r.concat(SUBJ_L[i]||[]);return r;}
+function placeUpTo(n){let r=[];for(let i=1;i<=n;i++)r=r.concat(PLACE_L[i]||[]);return r;}
+function objvUpTo(n){
+  const vs=new Set(vUpTo(n).map(v=>v.s));
+  let r=[];for(let i=1;i<=n;i++)r=r.concat(OBJV_L[i]||[]);
+  return r.filter(ov=>vs.has(ov[2]));
+}
+function nounsUpTo(n){let r=[];for(let i=1;i<=n;i++)r=r.concat(NOUNS_L[i]||[]);return r;}
+function topicUpTo(n){let r=[];for(let i=1;i<=n;i++)r=r.concat(TOPIC_L[i]||[]);return r;}
 
 /* =========================================================
    UTILITÁRIOS
@@ -456,8 +463,9 @@ function genAdjNaQuadro(lnum){
   return{p:`${a[0]} — ${a[2]}<br>presente neg. · passado · passado neg.:`,a:`${c.neg} / ${c.past} / ${c.pastneg}`,_k:"anq:"+a[0]};
 }
 
-function genNominal(){
-  const n=rnd(NOUNS_ALL);
+function genNominal(lnum){
+  const pool=nounsUpTo(lnum);
+  const n=rnd(pool.length?pool:nounsUpTo(7));
   return{p:`${n[0]} — "${n[1]}"<br>presente · passado · neg. presente · neg. passado:`,a:`${n[0]}だ / ${n[0]}だった / ${n[0]}ではない / ${n[0]}ではなかった`,_k:"nom:"+n[0]};
 }
 
@@ -523,31 +531,44 @@ function genCounterProd(){
 }
 
 const INTRANS=[
-  ["子供が","遊ぶ","A criança brinca."],["雨が","降る","Chove."],
-  ["授業が","終わる","A aula termina."],["魚が","泳ぐ","O peixe nada."],
-  ["マラソンランナーが","走る","O maratonista corre."],["風が","吹く","O vento sopra."],
-  ["鳥が","飛ぶ","O pássaro voa."],["ドアが","閉まる","A porta fecha."],
-  ["学生が","勉強する","O estudante estuda."],["机が","ある","Há uma carteira."],
-  ["バスが","止まる","O ônibus para."],["先生が","来る","O professor vem."],
-  ["友達が","帰る","O amigo volta."],["花が","咲く","A flor desabrocha."],
-  ["人が","立つ","A pessoa se levanta."],["子供が","寝る","A criança dorme."],
-  ["猫が","走る","O gato corre."],["電車が","止まる","O trem para."],
-  ["赤ちゃんが","泣く","O bebê chora."],["授業が","始まる","A aula começa."],
+  /* L1 */
+  ["学生が","歩く","O estudante anda."],["友達が","来る","O amigo vem."],
+  ["先生が","帰る","O professor volta."],["子供が","寝る","A criança dorme."],
   ["母が","来る","A mãe vem."],["父が","帰る","O pai volta."],
-  ["太陽が","出る","O sol nasce."],["雪が","降る","Neva."],
-  ["試合が","終わる","O jogo termina."],["犬が","吠える","O cachorro late."],
-  ["エレベーターが","止まる","O elevador para."],["音楽が","流れる","A música toca."],
-  ["春が","来る","A primavera chega."],["時間が","終わる","O tempo acaba."],
-  ["電気が","ある","Tem luz."],["子供たちが","走る","As crianças correm."],
+  ["机が","ある","Há uma carteira."],["電気が","ある","Tem luz."],
+  ["先生が","来る","O professor vem."],["春が","来る","A primavera chega."],
+  ["友達が","帰る","O amigo volta."],["子供が","起きる","A criança acorda."],
+  ["猫が","いる","Há um gato."],["犬が","いる","Há um cachorro."],
+  /* L2 */
+  ["雨が","降る","Chove."],["雪が","降る","Neva."],
+  ["風が","吹く","O vento sopra."],["花が","咲く","A flor desabrocha."],
+  ["授業が","終わる","A aula termina."],["試合が","終わる","O jogo termina."],
+  ["時間が","終わる","O tempo acaba."],["魚が","泳ぐ","O peixe nada."],
+  ["マラソンランナーが","走る","O maratonista corre."],
+  ["猫が","走る","O gato corre."],["子供たちが","走る","As crianças correm."],
+  /* L3 */
+  ["ドアが","閉まる","A porta fecha."],["太陽が","出る","O sol nasce."],
+  /* L4 */
+  ["鳥が","飛ぶ","O pássaro voa."],
+  ["バスが","止まる","O ônibus para."],["電車が","止まる","O trem para."],
+  ["エレベーターが","止まる","O elevador para."],
+  ["人が","立つ","A pessoa se levanta."],
+  ["赤ちゃんが","泣く","O bebê chora."],["犬が","吠える","O cachorro late."],
+  ["授業が","始まる","A aula começa."],["音楽が","流れる","A música toca."],
+  /* L5 */
+  ["学生が","勉強する","O estudante estuda."],
 ];
 const INTRANS_POOL=[...new Set(INTRANS.map(x=>x[1]))];
 
 function genCompleteVerb(lnum){
   const verbs=vUpTo(lnum);
-  const valid=INTRANS.filter(it=>verbs.some(v=>v.s===it[1]));
+  const vSet=new Set(verbs.map(v=>v.s));
+  const valid=INTRANS.filter(it=>vSet.has(it[1]));
   const pool=valid.length>=3?valid:INTRANS;
   const it=rnd(pool);
-  const d=shuf(INTRANS_POOL.filter(v=>v!==it[1])).slice(0,2);
+  /* distratores filtrados pela lição atual */
+  const dAll=INTRANS_POOL.filter(v=>v!==it[1]&&vSet.has(v));
+  const d=dAll.length>=2?shuf(dAll).slice(0,2):shuf(INTRANS_POOL.filter(v=>v!==it[1])).slice(0,2);
   return{jp:`${it[0]} ＿。`,pt:it[2],options:shuf([it[1],d[0],d[1]]),answer:it[1],_k:"cv:"+it[0]};
 }
 
@@ -619,7 +640,8 @@ function genTokui(){
 function genAdj2Pred(kind,lnum){
   const adjs=adjNaUpTo(lnum).filter(x=>!["好き","嫌い","得意","苦手","上手","下手"].includes(x[0]));
   if(!adjs.length)return genAdj2Pred(kind,7);
-  const t=rnd(TOPIC),a=rnd(adjs);
+  const topics=topicUpTo(lnum);
+  const t=rnd(topics.length?topics:topicUpTo(7)),a=rnd(adjs);
   const jpAff=`${t[0]}は${a[0]}だ。`,jpNeg=`${t[0]}は${a[0]}ではない。`;
   const ptAff=`${t[1]} é ${a[2]}.`;
   const k="ap2:"+kind+":"+t[0]+":"+a[0];
@@ -630,7 +652,8 @@ function genAdj2Pred(kind,lnum){
 
 function genTeSentence(kind,lnum){
   const adjs=adjIUpTo(lnum);
-  const t=rnd(TOPIC);let a=rnd(adjs),b=rnd(adjs);
+  const topics=topicUpTo(lnum);
+  const t=rnd(topics.length?topics:topicUpTo(7));let a=rnd(adjs),b=rnd(adjs);
   while(b[0]===a[0])b=rnd(adjs);
   const jp=`${t[0]}は${conjAdjI(a).te}${b[0]}。`;
   const pt=`${t[1]} é ${a[2]} e ${b[2]}.`;
@@ -642,10 +665,11 @@ function genTeSentence(kind,lnum){
 }
 
 function makeSentence(tense,lnum){
-  const availV=vUpTo(lnum).map(v=>v.s);
-  const validOV=OBJV.filter(ov=>availV.includes(ov[2]));
-  const ov=rnd(validOV.length?validOV:OBJV);
-  const s=rnd(SUBJ),pl=rnd(PLACE);
+  const ovPool=objvUpTo(lnum);
+  const ov=rnd(ovPool.length?ovPool:objvUpTo(7));
+  const subjs=subjUpTo(lnum);const places=placeUpTo(lnum);
+  const s=rnd(subjs.length?subjs:subjUpTo(7));
+  const pl=rnd(places.length?places:placeUpTo(7));
   const vj=vform(ov[2],ov[3],tense);
   const ptVerb=tense==="past"?ov[5]:ov[4];
   return{parts:[[s[0],"が"],[pl[0],"で"],[ov[0],"を"]],verb:vj,pt:`${s[1]} ${ptVerb} ${ov[1]} ${pl[1]}`};
@@ -674,13 +698,13 @@ const FILL4_GENS=[
   (L)=>{const a=rnd(["犬","小鳥","猫","魚","ウサギ","ハムスター","亀"]),p=rnd(["庭","部屋","教室","公園","リビング","箱の中"]);return{seg:[a,{g:1},p,{g:1},"いる。"],answers:["が","に"],t:`Há um(a) ${a} no(a) ${p}.`,_k:"f4:ani:"+a+":"+p};},
   (L)=>{const m=makeSentence("past",L);const seg=[];m.parts.forEach(x=>{seg.push(x[0]);seg.push({g:1});});seg.push(m.verb+"。");return{seg,answers:m.parts.map(x=>x[1]),t:m.pt+".",_k:"f4:s:"+m.parts[0][0]+":"+m.parts[2][0]+":"+m.verb};},
   (L)=>{const h=rnd(["六時","七時","七時半","八時","九時","十時","五時","三時"]);return{seg:["毎朝"+h,{g:1},"起きる。"],answers:["に"],t:`Acordo às ${h.replace("時"," h")} todas as manhãs.`,_k:"f4:t:"+h};},
-  (L)=>{const s=rnd(SUBJ),p=rnd(["学校","大学","図書館","日本","駅","病院","スーパー","公園"]);return{seg:[s[0],{g:1},p,{g:1},"行く。"],answers:["が","に"],t:`${s[1]} vai.`,_k:"f4:d:"+s[0]+":"+p};},
+  (L)=>{const s=rnd(subjUpTo(L)),p=rnd(["学校","大学","図書館","日本","駅","病院","スーパー","公園"]);return{seg:[s[0],{g:1},p,{g:1},"行く。"],answers:["が","に"],t:`${s[1]} vai.`,_k:"f4:d:"+s[0]+":"+p};},
   (L)=>{const prof=rnd(["教師","医者","先生","エンジニア","看護師","デザイナー","警察官"]);return{seg:[prof,{g:1},"なる。"],answers:["に"],t:`Torno-me ${prof}.`,_k:"f4:n:"+prof};},
-  (L)=>{const s=rnd(SUBJ),p=rnd(["先生","友達","母","父","先輩"]);return{seg:[s[0],{g:1},p,{g:1},"話す。"],answers:["が","に"],t:`${s[1]} fala com alguém.`,_k:"f4:h:"+s[0]+":"+p};},
+  (L)=>{const s=rnd(subjUpTo(L)),p=rnd(["先生","友達","母","父","先輩"]);return{seg:[s[0],{g:1},p,{g:1},"話す。"],answers:["が","に"],t:`${s[1]} fala com alguém.`,_k:"f4:h:"+s[0]+":"+p};},
   (L)=>{const h=rnd(["一時","二時","三時","四時","六時半","八時半"]);return{seg:["授業",{g:1},h,{g:1},"終わる。"],answers:["が","に"],t:`A aula termina às ${h}.`,_k:"f4:e:"+h};},
   (L)=>{const s=rnd(["子供","学生","友達"]),p=rnd(["公園","学校","駅","図書館"]);return{seg:[s,{g:1},p,{g:1},"来た。"],answers:["が","に"],t:`Alguém veio.`,_k:"f4:c:"+s+":"+p};},
   (L)=>{const o=rnd(["本","雑誌","新聞"]),p=rnd(["図書館","本屋","友達"]);return{seg:[o,{g:1},p,{g:1},"借りた。"],answers:["を","に"],t:`Peguei emprestado algo de algum lugar/pessoa.`,_k:"f4:bor:"+o+":"+p};},
-  (L)=>{const s=rnd(SUBJ);return{seg:[s[0],{g:1},"毎日",{g:1},"運動する。"],answers:["が","に"],t:`${s[1]} se exercita todos os dias.`,_k:"f4:ex:"+s[0]};},
+  (L)=>{const s=rnd(subjUpTo(L));return{seg:[s[0],{g:1},"毎日",{g:1},"運動する。"],answers:["が","に"],t:`${s[1]} se exercita todos os dias.`,_k:"f4:ex:"+s[0]};},
 ];
 function genFill4(lnum){return rnd(FILL4_GENS)(lnum);}
 
@@ -691,11 +715,11 @@ const FILL7_GENS=[
   (L)=>{return{seg:["口",{g:1},"中",{g:1},"何もない。"],answers:["の","に"],t:"Não há nada na boca.",_k:"f7:kuchi"};},
   (L)=>{const p=rnd(["大学","公園","学校","会社"]);return{seg:[p,{g:1},"キャンパス",{g:1},"広場がある。"],answers:["の","に"],t:"Há uma praça no campus.",_k:"f7:campus:"+p};},
   (L)=>{const s=rnd(["本","資料","パソコン","財布"]),p=rnd(["机","棚","テーブル","かばんの中"]);return{seg:[s,{g:1},p,{g:1},"置く。"],answers:["を","に"],t:`Coloco algo em algum lugar.`,_k:"f7:ok:"+s+":"+p};},
-  (L)=>{const s=rnd(SUBJ);return{seg:[s[0],{g:1},"友達",{g:1},"一緒に映画を見た。"],answers:["が","と"],t:`${s[1]} assistiu ao filme com um amigo.`,_k:"f7:tog:"+s[0]};},
+  (L)=>{const s=rnd(subjUpTo(L));return{seg:[s[0],{g:1},"友達",{g:1},"一緒に映画を見た。"],answers:["が","と"],t:`${s[1]} assistiu ao filme com um amigo.`,_k:"f7:tog:"+s[0]};},
   (L)=>{const p=rnd(["電車","バス","自転車","タクシー"]);return{seg:[p,{g:1},"学校",{g:1},"行く。"],answers:["で","に"],t:`Vou à escola de transporte.`,_k:"f7:tr:"+p};},
   (L)=>{const s=rnd(["母","父","先生","友達","田中さん"]);return{seg:[s,{g:1},"手紙",{g:1},"書いた。"],answers:["に","を"],t:`Escrevi uma carta para alguém.`,_k:"f7:let:"+s};},
   (L)=>{const p=rnd(["レストラン","食堂","カフェ"]),o=rnd(["ごはん","ランチ","コーヒー","お茶"]);return{seg:[p,{g:1},o,{g:1},"食べた。"],answers:["で","を"],t:`Comi algo no local.`,_k:"f7:eat:"+p+":"+o};},
-  (L)=>{const s=rnd(SUBJ),p=rnd(["学校","大学","会社"]);return{seg:[s[0],{g:1},p,{g:1},"日本語を勉強した。"],answers:["が","で"],t:`${s[1]} estudou japonês no local.`,_k:"f7:study:"+s[0]+":"+p};},
+  (L)=>{const s=rnd(subjUpTo(L)),p=rnd(["学校","大学","会社"]);return{seg:[s[0],{g:1},p,{g:1},"日本語を勉強した。"],answers:["が","で"],t:`${s[1]} estudou japonês no local.`,_k:"f7:study:"+s[0]+":"+p};},
   (L)=>{return{seg:["冷蔵庫",{g:1},"中",{g:1},"牛乳がある。"],answers:["の","に"],t:"Há leite dentro da geladeira.",_k:"f7:reizo"};},
 ];
 function genFill7(lnum){return rnd(FILL7_GENS)(lnum);}
@@ -746,7 +770,7 @@ const LICOES=[
   ]},
   {n:3,title:"Substantivos, adnomes e contadores",blocks:[
     {ref:"Ex. B1 — Grupos de verbos (revisão)",type:"mc",desc:"Classifique o verbo em Grupo 1/2/3.",gen:l=>genVerbGroup(l)},
-    {ref:"Ex. B2 — Predicado nominal",type:"reveal",pstyle:"plain",desc:"Complete as quatro formas do predicado.",gen:l=>genNominal()},
+    {ref:"Ex. B2 — Predicado nominal",type:"reveal",pstyle:"plain",desc:"Complete as quatro formas do predicado.",gen:l=>genNominal(l)},
     {ref:"Ex. B3 — Contadores: escolha",type:"mc",desc:"Escolha o numeral + sufixo correto.",gen:l=>genCounter()},
     {ref:"Ex. B4 — Numeral + sufixo (produção)",type:"reveal",pstyle:"plain",desc:"Diga o numeral com o contador certo.",gen:l=>genCounterProd()},
     {ref:"Ex. B5 — Montar a frase",type:"order",desc:"Ordene os blocos para formar a frase.",gen:l=>genOrder("pres",l)},
