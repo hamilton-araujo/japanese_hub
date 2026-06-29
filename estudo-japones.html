@@ -421,12 +421,12 @@
     <div id="lesList"></div>
   </section>
 
-  <footer class="foot">Ferramenta de estudo · vocabulário das Lições 1–3 · partículas, adnomes e pronomes das Lições 1–7.<br>Conteúdo conferido com o livro. As respostas dos exercícios são sugestões — pode haver mais de uma frase válida.</footer>
+  <footer class="foot">Ferramenta de estudo · vocabulário das Lições 1–7 · partículas, adnomes e pronomes das Lições 1–7.<br>Conteúdo conferido com o livro. As respostas dos exercícios são sugestões — pode haver mais de uma frase válida.</footer>
 </div>
 
 <script>
 /* ============================================================
-   DADOS — VOCABULÁRIO (Lições 1–3)  formato: "kanji|kana|português"
+   DADOS — VOCABULÁRIO (Lições 1–7)  formato: "kanji|kana|português"
    ============================================================ */
 const RAW = {
   L1:{
@@ -447,6 +447,28 @@ const RAW = {
     Substantivos:["犬|いぬ|cachorro","牛|うし|vaca, boi","うち||casa","馬|うま|cavalo","男の子|おとこのこ|menino","男の人|おとこのひと|homem","女の子|おんなのこ|menina","女の人|おんなのひと|mulher","買い物|かいもの|compras","学食|がくしょく|restaurante universitário","かさ||guarda-chuva","家族|かぞく|família","かばん||bolsa, mala","紙|かみ|papel","木|き|árvore","きのう||ontem","牛肉|ぎゅうにく|carne bovina","午後|ごご|p.m. (tarde)","午前|ごぜん|a.m. (manhã)","コップ||copo","ごはん||refeição; arroz cozido","コピー||cópia","シャツ||camisa","食事|しょくじ|refeição","スーパー||supermercado","大学生|だいがくせい|universitário","たまご||ovo","チョコレート||chocolate","テスト||prova","テキスト||texto","時計|とけい|relógio","中|なか|dentro","肉|にく|carne","庭|にわ|quintal","にんじん||cenoura","ノート||caderno","パパイヤ||mamão","パン||pão","日|ひ|dia","火|ひ|fogo","人|ひと|pessoa, gente","昼|ひる|tarde","びん||garrafa","ホテル||hotel","ボール||bola","ボールペン||caneta","みかん||laranja japonesa","ミネラルウオーター||água mineral","みんな||todos","山|やま|montanha"],
     "Adjetivos / Adnome":["小さい|ちいさい|(adj1) pequeno","茶色い|ちゃいろい|(adj1) marrom","いろいろ||(adj2) vários","大きな|おおきな|(adnome) grande; imenso","小さな|ちいさな|(adnome) pequeno"],
     Expressões:["それから||(conj.) depois","いくつ||quantos","行った|いった|fui","買った|かった|comprei","来た|きた|vieram","した||fiz","出かけた|でかけた|saímos","みんなで||todos juntos","もらった||ganhei","～ごろ||(sufixo) por volta de","～前|まえ|(sufixo) antes; para (horas)"]
+  },
+  L4:{
+    Verbos:["急ぐ|いそぐ|apressar-se","泣く|なく|chorar","始まる|はじまる|começar (vi); ter início","流れる|ながれる|fluir; correr","吠える|ほえる|latir; uivar","分かる|わかる|entender; compreender","住む|すむ|morar; habitar","働く|はたらく|trabalhar","受ける|うける|receber; fazer (exame)","落ちる|おちる|cair; reprovar"],
+    Substantivos:["先週|せんしゅう|semana passada","先月|せんげつ|mês passado","去年|きょねん|ano passado","来年|らいねん|ano que vem","朝|あさ|manhã","昼|ひる|meio-dia; tarde","夕方|ゆうがた|tarde; entardecer","春|はる|primavera","夏|なつ|verão","秋|あき|outono","冬|ふゆ|inverno","写真|しゃしん|fotografia","問題|もんだい|problema; questão","レポート||relatório","メール||e-mail","空港|くうこう|aeroporto","体育館|たいいくかん|ginásio","教師|きょうし|professor (profissão)","エンジニア||engenheiro","会社|かいしゃ|empresa"],
+    Expressões:["～た||(passado afirmativo simples)","～なかった||(passado negativo simples)","～に なる||(resultado) tornar-se ～","時間がある|じかんがある|ter tempo; estar disponível","六時に起きる|ろくじにおきる|acordar às 6 (に = tempo)","学校に行く|がっこうにいく|ir à escola (に = destino)"]
+  },
+  L5:{
+    Verbos:["勝つ|かつ|vencer; ganhar","探す|さがす|procurar; buscar","調べる|しらべる|pesquisar; verificar","考える|かんがえる|pensar; refletir","始める|はじめる|começar (vt)","続ける|つづける|continuar; prosseguir","集まる|あつまる|reunir-se; juntar-se","決める|きめる|decidir","信じる|しんじる|acreditar; confiar","負ける|まける|perder; ser derrotado"],
+    "Adjetivos な":["安全|あんぜん|seguro","簡単|かんたん|simples; fácil","危険|きけん|perigoso","きれい||limpo; bonito","元気|げんき|saudável; animado","静か|しずか|silencioso; calmo","上手|じょうず|hábil; bom em algo (de outra pessoa)","親切|しんせつ|gentil; amável","好き|すき|gostar de (ser afeiçoado a)","得意|とくい|ponto forte; ser bom em (próprio)","苦手|にがて|ponto fraco; não ser bom em","にぎやか||animado; agitado (de lugar)","複雑|ふくざつ|complexo; complicado","不便|ふべん|inconveniente","下手|へた|ser ruim em algo","便利|べんり|prático; conveniente","有名|ゆうめい|famoso","必要|ひつよう|necessário","嫌い|きらい|detestar; não gostar de","丁寧|ていねい|educado; cuidadoso","素直|すなお|dócil; sincero","真剣|しんけん|sério; determinado","経済的|けいざいてき|econômico","実用的|じつようてき|prático; funcional"],
+    Substantivos:["海|うみ|mar; oceano","山|やま|montanha","川|かわ|rio","地下鉄|ちかてつ|metrô","バス||ônibus","アパート||apartamento","仕事|しごと|trabalho","スポーツ||esporte","料理|りょうり|culinária; prato"],
+    Expressões:["得意 vs 上手|とくい vs じょうず|得意 = próprio ponto forte · 上手 = habilidade observada em outra pessoa","～だ / ～だった / ～ではない||(cópula) predicado nominal: pres. afirm. · passado · negativo","バスで行く|ばすでいく|ir de ônibus (で = meio)"]
+  },
+  L6:{
+    Verbos:["約束する|やくそくする|prometer; fazer uma combinação","忘れる|わすれる|esquecer","集める|あつめる|colecionar; reunir (vt)","開ける|あける|abrir (vt)","閉める|しめる|fechar (vt)","片付ける|かたづける|arrumar; organizar","助ける|たすける|ajudar; salvar","見せる|みせる|mostrar","送る|おくる|enviar; mandar","迎える|むかえる|ir buscar; receber (alguém)"],
+    "Adjetivos い (novos)":["細い|ほそい|fino; delgado","太い|ふとい|grosso","辛い|からい|picante; salgado","酸っぱい|すっぱい|azedo; ácido","眠い|ねむい|com sono; sonolento","痛い|いたい|doloroso; doer","うれしい||feliz; contente","かっこいい||bonito; estiloso","正しい|ただしい|correto","重い|おもい|pesado","軽い|かるい|leve","きたない||sujo; feio"],
+    Expressões:["～くて||(て-form do adj-い) e; sendo ～","～で||(て-form do adj-な) e; sendo ～","～くない / ～ではない||(negação presente do adjetivo)","～かった / だった||(passado do adjetivo)","～くなかった / ではなかった||(passado negativo do adjetivo)","きれいで、やさしい||(adj-な) て-form: bonita e gentil"]
+  },
+  L7:{
+    Verbos:["旅行する|りょこうする|viajar","散歩する|さんぽする|passear; caminhar","料理する|りょうりする|cozinhar; preparar comida","運動する|うんどうする|fazer exercício; praticar esporte","連絡する|れんらくする|entrar em contato; avisar","説明する|せつめいする|explicar","準備する|じゅんびする|preparar; se preparar","相談する|そうだんする|consultar; conversar sobre","参加する|さんかする|participar","確認する|かくにんする|confirmar; verificar"],
+    "Forma ます":["～ます||(presente/futuro polido — forma de dicionário → -ます)","～ました||(passado polido)","～ません||(negativo polido presente)","～ませんでした||(negativo polido passado)","～ましょう||(sugestão / vamos ～)","～ましょうか||(oferta / posso ～?)","～たいです||(desejo polido: gostaria de ～)","～に 行きます / 来ます||(に = finalidade + verbo polido)"],
+    Substantivos:["散歩|さんぽ|passeio (a pé)","旅行|りょこう|viagem","運動|うんどう|exercício físico","電話番号|でんわばんごう|número de telefone","毎朝|まいあさ|toda manhã","毎晩|まいばん|toda noite","週に一回|しゅうにいっかい|uma vez por semana","アルバイト||emprego temporário; bico","キャンパス||campus","授業料|じゅぎょうりょう|mensalidade escolar"],
+    Expressões:["よろしくお願いします|よろしくおねがいします|muito prazer; por favor (pedido formal)","お元気ですか|おげんきですか|Como vai? (polido)","ありがとうございます||obrigado(a) (polido formal)","すみません||com licença; desculpe (polido)","失礼します|しつれいします|com licença (ao entrar/sair de um lugar)"]
   }
 };
 
