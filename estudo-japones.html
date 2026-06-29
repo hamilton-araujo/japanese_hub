@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>助詞 · Estudo de Japonês — Vocabulário, Partículas, Adnomes e Pronomes</title>
+<style>
+  :root{
+    --ink:#141d33;        /* deep indigo (藍) */
+    --ink-2:#1d2945;      /* raised panel */
+    --ink-3:#26345a;      /* hover / borders on dark */
+    --paper:#f3eee1;      /* washi card */
+    --paper-soft:#fbf8f0;
+    --persimmon:#e0623a;  /* 柿色 — function words */
+    --persimmon-d:#c44e2a;
+    --celadon:#6fa088;    /* 青磁 — correct */
+    --celadon-d:#4f7d68;
+    --rose:#c8504e;       /* wrong */
+    --indigo-link:#8fb0e0;
+    --tink:#101729;
+    --text-paper:#e9e6dc;
+    --text-mut:#a6b0c9;
+    --text-card:#1a1d29;
+    --text-card-mut:#5c5f6e;
+    --radius:14px;
+    --line:rgba(233,230,220,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1c2950 0%, transparent 55%),
+      radial-gradient(900px 500px at -10% 110%, #20183a 0%, transparent 50%),
+      var(--ink);
+    color:var(--text-paper);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','YuMincho','MS PMincho','Songti SC',serif}
+  .jp-sans{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo','MS PGothic',sans-serif}
+
+  /* ---------- shell ---------- */
+  .wrap{max-width:920px;margin:0 auto;padding:22px 18px 90px}
+  header.top{padding:14px 2px 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--persimmon);font-weight:600}
+  h1.title{
+    font-family:'Fraunces',Georgia,'Hoefler Text','Times New Roman',serif;font-weight:900;line-height:.95;
+    font-size:clamp(2rem,7vw,3.3rem);margin:.18em 0 .15em;color:#fff;
+    font-optical-sizing:auto;letter-spacing:-.01em;
+  }
+  h1.title .jc{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','MS PMincho','Songti SC',serif;font-weight:800;color:var(--persimmon);font-size:.62em;vertical-align:.06em}
+  .sub{color:var(--text-mut);font-size:.95rem;max-width:62ch}
+
+  /* ---------- tabs ---------- */
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+  .tab{
+    appearance:none;border:1px solid var(--ink-3);background:var(--ink-2);
+    color:var(--text-mut);font-family:inherit;font-size:.92rem;font-weight:600;
+    padding:9px 15px;border-radius:999px;cursor:pointer;transition:.18s;display:flex;gap:7px;align-items:center
+  }
+  .tab .k{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:.85em;opacity:.8}
+  .tab:hover{color:var(--text-paper);border-color:#3a4a76}
+  .tab[aria-selected="true"]{background:var(--persimmon);border-color:var(--persimmon);color:#fff}
+  .tab[aria-selected="true"] .k{opacity:.95}
+
+  .panel{display:none;animation:rise .3s ease both}
+  .panel.active{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
+  .seg{display:inline-flex;background:var(--ink-2);border:1px solid var(--ink-3);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap}
+  .seg button{
+    appearance:none;border:0;background:transparent;color:var(--text-mut);
+    font-family:inherit;font-size:.82rem;font-weight:600;padding:6px 11px;border-radius:7px;cursor:pointer;transition:.15s
+  }
+  .seg button:hover{color:var(--text-paper)}
+  .seg button.on{background:var(--ink-3);color:#fff}
+  .ctl-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mut);font-weight:600;width:100%;margin:2px 2px -2px}
+  .btn{
+    appearance:none;border:1px solid var(--ink-3);background:var(--ink-2);color:var(--text-paper);
+    font-family:inherit;font-weight:600;font-size:.85rem;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.15s
+  }
+  .btn:hover{border-color:#46598c}
+  .btn.accent{background:var(--persimmon);border-color:var(--persimmon);color:#fff}
+  .btn.accent:hover{background:var(--persimmon-d);border-color:var(--persimmon-d)}
+  .btn.ghost{background:transparent}
+
+  /* ---------- flashcard ---------- */
+  .deckmeta{display:flex;justify-content:space-between;align-items:baseline;color:var(--text-mut);font-size:.83rem;margin:0 2px 10px}
+  .deckmeta b{color:var(--persimmon);font-weight:700}
+  .card{
+    position:relative;width:100%;min-height:300px;border-radius:22px;cursor:pointer;
+    perspective:1600px;margin-bottom:14px;
+  }
+  .card .face{
+    position:absolute;inset:0;border-radius:22px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:30px 24px;
+    backface-visibility:hidden;transition:transform .5s cubic-bezier(.4,.1,.2,1);
+    background:linear-gradient(180deg,var(--paper-soft),var(--paper));
+    color:var(--text-card);box-shadow:0 20px 40px -22px rgba(0,0,0,.7), inset 0 1px 0 #fff
+  }
+  .card .back{transform:rotateY(180deg)}
+  .card.flipped .front{transform:rotateY(-180deg)}
+  .card.flipped .back{transform:rotateY(0)}
+  .card .catpill{position:absolute;top:16px;left:16px;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--persimmon-d);font-weight:700;background:rgba(224,98,58,.1);padding:4px 9px;border-radius:999px}
+  .card .lespill{position:absolute;top:16px;right:16px;font-size:.66rem;letter-spacing:.1em;font-weight:700;
+    color:#fff;background:var(--ink);padding:4px 9px;border-radius:999px}
+  .card .big{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','MS PMincho','Songti SC',serif;font-weight:700;font-size:clamp(2.6rem,12vw,4.6rem);line-height:1.05;color:var(--tink)}
+  .card .kana{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:1.2rem;color:var(--text-card-mut);margin-top:8px;letter-spacing:.04em}
+  .card .pt{font-family:'Fraunces',Georgia,'Hoefler Text','Times New Roman',serif;font-weight:600;font-size:clamp(1.5rem,6vw,2.2rem);color:var(--persimmon-d);line-height:1.15}
+  .card .ptsmall{font-size:1.15rem;color:var(--text-card-mut);font-weight:500;margin-top:10px;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .card .hint{position:absolute;bottom:16px;font-size:.72rem;color:var(--text-card-mut);letter-spacing:.06em}
+  .navrow{display:flex;gap:8px;align-items:center;justify-content:center}
+  .navrow .btn{min-width:104px}
+  .progress{height:5px;border-radius:99px;background:var(--ink-2);overflow:hidden;margin:0 2px 16px}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--persimmon),var(--persimmon-d));transition:width .3s}
+
+  /* ---------- generic section text ---------- */
+  .lead{color:var(--text-mut);font-size:.95rem;max-width:64ch;margin:0 2px 18px}
+  .lead .jp-sans{color:var(--text-paper)}
+
+  /* ---------- particle reference ---------- */
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .pcard{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:16px 16px 14px}
+  .pcard .ph{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:10px}
+  .pcard .glyph{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-weight:700;font-size:2.1rem;color:var(--persimmon);line-height:1}
+  .pcard .rom{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-mut);font-weight:600}
+  .func{margin-bottom:11px}
+  .func:last-child{margin-bottom:0}
+  .func .ftop{display:flex;gap:7px;align-items:center;margin-bottom:3px;flex-wrap:wrap}
+  .ltag{font-size:.64rem;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--ink-3);padding:2px 7px;border-radius:999px}
+  .role{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--celadon);font-weight:700}
+  .func .desc{font-size:.88rem;color:var(--text-paper)}
+  .func .ex{margin-top:5px;font-size:.9rem;color:var(--text-mut)}
+  .func .ex .jp-sans{color:#fff}
+  .func .ex .exk{color:var(--text-mut);font-size:.82em}
+  .func .ex .ept{color:var(--text-mut);font-style:italic}
+  .func .ex em b{color:var(--persimmon);font-style:normal}
+
+  /* ---------- exercises ---------- */
+  .exhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .exhead .score{font-size:.85rem;color:var(--text-mut)}
+  .exhead .score b{color:var(--celadon)}
+  .ex-card{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+  .ex-card .exnum{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mut);font-weight:700;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+  .ex-card .exnum .ltag{background:var(--persimmon);}
+  .sentence{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:1.45rem;line-height:2;color:#fff;letter-spacing:.01em;margin-bottom:6px}
+  .sentence .seg{background:none;border:0;padding:0;display:inline}
+  .gap{
+    display:inline-flex;align-items:center;justify-content:center;min-width:2.1em;height:1.7em;
+    margin:0 .08em;border-radius:8px;border:2px dashed #4a5a86;background:var(--tink);
+    color:var(--persimmon);font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-weight:700;font-size:.9em;cursor:pointer;
+    transition:.12s;vertical-align:-.35em;padding:0 .2em
+  }
+  .gap:hover{border-color:var(--persimmon)}
+  .gap.active{border-style:solid;border-color:var(--persimmon);box-shadow:0 0 0 3px rgba(224,98,58,.22)}
+  .gap.empty{color:#4a5a86}
+  .gap.ok{border-style:solid;border-color:var(--celadon);color:var(--celadon);background:rgba(111,160,136,.12)}
+  .gap.bad{border-style:solid;border-color:var(--rose);color:#f0a3a1;background:rgba(200,80,78,.12)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+  .chip{
+    appearance:none;border:1px solid var(--ink-3);background:var(--tink);color:var(--persimmon);
+    font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-weight:700;font-size:1.05rem;min-width:2.6em;padding:7px 10px;border-radius:9px;cursor:pointer;transition:.12s
+  }
+  .chip:hover{border-color:var(--persimmon);background:#1a2238}
+  .ex-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .feedback{margin-top:12px;padding:11px 13px;border-radius:10px;font-size:.92rem;display:none}
+  .feedback.show{display:block}
+  .feedback.right{background:rgba(111,160,136,.14);border:1px solid var(--celadon-d);color:#cfe6da}
+  .feedback.wrong{background:rgba(200,80,78,.12);border:1px solid #8a3b3a;color:#f0c7c6}
+  .feedback .tr{display:block;margin-top:4px;color:var(--text-mut);font-style:italic}
+
+  /* ---------- kosoado table ---------- */
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px 24px}
+  table.kt{border-collapse:separate;border-spacing:0;width:100%;min-width:540px;background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);overflow:hidden}
+  table.kt th,table.kt td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:.9rem;vertical-align:top}
+  table.kt thead th{background:var(--tink);color:var(--text-mut);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  table.kt thead th.ko{color:var(--persimmon)}
+  table.kt tbody th{color:var(--text-mut);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+  table.kt .w{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:1.15rem;color:#fff;font-weight:500}
+  table.kt .r{display:block;font-size:.74rem;color:var(--text-mut);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;margin-top:1px;text-transform:none;letter-spacing:0}
+  table.kt tr:last-child td,table.kt tr:last-child th{border-bottom:0}
+  table.kt td.dq{color:var(--persimmon-d)}
+  table.kt td.dq .w{color:var(--persimmon)}
+
+  h2.sec{font-family:'Fraunces',Georgia,'Hoefler Text','Times New Roman',serif;font-weight:600;font-size:1.5rem;color:#fff;margin:6px 2px 4px}
+  h2.sec .jc{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;color:var(--persimmon);font-size:.7em;font-weight:700;margin-left:.4em}
+  .seclead{color:var(--text-mut);font-size:.9rem;margin:0 2px 16px;max-width:62ch}
+
+  .note{background:var(--ink-2);border-left:3px solid var(--persimmon);border-radius:0 10px 10px 0;padding:13px 15px;margin:0 0 24px;font-size:.9rem;color:var(--text-paper)}
+  .note b{color:var(--persimmon)}
+  .note .jp-sans{color:#fff}
+
+  /* ---------- pronoun cards (personal / interrog) ---------- */
+  .minicards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:24px}
+  .mc{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:12px;padding:13px 14px}
+  .mc .w{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:1.4rem;color:#fff;font-weight:500;line-height:1.2}
+  .mc .r{font-size:.74rem;color:var(--text-mut);margin-top:1px}
+  .mc .pt{font-size:.92rem;color:var(--persimmon);font-weight:600;margin-top:6px}
+  .mc .x{font-size:.78rem;color:var(--text-mut);margin-top:3px}
+
+  /* ---------- quiz ---------- */
+  .quiz{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:20px;max-width:560px}
+  .quiz .q{font-size:1.05rem;margin-bottom:4px}
+  .quiz .q .big{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;color:var(--persimmon);font-weight:700}
+  .quiz .qmeta{font-size:.78rem;color:var(--text-mut);margin-bottom:14px}
+  .opts{display:grid;gap:8px}
+  .opt{appearance:none;text-align:left;border:1px solid var(--ink-3);background:var(--tink);color:var(--text-paper);
+    font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','MS PGothic',sans-serif;font-size:1.05rem;font-weight:500;padding:12px 14px;border-radius:10px;cursor:pointer;transition:.13s}
+  .opt:hover{border-color:#46598c}
+  .opt .r{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:.76rem;color:var(--text-mut);margin-left:8px}
+  .opt.ok{border-color:var(--celadon);background:rgba(111,160,136,.16);color:#fff}
+  .opt.bad{border-color:var(--rose);background:rgba(200,80,78,.14)}
+  .opt:disabled{cursor:default}
+  .quiz .qfoot{margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+  .quiz .qscore{font-size:.85rem;color:var(--text-mut)}
+  .quiz .qscore b{color:var(--celadon)}
+
+  .phr-list{display:grid;gap:10px}
+  .gphead{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--persimmon);font-weight:700;margin:20px 2px 2px}
+  .gphead:first-child{margin-top:2px}
+  .scard{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:.15s}
+  .scard:hover{border-color:#46598c}
+  .scard .jpn{font-size:1.3rem;color:#fff;line-height:1.85}
+  .scard .jpn b{color:var(--persimmon);font-weight:700;font-style:normal}
+  .scard .rev{display:none;margin-top:11px;padding-top:11px;border-top:1px solid var(--line)}
+  .scard.open .rev{display:block}
+  .scard .read{color:var(--text-mut);font-size:.95rem;letter-spacing:.02em}
+  .scard .tr{color:var(--text-paper);font-size:.96rem;margin-top:5px;font-style:italic}
+  .scard .cue{font-size:.7rem;color:var(--text-mut);letter-spacing:.06em;margin-top:9px}
+  .scard.open .cue{display:none}
+  .les{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+  .lhead{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#fff;font-family:inherit;cursor:pointer;padding:15px 16px}
+  .lhead .lt{font-family:'Fraunces',Georgia,serif;font-size:1.12rem;font-weight:600}
+  .lhead .lt .jc{color:var(--persimmon);font-size:.82em;margin-left:.45em;font-weight:700}
+  .lhead .arw{color:var(--text-mut);transition:transform .2s;font-size:1.1rem;flex:none}
+  .les.open .lhead .arw{transform:rotate(90deg)}
+  .lbody{display:none;padding:2px 16px 16px;border-top:1px solid var(--line)}
+  .les.open .lbody{display:block}
+  .lbody p{color:var(--text-paper);font-size:.95rem;margin:12px 0;line-height:1.6}
+  .lbody .hl{color:var(--persimmon);font-weight:600}
+  .lbody .jw{color:#fff;font-weight:600}
+  .exrow{background:var(--tink);border-radius:10px;padding:11px 13px;margin:9px 0}
+  .exrow .j{font-size:1.15rem;color:#fff;line-height:1.7}
+  .exrow .j b{color:var(--persimmon);font-weight:700;font-style:normal}
+  .exrow .k{color:var(--text-mut);font-size:.84rem;margin-top:1px}
+  .exrow .t{color:var(--text-paper);font-style:italic;font-size:.9rem;margin-top:2px}
+  .tipbox{background:rgba(224,98,58,.1);border-left:3px solid var(--persimmon);border-radius:0 10px 10px 0;padding:11px 13px;margin-top:13px;font-size:.9rem;color:var(--text-paper)}
+  .tipbox b{color:var(--persimmon)}
+  .rate-bar{display:flex;gap:8px;align-items:center;justify-content:center;margin:0 0 6px;flex-wrap:wrap}
+  .rate-bar .lbl{font-size:.78rem;color:var(--text-mut);margin-right:4px}
+  .rate{appearance:none;border:1px solid var(--ink-3);background:var(--ink-2);color:var(--text-paper);font-family:inherit;font-weight:600;font-size:.85rem;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center}
+  .rate:hover{border-color:#46598c}
+  .rate .d{width:8px;height:8px;border-radius:50%;margin-right:7px}
+  .rate.hard .d{background:var(--rose)} .rate.med .d{background:#d29a3e} .rate.easy .d{background:var(--celadon)}
+  .rate.hard.active{background:var(--rose);border-color:var(--rose);color:#fff}
+  .rate.med.active{background:#c0871f;border-color:#c0871f;color:#fff}
+  .rate.easy.active{background:var(--celadon-d);border-color:var(--celadon-d);color:#fff}
+  .rate.active .d{background:#fff}
+  .counts{display:flex;gap:14px;justify-content:center;font-size:.78rem;color:var(--text-mut);margin-bottom:14px;flex-wrap:wrap}
+  .counts b{font-weight:700}
+  .counts .c-hard b{color:#e8908e} .counts .c-med b{color:#e0b56b} .counts .c-easy b{color:var(--celadon)}
+  .rate{flex-direction:column;gap:2px;padding:7px 16px;line-height:1.15}
+  .rate .rl{display:inline-flex;align-items:center}
+  .rate .iv{font-size:.66rem;font-weight:600;opacity:.72;letter-spacing:.02em}
+  .srsmeta{text-align:center;font-size:.78rem;color:var(--text-mut);margin:-6px 0 14px}
+  .srsmeta b{color:var(--persimmon);font-weight:700}
+  footer.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:var(--text-mut);font-size:.8rem;text-align:center}
+
+  @media (max-width:560px){
+    .card .catpill,.card .lespill{font-size:.6rem}
+    .navrow .btn{min-width:0;flex:1}
+    .sentence{font-size:1.25rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .card .face{transition:none}
+  }
+  :focus-visible{outline:3px solid var(--persimmon);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Lições 1–3 · gramática 1–7</div>
+    <h1 class="title">Partículas <span class="jc">助詞</span> &amp; companhia</h1>
+    <p class="sub">Memorize o vocabulário e treine o que liga as frases: <strong style="color:var(--text-paper)">partículas</strong>, <strong style="color:var(--text-paper)">adnomes</strong> (連体詞) e <strong style="color:var(--text-paper)">pronomes</strong>. As partículas aparecem sempre em <span style="color:var(--persimmon);font-weight:600">laranja</span> — são as articulações da frase.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-panel="cards"><span class="k">単語</span> Vocabulário</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="parts"><span class="k">助詞</span> Partículas</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="drill"><span class="k">練習</span> Exercícios</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="pron"><span class="k">代名詞</span> Adnomes &amp; Pronomes</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="phr"><span class="k">例文</span> Frases</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="gram"><span class="k">文法</span> Gramática</button>
+  </nav>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="panel active" id="cards" role="tabpanel">
+    <div class="controls">
+      <span class="ctl-label">Lição</span>
+      <div class="seg" id="filLes"></div>
+      <span class="ctl-label">Categoria</span>
+      <div class="seg" id="filCat"></div>
+      <span class="ctl-label">Modo de estudo</span>
+      <div class="seg" id="filMode">
+        <button data-mode="jp" class="on">日本語 → PT</button>
+        <button data-mode="pt">PT → 日本語</button>
+        <button data-mode="kana">かな → PT</button>
+      </div>
+      <span class="ctl-label">Hiragana (leitura)</span>
+      <div class="seg" id="filKana"></div>
+      <span class="ctl-label">Estudar</span>
+      <div class="seg" id="filRate"></div>
+    </div>
+
+    <div class="deckmeta"><span id="deckName">Vocabulário</span><span>Carta <b id="cIdx">1</b> de <b id="cTot">1</b></span></div>
+    <div class="progress"><i id="prog" style="width:0%"></i></div>
+
+    <div class="card" id="card" tabindex="0" aria-label="Cartão. Toque para virar.">
+      <div class="face front">
+        <span class="catpill" id="fCat"></span><span class="lespill" id="fLes"></span>
+        <div id="frontMain"></div>
+        <span class="hint">toque para virar · ↑↓ para navegar</span>
+      </div>
+      <div class="face back">
+        <span class="catpill" id="bCat"></span><span class="lespill" id="bLes"></span>
+        <div id="backMain"></div>
+        <span class="hint">toque para virar</span>
+      </div>
+    </div>
+
+    <div class="rate-bar" id="rateBar">
+      <span class="lbl">Que tal foi?</span>
+      <button class="rate hard" data-level="hard"><span class="rl"><span class="d"></span>Difícil</span><small class="iv"></small></button>
+      <button class="rate med" data-level="med"><span class="rl"><span class="d"></span>Médio</span><small class="iv"></small></button>
+      <button class="rate easy" data-level="easy"><span class="rl"><span class="d"></span>Fácil</span><small class="iv"></small></button>
+    </div>
+    <div class="counts" id="counts"></div>
+    <div class="srsmeta" id="srsmeta"></div>
+    <div class="navrow">
+      <button class="btn ghost" id="prev">← Anterior</button>
+      <button class="btn accent" id="flip">Virar</button>
+      <button class="btn ghost" id="next">Próxima →</button>
+    </div>
+    <div style="text-align:center;margin-top:10px"><button class="btn ghost" id="shuf">⤮ Embaralhar</button></div>
+  </section>
+
+  <!-- ============ PARTICLES REFERENCE ============ -->
+  <section class="panel" id="parts" role="tabpanel">
+    <p class="lead">Toda partícula vem <em>depois</em> da palavra a que se liga. A mesma partícula muda de função conforme a lição — por isso cada cartão lista todos os usos vistos até aqui, com a etiqueta da lição (<span class="ltag" style="position:static;display:inline-block">L1</span> etc.).</p>
+    <div class="pgrid" id="pgrid"></div>
+  </section>
+
+  <!-- ============ DRILL ============ -->
+  <section class="panel" id="drill" role="tabpanel">
+    <div class="exhead">
+      <p class="lead" style="margin:0;max-width:46ch">Toque numa lacuna para selecioná-la, depois toque na partícula. Use só as partículas oferecidas em cada exercício (são as do enunciado original do livro).</p>
+      <span class="score">Conferidos certos: <b id="exScore">0</b> / <span id="exTot">0</span></span>
+    </div>
+    <div class="controls" style="margin-bottom:16px">
+      <span class="ctl-label">Conjunto de partículas (por lição)</span>
+      <div class="seg" id="exFil"></div>
+    </div>
+    <div id="exList"></div>
+  </section>
+
+  <!-- ============ PRONOUNS / ADNOMES ============ -->
+  <section class="panel" id="pron" role="tabpanel">
+    <h2 class="sec">Sistema こ・そ・あ・ど <span class="jc">指示語</span></h2>
+    <p class="seclead">A lógica dos demonstrativos: <b style="color:var(--persimmon)">こ</b> = perto de quem fala · <b style="color:var(--persimmon)">そ</b> = perto do ouvinte · <b style="color:var(--persimmon)">あ</b> = longe dos dois · <b style="color:var(--persimmon)">ど</b> = pergunta. Mude só a primeira sílaba e o resto se mantém.</p>
+    <div class="tablewrap">
+      <table class="kt">
+        <thead><tr><th>Série</th><th class="ko">こ (este)</th><th>そ (esse)</th><th>あ (aquele)</th><th>ど (qual?)</th></tr></thead>
+        <tbody id="ktbody"></tbody>
+      </table>
+    </div>
+
+    <h2 class="sec">Adnomes <span class="jc">連体詞</span></h2>
+    <div class="note">Adnomes <b>não flexionam</b> e grudam direto no substantivo. Cuidado: <span class="jp-sans">大きな・小さな</span> (adnomes) são diferentes de <span class="jp-sans">大きい・小さい</span> (adjetivos-i, que flexionam). Ex.: <span class="jp-sans">大きな車</span> = um carro imenso · <span class="jp-sans">この本</span> = este livro.</div>
+    <div class="minicards" id="adnList"></div>
+
+    <h2 class="sec">Pronomes pessoais <span class="jc">人代名詞</span></h2>
+    <div class="minicards" id="perList"></div>
+
+    <h2 class="sec">Pronomes interrogativos <span class="jc">疑問詞</span></h2>
+    <div class="minicards" id="intList"></div>
+
+    <h2 class="sec">Treino rápido <span class="jc">クイズ</span></h2>
+    <p class="seclead">Escolha a forma japonesa correta. Pronomes, adnomes e demonstrativos misturados.</p>
+    <div class="quiz" id="quiz">
+      <div class="q" id="qText"></div>
+      <div class="qmeta" id="qMeta"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="qfoot">
+        <span class="qscore">Acertos: <b id="qScore">0</b> / <span id="qSeen">0</span></span>
+        <button class="btn accent" id="qNext" disabled>Próxima →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FRASES ============ -->
+  <section class="panel" id="phr" role="tabpanel">
+    <p class="lead">Frases montadas <strong style="color:var(--text-paper)">só com o que já vimos</strong> — vocabulário das Lições 1–3 e a gramática das Lições 1–7. As <span style="color:var(--persimmon);font-weight:600">partículas</span> aparecem em laranja. Toque numa frase para revelar a leitura e a tradução.</p>
+    <div class="controls" style="margin-bottom:14px">
+      <span class="ctl-label">Foco</span>
+      <div class="seg" id="phrFil"></div>
+      <button class="btn ghost" id="revealAll" style="margin-left:auto">Revelar tudo</button>
+    </div>
+    <div class="phr-list" id="phrList"></div>
+  </section>
+
+  <!-- ============ GRAMÁTICA ============ -->
+  <section class="panel" id="gram" role="tabpanel">
+    <p class="lead">A camada que <strong style="color:var(--text-paper)">explica</strong>. Os flashcards gravam palavras; aqui você entende <em>como a gramática funciona</em>. Ordem sugerida de estudo: <span class="hl">Gramática → Frases → Exercícios → Vocabulário</span>. Toque numa lição para abrir.</p>
+    <div id="lesList"></div>
+  </section>
+
+  <footer class="foot">Ferramenta de estudo · vocabulário das Lições 1–3 · partículas, adnomes e pronomes das Lições 1–7.<br>Conteúdo conferido com o livro. As respostas dos exercícios são sugestões — pode haver mais de uma frase válida.</footer>
+</div>
+
+<script>
+/* ============================================================
+   DADOS — VOCABULÁRIO (Lições 1–3)  formato: "kanji|kana|português"
+   ============================================================ */
+const RAW = {
+  L1:{
+    Verbos:["会う|あう|encontrar-se","開く|あく|abrir (vi); funcionar","遊ぶ|あそぶ|brincar","ある||estar; existir; haver (inanimados)","歩く|あるく|caminhar, andar","行く|いく／ゆく|ir","いる||estar; existir; haver (animados)","歌う|うたう|cantar","売る|うる|vender","起きる|おきる|acordar; levantar-se","置く|おく|deixar; pôr","教える|おしえる|ensinar","覚える|おぼえる|memorizar","泳ぐ|およぐ|nadar","終わる|おわる|terminar","買う|かう|comprar","帰る|かえる|voltar para casa","書く|かく|escrever","貸す|かす|emprestar","借りる|かりる|tomar emprestado","聞く|きく|ouvir; perguntar","切る|きる|cortar","着る|きる|vestir-se","来る|くる|vir","消す|けす|apagar; desligar","結婚する|けっこんする|casar-se","咲く|さく|florescer; desabrochar","質問する|しつもんする|fazer perguntas","死ぬ|しぬ|morrer","閉まる|しまる|fechar (vi)","知らせる|しらせる|avisar","知る|しる|saber","する||praticar; fazer","立つ|たつ|levantar-se","食べる|たべる|comer","着く|つく|chegar","飛ぶ|とぶ|voar","止まる|とまる|parar (vi)","取る|とる|pegar; tomar","習う|ならう|aprender (com alguém)","なる||tornar-se","脱ぐ|ぬぐ|despir-se; tirar calçado","寝る|ねる|dormir; deitar-se","飲む|のむ|beber; tomar","乗る|のる|embarcar; tomar condução","走る|はしる|correr","話す|はなす|conversar; falar","勉強する|べんきょうする|estudar","見る|みる|ver; assistir a","休む|やすむ|descansar; faltar","読む|よむ|ler","練習する|れんしゅうする|treinar"],
+    Substantivos:["朝|あさ|manhã","明日|あした|amanhã","市場|いちば|feira","いとこ||primo, prima","いま||agora","歌|うた|canção; música","絵|え|desenho; figura","映画|えいが|cinema; filme","映画館|えいがかん|cinema (prédio)","おじ||tio (do falante)","音楽|おんがく|música","学生|がくせい|estudante","風|かぜ|vento","学校|がっこう|escola","ガラス||vidro","漢字|かんじ|ideograma; logograma","キッチン||cozinha","教会|きょうかい|igreja","教室|きょうしつ|sala de aula","果物屋|くだものや|casa de frutas","クラスメート||colega de classe","車|くるま|carro","公園|こうえん|parque; praça","ことば||palavra","子供|こども|criança; filho(a)","小鳥|ことり|passarinho","魚|さかな|peixe","サッカー||futebol","雑誌|ざっし|revista","時間|じかん|horário","辞書|じしょ|dicionário","授業|じゅぎょう|aula","ショッピングセンター||shopping center","新聞|しんぶん|jornal","生徒|せいと|aluno","先生|せんせい|professor (tratamento)","大学|だいがく|universidade; faculdade","近く|ちかく|perto","地図|ちず|mapa","机|つくえ|carteira; escrivaninha","電話|でんわ|telefone; telefonema","戸|と|porta","図書館|としょかん|biblioteca (prédio)","友達|ともだち|amigo(a)","鳥|とり|pássaro","部屋|へや|quarto","名前|なまえ|nome","日本|にほん|Japão","母|はは|\u201cminha mãe\u201d (do falante)","左|ひだり|esquerda","ビール||cerveja","方々|ほうぼう|vários lugares","本|ほん|livro","毎日|まいにち|todos os dias","窓|まど|janela","マラソンランナー||corredor de maratona","右|みぎ|direita","店|みせ|loja","向こう|むこう|lá; outro lado","野菜|やさい|verdura","郵便局|ゆうびんきょく|correio","夜|よる|noite","来月|らいげつ|mês que vem","りんご||maçã","和食|わしょく|comida japonesa"],
+    "Sufixos / Prefixo":["小|こ|(prefixo) diminutivo / algo pequeno","語|ご|(sufixo) idioma: 日本語, 英語","さん||(sufixo) respeito/consideração","屋|や|(sufixo) comércio/profissional de…: 電気屋"],
+    Expressões:["青い空|あおいそら|céu azul","雨が降る|あめがふる|chover","絵をかく|えをかく|desenhar","お天気のよい|おてんきのよい|tempo bom","風が吹く|かぜがふく|ventar","気づく|きづく|perceber","電話をかける|でんわをかける|telefonar","日が暮れる|ひがくれる|anoitecer","持っている|もっている|possuir; ter","方々に|ほうぼうに|para vários lugares"]
+  },
+  L2:{
+    Verbos:["集まる|あつまる|reunir-se","入れる|いれる|colocar dentro; introduzir","沈む|しずむ|pôr-se (sol/lua); afundar","続く|つづく|continuar; estender-se","のぼる||subir; nascer (sol/lua); aparecer"],
+    Substantivos:["家|いえ|casa","一年中|いちねんじゅう|ano inteiro","海|うみ|mar; oceano","会議|かいぎ|reunião","カレー||curry","今日|きょう|hoje","国|くに|país","ケイタイ||telefone celular","コーヒー||café","仕事|しごと|trabalho; serviço","自動車|じどうしゃ|automóvel","ジュース||suco","タイ||Tailândia","チーズ||queijo","月|つき|lua","電気|でんき|luz","となり||vizinho(a); vizinhança","ドレス||vestido","波|なみ|onda","ノルウェー||Noruega","パーティー||festa","日|ひ|sol","舟|ふね|barco","船|ふね|navio","フランス||França","ほたる||vagalume","水|みず|água","ヨーグルト||iogurte","ヨーロッパ||Europa","よそ||outro lugar; estrangeiro","読み方|よみかた|leitura"],
+    "Adjetivos 1":["青い|あおい|azul","赤い|あかい|vermelho","明るい|あかるい|claro; iluminado","新しい|あたらしい|novo","暑い|あつい|quente (ar/ambiente)","熱い|あつい|quente (bebida/comida)","甘い|あまい|doce","いい・よい||bom","忙しい|いそがしい|ocupado, atarefado","うるさい||barulhento","おいしい||gostoso","多い|おおい|numeroso; ter muito","大きい|おおきい|grande","おもしろい||interessante; engraçado","悲しい|かなしい|triste","かわいい||gracioso, bonitinho","黄色い|きいろい|amarelo","黒い|くろい|preto","寒い|さむい|frio (clima)","白い|しろい|branco","涼しい|すずしい|fresco (ar/clima)","すばらしい||maravilhoso","狭い|せまい|estreito, apertado","高い|たかい|alto; caro","楽しい|たのしい|divertido","茶色い|ちゃいろい|marrom","冷たい|つめたい|gelado","遠い|とおい|longe","苦い|にがい|amargo","広い|ひろい|amplo; largo","古い|ふるい|velho; antigo","難しい|むずかしい|difícil","やさしい||fácil","安い|やすい|barato","若い|わかい|jovem"],
+    Advérbios:["いつも||sempre","少し|すこし|pouco","そんなに||tão; tanto (c/ negação: não tão)"],
+    Expressões:["いいえ||não","ううん||não (informal)","うん||sim (informal)","行ってみたい|いってみたい|querer ir (experimentar)","どんな||de que tipo","はい||sim","ゆれて||balançando","～はどう？||que tal ~?","でも||(conj.) mas, embora, contudo"]
+  },
+  L3:{
+    Verbos:["洗う|あらう|lavar","育てる|そだてる|cuidar, criar (vt)","出かける|でかける|sair","入る|はいる|entrar","持っていく|もっていく|levar (objetos)"],
+    Substantivos:["犬|いぬ|cachorro","牛|うし|vaca, boi","うち||casa","馬|うま|cavalo","男の子|おとこのこ|menino","男の人|おとこのひと|homem","女の子|おんなのこ|menina","女の人|おんなのひと|mulher","買い物|かいもの|compras","学食|がくしょく|restaurante universitário","かさ||guarda-chuva","家族|かぞく|família","かばん||bolsa, mala","紙|かみ|papel","木|き|árvore","きのう||ontem","牛肉|ぎゅうにく|carne bovina","午後|ごご|p.m. (tarde)","午前|ごぜん|a.m. (manhã)","コップ||copo","ごはん||refeição; arroz cozido","コピー||cópia","シャツ||camisa","食事|しょくじ|refeição","スーパー||supermercado","大学生|だいがくせい|universitário","たまご||ovo","チョコレート||chocolate","テスト||prova","テキスト||texto","時計|とけい|relógio","中|なか|dentro","肉|にく|carne","庭|にわ|quintal","にんじん||cenoura","ノート||caderno","パパイヤ||mamão","パン||pão","日|ひ|dia","火|ひ|fogo","人|ひと|pessoa, gente","昼|ひる|tarde","びん||garrafa","ホテル||hotel","ボール||bola","ボールペン||caneta","みかん||laranja japonesa","ミネラルウオーター||água mineral","みんな||todos","山|やま|montanha"],
+    "Adjetivos / Adnome":["小さい|ちいさい|(adj1) pequeno","茶色い|ちゃいろい|(adj1) marrom","いろいろ||(adj2) vários","大きな|おおきな|(adnome) grande; imenso","小さな|ちいさな|(adnome) pequeno"],
+    Expressões:["それから||(conj.) depois","いくつ||quantos","行った|いった|fui","買った|かった|comprei","来た|きた|vieram","した||fiz","出かけた|でかけた|saímos","みんなで||todos juntos","もらった||ganhei","～ごろ||(sufixo) por volta de","～前|まえ|(sufixo) antes; para (horas)"]
+  }
+};
+
+/* ============================================================
+   DADOS — PARTÍCULAS (Lições 1–7)
+   ============================================================ */
+const PARTS = [
+  {p:"が",rom:"ga",f:[
+    {l:1,role:"caso",d:"indica o sujeito da oração",j:"子供<b>が</b>遊ぶ。",k:"こどもがあそぶ",t:"A criança brinca."},
+    {l:3,role:"conectiva",d:"liga orações com sentido de \u201cmas\u201d",j:"安い<b>が</b>、おいしい。",k:"やすいが、おいしい",t:"É barato, mas gostoso."},
+    {l:4,role:"caso",d:"forma o complemento de capacidade / possibilidade",j:"日本語<b>が</b>分かる。",k:"にほんごがわかる",t:"Entendo japonês."}
+  ]},
+  {p:"を",rom:"o",f:[
+    {l:1,role:"caso",d:"complemento do verbo transitivo direto (objeto)",j:"本<b>を</b>読む。",k:"ほんをよむ",t:"Leio um livro."}
+  ]},
+  {p:"の",rom:"no",f:[
+    {l:1,role:"caso",d:"\u201cde / do / da\u201d — semelhante ao genitivo",j:"私<b>の</b>本",k:"わたしのほん",t:"meu livro"}
+  ]},
+  {p:"で",rom:"de",f:[
+    {l:1,role:"caso",d:"indica o lugar onde a ação ocorre",j:"学校<b>で</b>勉強する。",k:"がっこうでべんきょうする",t:"Estudo na escola."},
+    {l:5,role:"meio",d:"meio / instrumento: \u201cpor\u201d, \u201cde\u201d",j:"バス<b>で</b>行く。",k:"バスでいく",t:"Vou de ônibus."}
+  ]},
+  {p:"と",rom:"to",f:[
+    {l:1,role:"caso",d:"parceiro / companhia da ação do sujeito",j:"友達<b>と</b>話す。",k:"ともだちとはなす",t:"Converso com o amigo."},
+    {l:2,role:"caso",d:"enumeração aditiva \u201ce\u201d; parâmetro de comparação",j:"本<b>と</b>ノート",k:"ほんとノート",t:"livro e caderno"}
+  ]},
+  {p:"に",rom:"ni",f:[
+    {l:2,role:"caso",d:"local de existência ou colocação (\u201cem, sobre, dentro\u201d)",j:"庭<b>に</b>犬がいる。",k:"にわにいぬがいる",t:"Há um cachorro no quintal."},
+    {l:4,role:"caso",d:"tempo da ação praticada pelo sujeito",j:"六時<b>に</b>起きる。",k:"ろくじにおきる",t:"Acordo às 6."},
+    {l:4,role:"caso",d:"resultado de um processo (com なる etc.)",j:"教師<b>に</b>なる。",k:"きょうしになる",t:"Torno-me professor."},
+    {l:4,role:"caso",d:"destino, com verbos de deslocamento; いる・ある・住む sempre pedem に",j:"学校<b>に</b>行く。",k:"がっこうにいく",t:"Vou à escola."},
+    {l:7,role:"caso",d:"finalidade da ação (com 行く/来る o verbo fica em れんようけい)",j:"パンを買い<b>に</b>行く。",k:"パンをかいにいく",t:"Vou comprar pão."}
+  ]},
+  {p:"へ",rom:"e",f:[
+    {l:2,role:"caso",d:"direção do deslocamento: \u201cpara\u201d",j:"日本<b>へ</b>行く。",k:"にほんへいく",t:"Vou para o Japão."}
+  ]},
+  {p:"まで",rom:"made",f:[
+    {l:2,role:"caso",d:"ponto de chegada (espacial/temporal): \u201caté\u201d",j:"六時<b>まで</b>勉強する。",k:"ろくじまでべんきょうする",t:"Estudo até as 6."}
+  ]},
+  {p:"から",rom:"kara",f:[
+    {l:3,role:"caso",d:"ponto de partida (espacial/temporal): \u201ca partir de\u201d",j:"二時<b>から</b>勉強する。",k:"にじからべんきょうする",t:"Estudo a partir das 2."},
+    {l:4,role:"conectiva",d:"causa (relação subjetiva): \u201ccomo / porque\u201d",j:"寒い<b>から</b>、セーターを着る。",k:"さむいから…",t:"Como está frio, visto um suéter."},
+    {l:5,role:"procedência",d:"procedência: \u201cde\u201d",j:"外<b>から</b>人が来る。",k:"そとからひとがくる",t:"Vem gente de fora."}
+  ]},
+  {p:"は",rom:"wa",f:[
+    {l:2,role:"adverbial",d:"tópico do enunciado, ou ênfase / contraste",j:"私<b>は</b>学生だ。",k:"わたしはがくせいだ",t:"Eu sou estudante."}
+  ]},
+  {p:"も",rom:"mo",f:[
+    {l:2,role:"adverbial",d:"ênfase / contraste + acréscimo: \u201ctambém\u201d",j:"私<b>も</b>行く。",k:"わたしもいく",t:"Eu também vou."}
+  ]},
+  {p:"し",rom:"shi",f:[
+    {l:2,role:"conectiva",d:"interliga orações numa relação de adição",j:"安い<b>し</b>、おいしい。",k:"やすいし…",t:"É barato e ainda gostoso."}
+  ]},
+  {p:"ので",rom:"node",f:[
+    {l:4,role:"conectiva",d:"causa (relação objetiva): \u201ccomo / porque\u201d",j:"雨が降る<b>ので</b>、行かない。",k:"あめがふるので…",t:"Como vai chover, não vou."}
+  ]},
+  {p:"だけ",rom:"dake",f:[
+    {l:4,role:"restritiva",d:"\u201csomente / apenas\u201d",j:"これ<b>だけ</b>買う。",k:"これだけかう",t:"Compro só isto."}
+  ]},
+  {p:"か",rom:"ka",f:[
+    {l:5,role:"final",d:"partícula final de dúvida / pergunta",j:"これは何です<b>か</b>。",k:"これはなんですか",t:"O que é isto?"}
+  ]},
+  {p:"など",rom:"nado",f:[
+    {l:5,role:"caso",d:"exemplificação: \u201cetc.\u201d",j:"本やノート<b>など</b>",k:"ほんやノートなど",t:"livros, cadernos etc."}
+  ]},
+  {p:"より",rom:"yori",f:[
+    {l:5,role:"comparação",d:"\u201cmais (do) que\u201d — recai sobre o termo comparado",j:"バス<b>より</b>地下鉄が速い。",k:"バスよりちかてつがはやい",t:"O metrô é mais rápido que o ônibus."}
+  ]},
+  {p:"ながら",rom:"nagara",f:[
+    {l:7,role:"conectiva",d:"liga duas ações simultâneas do mesmo sujeito",j:"テレビを見<b>ながら</b>勉強する。",k:"テレビをみながら…",t:"Estudo enquanto assisto à TV."}
+  ]},
+  {p:"ぞ",rom:"zo",f:[
+    {l:2,role:"final",d:"modalização: convencer / chamar a atenção do interlocutor",j:"行く<b>ぞ</b>！",k:"いくぞ",t:"Vou, viu! / Vamos lá!"}
+  ]},
+  {p:"な",rom:"na",f:[
+    {l:2,role:"final",d:"modalização: expressa emoção sobre o que se diz",j:"きれいだ<b>な</b>。",k:"きれいだな",t:"Que bonito!"}
+  ]},
+  {p:"やら",rom:"yara",f:[
+    {l:2,role:"modalização",d:"indefinição / dúvida; ocorre com interrogativos",j:"どこまで続く<b>やら</b>。",k:"どこまでつづくやら",t:"Até onde será que se estende…"}
+  ]}
+];
+
+/* ============================================================
+   DADOS — EXERCÍCIOS de partícula (gabarito sugerido)
+   seg: array (strings fixas) com {g:1} marcando lacunas, na ordem
+   ============================================================ */
+const SET_L1 = ["の","が","を","と","で"];
+const SET_L4 = ["が","を","と","で","の","に"];
+const SET_L7 = ["を","と","で","の","に"];
+
+function ex(l,seg,ans,t){return{l,seg,ans,t};}
+const DRILLS = [
+  // ---- Lição 1 (の・が・を・と・で) ----
+  ex(1,["日本語",{g:1},"本",{g:1},"ある。"],["の","が"],"Há livro(s) de japonês."),
+  ex(1,["青い空",{g:1},"絵",{g:1},"かく。"],["の","を"],"Desenho o quadro do céu azul."),
+  ex(1,["子供",{g:1},"部屋",{g:1},"私が寝る。"],["の","で"],"Durmo no quarto da criança."),
+  ex(1,["先生",{g:1},"生徒",{g:1},"学校",{g:1},"会う。"],["と","が","で"],"O professor e o aluno se encontram na escola."),
+  ex(1,["図書館",{g:1},"漢字",{g:1},"辞書",{g:1},"借りる。"],["で","の","を"],"Pego um dicionário de kanji emprestado na biblioteca."),
+  ex(1,["夜、クラスメート",{g:1},"大学",{g:1},"近く",{g:1},"ビール",{g:1},"飲む。"],["と","の","で","を"],"À noite, bebo cerveja com os colegas perto da universidade."),
+  ex(1,["私",{g:1},"名前",{g:1},"書く。"],["の","を"],"Escrevo meu nome."),
+  ex(1,["ブラジル",{g:1},"雑誌",{g:1},"買う。"],["の","を"],"Compro uma revista do Brasil."),
+  // ---- Lição 4 (が・を・と・で・の・に) ----
+  ex(4,["赤い小鳥",{g:1},"庭",{g:1},"いる。"],["が","に"],"Há um passarinho vermelho no quintal."),
+  ex(4,["来年",{g:1},"一月",{g:1},"彼女",{g:1},"教会",{g:1},"結婚する。"],["の","に","と","で"],"Em janeiro do ano que vem, vou me casar com ela na igreja."),
+  ex(4,["寒いからセーター",{g:1},"着た。"],["を"],"Como estava frio, vesti um suéter."),
+  ex(4,["毎朝六時",{g:1},"起きる。"],["に"],"Acordo às 6 todas as manhãs."),
+  ex(4,["窓",{g:1},"間",{g:1},"ドア",{g:1},"ある。"],["の","に","が"],"Entre as janelas há uma porta."),
+  ex(4,["サンパウロ大学",{g:1},"日本語",{g:1},"英語",{g:1},"勉強する。そして、教師",{g:1},"なる。"],["で","と","を","に"],"Estudo japonês e inglês na USP. E me torno professor."),
+  // ---- Lição 7 (を・と・で・の・に) ----
+  ex(7,["私",{g:1},"家は地下鉄",{g:1},"駅に近い。"],["の","の"],"Minha casa fica perto da estação do metrô."),
+  ex(7,["大学",{g:1},"キャンパス",{g:1},"中",{g:1},"広場がある。"],["の","の","に"],"Há uma praça dentro do campus da universidade."),
+  ex(7,["図書館",{g:1},"昨日",{g:1},"新聞",{g:1},"読んだ。"],["で","の","を"],"Li o jornal de ontem na biblioteca."),
+  ex(7,["教室",{g:1},"クラスメート",{g:1},"話した。"],["で","と"],"Conversei com um colega na sala de aula."),
+  ex(7,["屋根",{g:1},"上",{g:1},"鳥がいる。"],["の","に"],"Há um pássaro em cima do telhado."),
+  ex(7,["鳥が木",{g:1},"上",{g:1},"鳴く。"],["の","で"],"O pássaro canta em cima da árvore.")
+];
+
+/* ============================================================
+   DADOS — KOSOADO / PRONOMES / ADNOMES
+   ============================================================ */
+const KOSOADO = [
+  {s:"Coisa (isto/isso)", ko:["これ","kore"], so:["それ","sore"], a:["あれ","are"], d:["どれ","dore — qual/quais"]},
+  {s:"Lugar", ko:["ここ","koko — aqui"], so:["そこ","soko — aí/ali"], a:["あそこ","asoko — lá"], d:["どこ","doko — onde"]},
+  {s:"Lado (formal)", ko:["こちら","kochira"], so:["そちら","sochira"], a:["あちら","achira"], d:["どちら","dochira"]},
+  {s:"Lado (informal)", ko:["こっち","kotchi"], so:["そっち","sotchi"], a:["あっち","atchi"], d:["どっち","dotchi"]},
+  {s:"Adnome (+ subst.)", ko:["この","kono — este"], so:["その","sono — esse"], a:["あの","ano — aquele"], d:["—","—"]},
+  {s:"Tipo / modo", ko:["—","—"], so:["—","—"], a:["—","—"], d:["どんな","donna — de que tipo"]}
+];
+const ADN = [
+  {w:"この",r:"kono",pt:"este",x:"この本 — este livro"},
+  {w:"その",r:"sono",pt:"esse",x:"その車 — esse carro"},
+  {w:"あの",r:"ano",pt:"aquele",x:"あの店 — aquela loja"},
+  {w:"大きな",r:"ōkina",pt:"grande; imenso",x:"大きな山 — uma montanha imensa"},
+  {w:"小さな",r:"chiisana",pt:"pequeno",x:"小さな犬 — um cachorrinho"}
+];
+const PER = [
+  {w:"私",r:"watashi",pt:"eu",x:"neutro"},
+  {w:"私",r:"watakushi",pt:"eu",x:"modéstia / formal"},
+  {w:"僕",r:"boku",pt:"eu",x:"masculino, modéstia"},
+  {w:"君",r:"kimi",pt:"você",x:"a alguém mais novo / inferior"},
+  {w:"彼",r:"kare",pt:"ele",x:""},
+  {w:"彼女",r:"kanojo",pt:"ela",x:""},
+  {w:"私達",r:"watashitachi",pt:"nós",x:""},
+  {w:"俺たち",r:"oretachi",pt:"nós",x:"uso masculino"}
+];
+const INT = [
+  {w:"いつ",r:"itsu",pt:"quando",x:""},
+  {w:"どこ",r:"doko",pt:"onde",x:""},
+  {w:"どちら",r:"dochira",pt:"qual lado / onde",x:"formal"},
+  {w:"どっち",r:"dotchi",pt:"qual lado",x:"informal"},
+  {w:"どれ",r:"dore",pt:"qual / quais",x:""},
+  {w:"何",r:"nani / nan",pt:"o que; qual",x:""},
+  {w:"どんな",r:"donna",pt:"de que tipo",x:""}
+];
+const QUIZ = [
+  {q:"este livro (adnome + subst.)",a:"この本",o:["この本","これ本","こっち本"]},
+  {q:"aquele (coisa, longe)",a:"あれ",o:["あれ","あの","あそこ"]},
+  {q:"onde?",a:"どこ",o:["どこ","どれ","どっち"]},
+  {q:"deste lado (informal)",a:"こっち",o:["こっち","こちら","ここ"]},
+  {q:"qual / quais?",a:"どれ",o:["どれ","だれ","どこ"]},
+  {q:"ele",a:"彼",o:["彼","彼女","君"]},
+  {q:"eu (modéstia, masculino)",a:"僕",o:["僕","私","君"]},
+  {q:"esse (coisa, perto do ouvinte)",a:"それ",o:["それ","これ","あれ"]},
+  {q:"de que tipo?",a:"どんな",o:["どんな","どっち","どちら"]},
+  {q:"uma montanha imensa (adnome)",a:"大きな山",o:["大きな山","大きい山","大山"]},
+  {q:"aqui",a:"ここ",o:["ここ","そこ","あそこ"]},
+  {q:"esse carro (adnome)",a:"その車",o:["その車","それ車","そっち車"]}
+];
+
+/* ============================================================
+   VOCAB — montagem
+   ============================================================ */
+let VOCAB=[];
+for(const les in RAW){for(const cat in RAW[les]){for(const s of RAW[les][cat]){
+  const[jp,kana,pt]=s.split("|");VOCAB.push({jp,kana,pt,cat,les});
+}}}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+const tabs=[...document.querySelectorAll('.tab')];
+const panels={cards:document.getElementById('cards'),parts:document.getElementById('parts'),drill:document.getElementById('drill'),pron:document.getElementById('pron'),phr:document.getElementById('phr'),gram:document.getElementById('gram')};
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.setAttribute('aria-selected',x===t));
+  for(const k in panels)panels[k].classList.toggle('active',panels[k]===panels[t.dataset.panel]);
+}));
+
+/* ============================================================
+   FLASHCARDS
+   ============================================================ */
+let curLes="all",curCat="all",mode="jp",showKana=false,ratingFilter="all",deck=[],idx=0,ratings={},srs={};
+const card=document.getElementById('card');
+const countsEl=document.getElementById('counts');
+const rateBtns=[...document.querySelectorAll('#rateBar .rate')];
+function cardKey(c){return c.les+'/'+c.jp+'/'+c.pt;}
+
+function buildSeg(el,items,active,cb){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.textContent=it.label;b.dataset.v=it.v;
+    if(it.v===active)b.classList.add('on');
+    b.addEventListener('click',()=>cb(it.v));
+    el.appendChild(b);
+  });
+}
+function lessons(){return[{v:"all",label:"Todas"},{v:"L1",label:"L1"},{v:"L2",label:"L2"},{v:"L3",label:"L3"}];}
+function cats(){
+  const set=new Set(VOCAB.filter(v=>curLes==="all"||v.les===curLes).map(v=>v.cat));
+  return[{v:"all",label:"Todas"},...[...set].map(c=>({v:c,label:c}))];
+}
+function matchRate(c){if(ratingFilter==="all")return true;if(ratingFilter==="due")return isDue(c);const r=ratings[cardKey(c)];if(ratingFilter==="none")return !r;return r===ratingFilter;}
+function rebuildDeck(){
+  deck=VOCAB.filter(v=>(curLes==="all"||v.les===curLes)&&(curCat==="all"||v.cat===curCat)&&matchRate(v));
+  if(ratingFilter==="due"){const now=Date.now();deck.sort((a,b)=>{const sa=srs[cardKey(a)],sb=srs[cardKey(b)];return (sa?sa.due:now)-(sb?sb.due:now);});}
+  idx=0;render();
+}
+function render(){
+  document.getElementById('cTot').textContent=deck.length;
+  document.getElementById('cIdx').textContent=deck.length?idx+1:0;
+  document.getElementById('prog').style.width=deck.length?((idx+1)/deck.length*100)+'%':'0%';
+  document.getElementById('deckName').textContent=(curLes==="all"?"Todas as lições":curLes)+(curCat==="all"?"":" · "+curCat);
+  card.classList.remove('flipped');
+  const _ck=deck.length?cardKey(deck[idx]):null;const _cr=_ck?ratings[_ck]:null;
+  rateBtns.forEach(b=>b.classList.toggle('active',b.dataset.level===_cr));
+  if(deck.length){const _st=srs[cardKey(deck[idx])];rateBtns.forEach(b=>{const iv=b.querySelector('.iv');if(iv)iv.textContent=fmtInterval(schedule(_st,b.dataset.level).interval);});}
+  if(!deck.length){
+    document.getElementById('frontMain').innerHTML='<div class="pt">—</div>';
+    document.getElementById('backMain').innerHTML='';return;
+  }
+  const c=deck[idx];
+  document.getElementById('fCat').textContent=c.cat;document.getElementById('bCat').textContent=c.cat;
+  document.getElementById('fLes').textContent=c.les;document.getElementById('bLes').textContent=c.les;
+  const jpBlock=`<div class="big jp">${c.jp}</div>${(showKana&&c.kana)?`<div class="kana jp-sans">${c.kana}</div>`:''}`;
+  const ptBlock=`<div class="pt">${c.pt}</div>`;
+  let front,back;
+  if(mode==="jp"){front=jpBlock;back=`<div class="pt">${c.pt}</div>${c.kana?`<div class="kana jp-sans" style="margin-top:16px">${c.kana}</div>`:''}`;}
+  else if(mode==="pt"){front=ptBlock;back=jpBlock;}
+  else{front=`<div class="big jp-sans" style="font-size:clamp(2.2rem,9vw,3.4rem)">${c.kana||c.jp}</div>`;back=`<div class="big jp" style="font-size:clamp(2rem,8vw,3rem)">${c.jp}</div><div class="ptsmall">${c.pt}</div>`;}
+  document.getElementById('frontMain').innerHTML=front;
+  document.getElementById('backMain').innerHTML=back;
+}
+function flip(){card.classList.toggle('flipped');}
+function next(){if(deck.length){idx=(idx+1)%deck.length;render();}}
+function prev(){if(deck.length){idx=(idx-1+deck.length)%deck.length;render();}}
+function shuffle(){for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}idx=0;render();}
+
+card.addEventListener('click',flip);
+card.addEventListener('keydown',e=>{
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();flip();}
+  if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();next();}
+  if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();prev();}
+});
+document.getElementById('flip').addEventListener('click',e=>{e.stopPropagation();flip();});
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('prev').addEventListener('click',prev);
+document.getElementById('shuf').addEventListener('click',shuffle);
+function renderMode(){
+  buildSeg(document.getElementById('filMode'),[{v:"jp",label:"日本語 → PT"},{v:"pt",label:"PT → 日本語"},{v:"kana",label:"かな → PT"}],mode,v=>{mode=v;renderMode();render();});
+}
+renderMode();
+function renderKana(){
+  buildSeg(document.getElementById('filKana'),[{v:false,label:"Ocultar"},{v:true,label:"Mostrar"}],showKana,v=>{showKana=v;renderKana();render();});
+}
+renderKana();
+function refreshLesCat(){
+  buildSeg(document.getElementById('filLes'),lessons(),curLes,v=>{curLes=v;curCat="all";function renderRateFil(){
+  buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
+}
+function updateCounts(){
+  let h=0,m=0,e=0,n=0,due=0,nw=0,sched=0;const now=Date.now();
+  VOCAB.forEach(v=>{const k=cardKey(v);const r=ratings[k];if(r==="hard")h++;else if(r==="med")m++;else if(r==="easy")e++;else n++;
+    const st=srs[k];if(!st)nw++;else if(st.due<=now)due++;else sched++;});
+  countsEl.innerHTML='<span class="c-hard">Difícil <b>'+h+'</b></span><span class="c-med">Médio <b>'+m+'</b></span><span class="c-easy">Fácil <b>'+e+'</b></span><span>Sem marca <b>'+n+'</b></span>';
+  const sm=document.getElementById('srsmeta');if(sm)sm.innerHTML='Revisão espaçada · a revisar agora: <b>'+(due+nw)+'</b> &nbsp;(novas: '+nw+' · agendadas: '+sched+')';
+}
+function rate(level){
+  if(!deck.length)return;
+  const c=deck[idx];const k=cardKey(c);
+  ratings[k]=level;srs[k]=schedule(srs[k],level);saveAll();card.classList.remove('flipped');
+  if(ratingFilter==="due"){
+    if(level==="hard"){const cc=deck.splice(idx,1)[0];deck.splice(Math.min(deck.length,idx+3),0,cc);if(idx>=deck.length)idx=0;render();}
+    else{deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  } else if(ratingFilter!=="all"&&ratingFilter!==level){deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  else{next();}
+  updateCounts();
+}
+rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
+const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
+function schedule(st,level){
+  let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
+  if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
+  else if(level==="med"){interval=interval<1?1:Math.round(interval*ease);reps++;}
+  else{ease+=0.15;interval=interval<1?3:Math.round(interval*ease*1.3);reps++;}
+  const due=interval===0?Date.now()+600000:Date.now()+interval*86400000;
+  return {ease:Math.round(ease*100)/100,interval,reps,due};
+}
+function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
+function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
+function saveAll(){try{if(window.storage&&window.storage.set){clearTimeout(_saveT);_saveT=setTimeout(()=>{try{window.storage.set(RKEY,JSON.stringify(ratings));window.storage.set(SKEY,JSON.stringify(srs));}catch(e){}},150);}}catch(e){}}
+async function loadAll(){try{if(window.storage&&window.storage.get){const a=await window.storage.get(RKEY);if(a&&a.value)ratings=JSON.parse(a.value);const b=await window.storage.get(SKEY);if(b&&b.value)srs=JSON.parse(b.value);}}catch(e){}rebuildDeck();updateCounts();}
+refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();});
+  buildSeg(document.getElementById('filCat'),cats(),curCat,v=>{curCat=v;function renderRateFil(){
+  buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
+}
+function updateCounts(){
+  let h=0,m=0,e=0,n=0,due=0,nw=0,sched=0;const now=Date.now();
+  VOCAB.forEach(v=>{const k=cardKey(v);const r=ratings[k];if(r==="hard")h++;else if(r==="med")m++;else if(r==="easy")e++;else n++;
+    const st=srs[k];if(!st)nw++;else if(st.due<=now)due++;else sched++;});
+  countsEl.innerHTML='<span class="c-hard">Difícil <b>'+h+'</b></span><span class="c-med">Médio <b>'+m+'</b></span><span class="c-easy">Fácil <b>'+e+'</b></span><span>Sem marca <b>'+n+'</b></span>';
+  const sm=document.getElementById('srsmeta');if(sm)sm.innerHTML='Revisão espaçada · a revisar agora: <b>'+(due+nw)+'</b> &nbsp;(novas: '+nw+' · agendadas: '+sched+')';
+}
+function rate(level){
+  if(!deck.length)return;
+  const c=deck[idx];const k=cardKey(c);
+  ratings[k]=level;srs[k]=schedule(srs[k],level);saveAll();card.classList.remove('flipped');
+  if(ratingFilter==="due"){
+    if(level==="hard"){const cc=deck.splice(idx,1)[0];deck.splice(Math.min(deck.length,idx+3),0,cc);if(idx>=deck.length)idx=0;render();}
+    else{deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  } else if(ratingFilter!=="all"&&ratingFilter!==level){deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  else{next();}
+  updateCounts();
+}
+rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
+const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
+function schedule(st,level){
+  let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
+  if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
+  else if(level==="med"){interval=interval<1?1:Math.round(interval*ease);reps++;}
+  else{ease+=0.15;interval=interval<1?3:Math.round(interval*ease*1.3);reps++;}
+  const due=interval===0?Date.now()+600000:Date.now()+interval*86400000;
+  return {ease:Math.round(ease*100)/100,interval,reps,due};
+}
+function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
+function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
+function saveAll(){try{if(window.storage&&window.storage.set){clearTimeout(_saveT);_saveT=setTimeout(()=>{try{window.storage.set(RKEY,JSON.stringify(ratings));window.storage.set(SKEY,JSON.stringify(srs));}catch(e){}},150);}}catch(e){}}
+async function loadAll(){try{if(window.storage&&window.storage.get){const a=await window.storage.get(RKEY);if(a&&a.value)ratings=JSON.parse(a.value);const b=await window.storage.get(SKEY);if(b&&b.value)srs=JSON.parse(b.value);}}catch(e){}rebuildDeck();updateCounts();}
+refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();});
+}
+function renderRateFil(){
+  buildSeg(document.getElementById('filRate'),[{v:"all",label:"Todas"},{v:"due",label:"Revisão"},{v:"hard",label:"Difíceis"},{v:"med",label:"Médias"},{v:"easy",label:"Fáceis"},{v:"none",label:"Sem marca"}],ratingFilter,v=>{ratingFilter=v;renderRateFil();rebuildDeck();});
+}
+function updateCounts(){
+  let h=0,m=0,e=0,n=0,due=0,nw=0,sched=0;const now=Date.now();
+  VOCAB.forEach(v=>{const k=cardKey(v);const r=ratings[k];if(r==="hard")h++;else if(r==="med")m++;else if(r==="easy")e++;else n++;
+    const st=srs[k];if(!st)nw++;else if(st.due<=now)due++;else sched++;});
+  countsEl.innerHTML='<span class="c-hard">Difícil <b>'+h+'</b></span><span class="c-med">Médio <b>'+m+'</b></span><span class="c-easy">Fácil <b>'+e+'</b></span><span>Sem marca <b>'+n+'</b></span>';
+  const sm=document.getElementById('srsmeta');if(sm)sm.innerHTML='Revisão espaçada · a revisar agora: <b>'+(due+nw)+'</b> &nbsp;(novas: '+nw+' · agendadas: '+sched+')';
+}
+function rate(level){
+  if(!deck.length)return;
+  const c=deck[idx];const k=cardKey(c);
+  ratings[k]=level;srs[k]=schedule(srs[k],level);saveAll();card.classList.remove('flipped');
+  if(ratingFilter==="due"){
+    if(level==="hard"){const cc=deck.splice(idx,1)[0];deck.splice(Math.min(deck.length,idx+3),0,cc);if(idx>=deck.length)idx=0;render();}
+    else{deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  } else if(ratingFilter!=="all"&&ratingFilter!==level){deck.splice(idx,1);if(idx>=deck.length)idx=0;render();}
+  else{next();}
+  updateCounts();
+}
+rateBtns.forEach(b=>b.addEventListener('click',()=>rate(b.dataset.level)));
+const RKEY='estudo-jp-ratings-v1',SKEY='estudo-jp-srs-v1';let _saveT;
+function schedule(st,level){
+  let ease=st?st.ease:2.5,interval=st?st.interval:0,reps=st?st.reps:0;
+  if(level==="hard"){ease=Math.max(1.3,ease-0.2);interval=0;reps=0;}
+  else if(level==="med"){interval=interval<1?1:Math.round(interval*ease);reps++;}
+  else{ease+=0.15;interval=interval<1?3:Math.round(interval*ease*1.3);reps++;}
+  const due=interval===0?Date.now()+600000:Date.now()+interval*86400000;
+  return {ease:Math.round(ease*100)/100,interval,reps,due};
+}
+function fmtInterval(d){if(d===0)return '~10 min';if(d===1)return '1 dia';if(d<30)return d+' dias';const mo=Math.round(d/30);return mo<=1?'1 mês':mo+' meses';}
+function isDue(c){const st=srs[cardKey(c)];return !st||st.due<=Date.now();}
+function saveAll(){try{if(window.storage&&window.storage.set){clearTimeout(_saveT);_saveT=setTimeout(()=>{try{window.storage.set(RKEY,JSON.stringify(ratings));window.storage.set(SKEY,JSON.stringify(srs));}catch(e){}},150);}}catch(e){}}
+async function loadAll(){try{if(window.storage&&window.storage.get){const a=await window.storage.get(RKEY);if(a&&a.value)ratings=JSON.parse(a.value);const b=await window.storage.get(SKEY);if(b&&b.value)srs=JSON.parse(b.value);}}catch(e){}rebuildDeck();updateCounts();}
+refreshLesCat();renderRateFil();rebuildDeck();updateCounts();loadAll();
+
+/* ============================================================
+   PARTICLES REFERENCE
+   ============================================================ */
+const pg=document.getElementById('pgrid');
+PARTS.forEach(P=>{
+  const c=document.createElement('div');c.className='pcard';
+  let h=`<div class="ph"><span class="glyph jp-sans">${P.p}</span><span class="rom">${P.rom}</span></div>`;
+  P.f.forEach(f=>{
+    h+=`<div class="func"><div class="ftop"><span class="ltag">L${f.l}</span><span class="role">${f.role}</span></div>
+    <div class="desc">${f.d}</div>
+    <div class="ex"><span class="jp-sans">${f.j}</span> <span class="exk">(${f.k})</span><br><span class="ept">${f.t}</span></div></div>`;
+  });
+  c.innerHTML=h;pg.appendChild(c);
+});
+
+/* ============================================================
+   DRILL
+   ============================================================ */
+let exFilter=1, exScore=0, exChecked={};
+const exListEl=document.getElementById('exList');
+function renderExFil(){
+  buildSeg(document.getElementById('exFil'),[{v:1,label:"Lição 1"},{v:4,label:"Lição 4"},{v:7,label:"Lição 7"}],exFilter,v=>{exFilter=+v;renderExFil();renderDrills();});
+}
+renderExFil();
+function optionsFor(l){return l===1?SET_L1:l===4?SET_L4:SET_L7;}
+function renderDrills(){
+  const list=DRILLS.filter(d=>d.l===exFilter);
+  document.getElementById('exTot').textContent=list.length;
+  exScore=0;exChecked={};document.getElementById('exScore').textContent=0;
+  exListEl.innerHTML="";
+  list.forEach((d,n)=>{
+    const id=`ex${d.l}_${n}`;
+    const opts=optionsFor(d.l);
+    const card=document.createElement('div');card.className='ex-card';card.dataset.id=id;
+    let gapCount=0;
+    let sent='<div class="sentence">';
+    d.seg.forEach(s=>{
+      if(typeof s==='string'){sent+=`<span class="seg jp-sans">${s}</span>`;}
+      else{sent+=`<button class="gap empty jp-sans" data-gap="${gapCount}">＿</button>`;gapCount++;}
+    });
+    sent+='</div>';
+    let chips='<div class="chips">'+opts.map(o=>`<button class="chip jp-sans" data-chip="${o}">${o}</button>`).join('')+'</div>';
+    card.innerHTML=`<div class="exnum"><span class="ltag">L${d.l}</span> Frase ${n+1}</div>${sent}${chips}
+      <div class="ex-actions"><button class="btn accent v">Verificar</button><button class="btn ghost c">Limpar</button><button class="btn ghost r">Resposta</button></div>
+      <div class="feedback"></div>`;
+    exListEl.appendChild(card);
+
+    const gaps=[...card.querySelectorAll('.gap')];
+    const fb=card.querySelector('.feedback');
+    let active=0;
+    function setActive(i){active=i;gaps.forEach((g,gi)=>g.classList.toggle('active',gi===i));}
+    setActive(0);
+    gaps.forEach((g,gi)=>g.addEventListener('click',()=>setActive(gi)));
+    card.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+      const g=gaps[active];if(!g)return;
+      g.textContent=ch.dataset.chip;g.dataset.val=ch.dataset.chip;g.classList.remove('empty','ok','bad');
+      if(active<gaps.length-1)setActive(active+1);
+    }));
+    card.querySelector('.c').addEventListener('click',()=>{
+      gaps.forEach(g=>{g.textContent='＿';g.dataset.val='';g.classList.remove('ok','bad');g.classList.add('empty');});
+      fb.className='feedback';setActive(0);
+    });
+    card.querySelector('.r').addEventListener('click',()=>{
+      gaps.forEach((g,gi)=>{g.textContent=d.ans[gi];g.dataset.val=d.ans[gi];g.classList.remove('empty','bad');g.classList.add('ok');});
+      fb.className='feedback show right';fb.innerHTML=`Gabarito preenchido.<span class="tr">${d.t}</span>`;
+    });
+    card.querySelector('.v').addEventListener('click',()=>{
+      let all=true,filled=true;
+      gaps.forEach((g,gi)=>{
+        const v=g.dataset.val||'';
+        if(!v){filled=false;}
+        const ok=v===d.ans[gi];
+        g.classList.remove('ok','bad','empty');
+        g.classList.add(ok?'ok':'bad');
+        if(!ok)all=false;
+      });
+      if(!filled){fb.className='feedback show wrong';fb.innerHTML='Preencha todas as lacunas primeiro.';return;}
+      if(all){
+        fb.className='feedback show right';fb.innerHTML=`Perfeito! <span class="tr">${d.t}</span>`;
+        if(!exChecked[id]){exChecked[id]=true;exScore++;document.getElementById('exScore').textContent=exScore;}
+      }else{
+        fb.className='feedback show wrong';fb.innerHTML='Ainda não. As lacunas em vermelho estão erradas — ajuste e verifique de novo.';
+      }
+    });
+  });
+}
+renderDrills();
+
+/* ============================================================
+   KOSOADO + PRONOUN CARDS
+   ============================================================ */
+const ktb=document.getElementById('ktbody');
+KOSOADO.forEach(row=>{
+  const tr=document.createElement('tr');
+  const cell=(arr,dq)=>`<td class="${dq?'dq':''}"><span class="w jp-sans">${arr[0]}</span>${arr[1]&&arr[1]!=='—'?`<span class="r">${arr[1]}</span>`:''}</td>`;
+  tr.innerHTML=`<th>${row.s}</th>${cell(row.ko)}${cell(row.so)}${cell(row.a)}${cell(row.d,true)}`;
+  ktb.appendChild(tr);
+});
+function miniCards(el,arr){
+  arr.forEach(o=>{
+    const d=document.createElement('div');d.className='mc';
+    d.innerHTML=`<div class="w jp-sans">${o.w}</div><div class="r">${o.r}</div><div class="pt">${o.pt}</div>${o.x?`<div class="x">${o.x}</div>`:''}`;
+    el.appendChild(d);
+  });
+}
+miniCards(document.getElementById('adnList'),ADN);
+miniCards(document.getElementById('perList'),PER);
+miniCards(document.getElementById('intList'),INT);
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+let qOrder=[],qPos=0,qScore=0,qSeen=0;
+function shuffleArr(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQuiz(){qOrder=shuffleArr([...Array(QUIZ.length).keys()]);qPos=0;qScore=0;qSeen=0;document.getElementById('qScore').textContent=0;document.getElementById('qSeen').textContent=0;showQ();}
+function showQ(){
+  const q=QUIZ[qOrder[qPos]];
+  document.getElementById('qText').innerHTML=`Como se diz: <span class="big jp-sans" style="font-style:normal">«${q.q}»</span>?`;
+  document.getElementById('qMeta').textContent=`Pergunta ${qPos+1} de ${QUIZ.length}`;
+  const opts=document.getElementById('qOpts');opts.innerHTML="";
+  const choices=shuffleArr(q.o);
+  const nextBtn=document.getElementById('qNext');nextBtn.disabled=true;
+  choices.forEach(ch=>{
+    const b=document.createElement('button');b.className='opt jp-sans';b.textContent=ch;
+    b.addEventListener('click',()=>{
+      [...opts.children].forEach(x=>x.disabled=true);
+      qSeen++;document.getElementById('qSeen').textContent=qSeen;
+      if(ch===q.a){b.classList.add('ok');qScore++;document.getElementById('qScore').textContent=qScore;}
+      else{b.classList.add('bad');[...opts.children].forEach(x=>{if(x.textContent===q.a)x.classList.add('ok');});}
+      nextBtn.disabled=false;
+    });
+    opts.appendChild(b);
+  });
+}
+document.getElementById('qNext').addEventListener('click',()=>{
+  qPos++;if(qPos>=qOrder.length){startQuiz();}else showQ();
+});
+startQuiz();
+
+/* ============================================================
+   FRASES (例文) — só vocabulário/gramática já vistos
+   ============================================================ */
+const SENT=[
+ {g:"Partículas de caso (L1) — が・を・の・で・と・に", short:"Caso", items:[
+   {j:"私<b>は</b>本<b>を</b>読む。",k:"わたしはほんをよむ。",t:"Eu leio um livro."},
+   {j:"子供<b>が</b>公園<b>で</b>遊ぶ。",k:"こどもがこうえんであそぶ。",t:"A criança brinca no parque."},
+   {j:"先生<b>が</b>学生<b>に</b>漢字<b>を</b>教える。",k:"せんせいががくせいにかんじをおしえる。",t:"O professor ensina kanji aos alunos."},
+   {j:"友達<b>と</b>映画館<b>で</b>映画<b>を</b>見る。",k:"ともだちとえいがかんでえいがをみる。",t:"Vejo um filme com o amigo no cinema."},
+   {j:"母<b>が</b>キッチン<b>で</b>野菜<b>を</b>切る。",k:"ははがキッチンでやさいをきる。",t:"Minha mãe corta verduras na cozinha."},
+   {j:"日本語<b>の</b>辞書<b>を</b>買う。",k:"にほんごのじしょをかう。",t:"Compro um dicionário de japonês."}
+ ]},
+ {g:"Lugar, tempo e direção — に・へ・から・まで", short:"Lugar/tempo", items:[
+   {j:"庭<b>に</b>犬<b>が</b>いる。",k:"にわにいぬがいる。",t:"Há um cachorro no quintal."},
+   {j:"机<b>の</b>上<b>に</b>本<b>が</b>ある。",k:"つくえのうえにほんがある。",t:"Há um livro em cima da mesa."},
+   {j:"毎日学校<b>へ</b>行く。",k:"まいにちがっこうへいく。",t:"Vou à escola todos os dias."},
+   {j:"二時<b>から</b>六時<b>まで</b>勉強する。",k:"にじからろくじまでべんきょうする。",t:"Estudo das 2 às 6."},
+   {j:"六時<b>に</b>起きる。",k:"ろくじにおきる。",t:"Acordo às 6 horas."},
+   {j:"来月日本<b>へ</b>行く。",k:"らいげつにほんへいく。",t:"No mês que vem, vou ao Japão."}
+ ]},
+ {g:"Adnomes — この・その・あの・大きな・小さな", short:"Adnomes", items:[
+   {j:"この本<b>は</b>おもしろい。",k:"このほんはおもしろい。",t:"Este livro é interessante."},
+   {j:"その車<b>は</b>新しい。",k:"そのくるまはあたらしい。",t:"Esse carro é novo."},
+   {j:"あの店<b>は</b>遠い。",k:"あのみせはとおい。",t:"Aquela loja fica longe."},
+   {j:"大きな犬<b>が</b>走る。",k:"おおきないぬがはしる。",t:"Um cachorro grande corre."},
+   {j:"小さな犬<b>が</b>庭<b>で</b>遊ぶ。",k:"ちいさないぬがにわであそぶ。",t:"Um cachorrinho brinca no quintal."}
+ ]},
+ {g:"Demonstrativos e pronomes — これ・あそこ・どれ・こっち…", short:"Pronomes", items:[
+   {j:"これ<b>は</b>私<b>の</b>本だ。",k:"これはわたしのほんだ。",t:"Isto é o meu livro."},
+   {j:"あそこ<b>は</b>図書館だ。",k:"あそこはとしょかんだ。",t:"Lá é a biblioteca."},
+   {j:"ここ<b>で</b>友達<b>と</b>会う。",k:"ここでともだちとあう。",t:"Encontro o amigo aqui."},
+   {j:"どれ<b>が</b>新しい？",k:"どれがあたらしい？",t:"Qual é o novo?"},
+   {j:"こっち<b>の</b>店<b>は</b>安い。",k:"こっちのみせはやすい。",t:"A loja deste lado é barata."},
+   {j:"君<b>は</b>学生<b>か</b>？",k:"きみはがくせいか？",t:"Você é estudante?"}
+ ]},
+ {g:"Adjetivos e ligação com て (L6)", short:"Adjetivos", items:[
+   {j:"日本語<b>は</b>難しい。",k:"にほんごはむずかしい。",t:"O japonês é difícil."},
+   {j:"このコーヒー<b>は</b>熱い。",k:"このコーヒーはあつい。",t:"Este café está quente."},
+   {j:"新しい車<b>は</b>高い。",k:"あたらしいくるまはたかい。",t:"O carro novo é caro."},
+   {j:"その山<b>は</b>高くて大きい。",k:"そのやまはたかくておおきい。",t:"Aquela montanha é alta e grande."},
+   {j:"この部屋<b>は</b>広くてきれいだ。",k:"このへやはひろくてきれいだ。",t:"Este quarto é amplo e bonito."},
+   {j:"海<b>は</b>青くて広い。",k:"うみはあおくてひろい。",t:"O mar é azul e amplo."}
+ ]},
+ {g:"Predicado nominal — だ・だった・ではない (L3–4)", short:"だ/ではない", items:[
+   {j:"私<b>は</b>学生だ。",k:"わたしはがくせいだ。",t:"Eu sou estudante."},
+   {j:"友達<b>は</b>日本語<b>の</b>学生ではない。",k:"ともだちはにほんごのがくせいではない。",t:"O amigo não é estudante de japonês."},
+   {j:"きのう<b>は</b>日曜日だった。",k:"きのうはにちようびだった。",t:"Ontem foi domingo."},
+   {j:"昔、ここ<b>は</b>郵便局だった。",k:"むかし、ここはゆうびんきょくだった。",t:"Antigamente, aqui era um correio."},
+   {j:"テスト<b>は</b>木曜日だ。",k:"テストはもくようびだ。",t:"A prova é na quinta-feira."}
+ ]},
+ {g:"Passado, causa e polidez — た・ので・から・ます (L4, L7)", short:"Passado/ます", items:[
+   {j:"きのう映画<b>を</b>見た。",k:"きのうえいがをみた。",t:"Ontem vi um filme."},
+   {j:"雨<b>が</b>降った<b>ので</b>、行かなかった。",k:"あめがふったので、いかなかった。",t:"Como choveu, não fui."},
+   {j:"お金<b>が</b>ない<b>から</b>、買わない。",k:"おかねがないから、かわない。",t:"Como não tenho dinheiro, não compro."},
+   {j:"毎日大学<b>で</b>勉強します。",k:"まいにちだいがくでべんきょうします。",t:"Estudo na universidade todos os dias."},
+   {j:"パン<b>を</b>買い<b>に</b>行きます。",k:"パンをかいにいきます。",t:"Vou comprar pão."},
+   {j:"テレビ<b>を</b>見<b>ながら</b>、ごはん<b>を</b>食べます。",k:"テレビをみながら、ごはんをたべます。",t:"Como enquanto assisto à TV."}
+ ]},
+ {g:"Comparação e exemplificação — より・や・など (L5–6)", short:"Comparação", items:[
+   {j:"バス<b>より</b>地下鉄<b>が</b>速い。",k:"バスよりちかてつがはやい。",t:"O metrô é mais rápido que o ônibus."},
+   {j:"本<b>や</b>ノート<b>など</b><b>を</b>買う。",k:"ほんやノートなどをかう。",t:"Compro livros, cadernos etc."},
+   {j:"屋根<b>の</b>上<b>に</b>鳥<b>が</b>います。",k:"やねのうえにとりがいます。",t:"Há um pássaro em cima do telhado."}
+ ]}
+];
+const phrList=document.getElementById('phrList');
+let phrFilter='all',phrAllOpen=false;
+function renderPhr(){
+  phrList.innerHTML='';
+  SENT.forEach((g,gi)=>{
+    if(phrFilter!=='all'&&String(gi)!==phrFilter)return;
+    const h=document.createElement('div');h.className='gphead';h.textContent=g.g;phrList.appendChild(h);
+    g.items.forEach(it=>{
+      const c=document.createElement('div');c.className='scard'+(phrAllOpen?' open':'');
+      c.innerHTML='<div class="jpn jp-sans">'+it.j+'</div><div class="rev"><div class="read jp-sans">'+it.k+'</div><div class="tr">'+it.t+'</div></div><div class="cue">toque para ver leitura e tradução</div>';
+      c.addEventListener('click',()=>c.classList.toggle('open'));
+      phrList.appendChild(c);
+    });
+  });
+}
+function renderPhrFil(){
+  buildSeg(document.getElementById('phrFil'),[{v:'all',label:'Todas'}].concat(SENT.map((g,i)=>({v:String(i),label:g.short}))),phrFilter,v=>{phrFilter=v;renderPhrFil();renderPhr();});
+}
+renderPhrFil();
+const revealAllBtn=document.getElementById('revealAll');
+revealAllBtn.addEventListener('click',()=>{phrAllOpen=!phrAllOpen;revealAllBtn.textContent=phrAllOpen?'Ocultar tudo':'Revelar tudo';renderPhr();});
+renderPhr();
+
+/* ============================================================
+   GRAMÁTICA (文法) — a camada que explica
+   ============================================================ */
+const LESSONS=[
+ {t:"Como a frase japonesa funciona", jc:"基本", 
+  body:"<p>Três ideias que mudam tudo:</p>"+
+       "<p><span class='hl'>1. O verbo vem no fim.</span> A ordem básica é Sujeito\u2013Objeto\u2013Verbo. <span class='jw'>私は本を読む</span> = \u201ceu / livro / leio\u201d.</p>"+
+       "<p><span class='hl'>2. Quem manda é a partícula, não a posição.</span> Cada palavra leva atrás de si uma part\u00edcula que diz a sua fun\u00e7\u00e3o (quem faz, o que sofre a a\u00e7\u00e3o, onde\u2026). Por isso d\u00e1 para trocar a ordem sem mudar o sentido: <span class='jw'>本を私は読む</span> quer dizer o mesmo.</p>"+
+       "<p><span class='hl'>3. N\u00e3o h\u00e1 artigo nem plural obrigat\u00f3rio,</span> e o sujeito some quando \u00e9 \u00f3bvio. <span class='jw'>本</span> pode ser \u201clivro\u201d, \u201co livro\u201d ou \u201cos livros\u201d.</p>",
+  ex:[{j:"私<b>は</b>本<b>を</b>読む。",k:"わたしはほんをよむ。",t:"Eu leio um livro."}],
+  tip:"<b>H\u00e1bito-chave:</b> ao ler, pare em cada part\u00edcula e pergunte \u201cque fun\u00e7\u00e3o ela marca?\u201d. \u00c9 assim que a frase se decifra."},
+
+ {t:"は vs が \u2014 a dúvida nº 1", jc:"は・が",
+  body:"<p><span class='jw'>が</span> marca o <span class='hl'>sujeito</span>: quem faz a a\u00e7\u00e3o, normalmente como informa\u00e7\u00e3o <span class='hl'>nova</span>. <span class='jw'>子供が遊ぶ</span> = (\u00e9) a crian\u00e7a (que) brinca.</p>"+
+       "<p><span class='jw'>は</span> marca o <span class='hl'>t\u00f3pico</span>: \u201cquanto a\u2026\u201d, aquilo de que se vai falar \u2014 em geral j\u00e1 conhecido, e cria <span class='hl'>contraste</span>. <span class='jw'>私は学生だ</span> = quanto a mim, sou estudante.</p>"+
+       "<p>Regra pr\u00e1tica inicial: resposta / coisa nova \u2192 <span class='hl'>が</span>; tema j\u00e1 estabelecido ou contraste \u2192 <span class='hl'>は</span>.</p>",
+  ex:[{j:"庭<b>に</b>犬<b>が</b>いる。",k:"にわにいぬがいる。",t:"Há um cachorro no quintal. (apresenta algo novo \u2192 が)"},
+      {j:"友達<b>は</b>学生ではない。",k:"ともだちはがくせいではない。",t:"O amigo, esse, não é estudante. (tópico/contraste \u2192 は)"}],
+  tip:"<b>Imagem:</b> が aponta um holofote para o sujeito; は p\u00f5e a palavra como \u201cpano de fundo\u201d sobre o qual se comenta."},
+
+ {t:"に vs で \u2014 dois tipos de \u201conde\u201d", jc:"に・で",
+  body:"<p><span class='jw'>で</span> = o lugar onde a <span class='hl'>a\u00e7\u00e3o acontece</span>. <span class='jw'>公園で遊ぶ</span> = brincar no parque.</p>"+
+       "<p><span class='jw'>に</span> = onde algo <span class='hl'>existe / est\u00e1</span> (com いる・ある・住む), e tamb\u00e9m o <span class='hl'>tempo</span>, o <span class='hl'>destino</span> e o <span class='hl'>resultado</span>:</p>"+
+       "<p>existe: <span class='jw'>庭に犬がいる</span> \u00b7 tempo: <span class='jw'>六時に起きる</span> \u00b7 destino: <span class='jw'>学校に行く</span> \u00b7 resultado: <span class='jw'>教師になる</span>.</p>",
+  ex:[{j:"教室<b>で</b>勉強する。",k:"きょうしつでべんきょうする。",t:"Estudo na sala. (ação ocorre ali \u2192 で)"},
+      {j:"教室<b>に</b>机<b>が</b>ある。",k:"きょうしつにつくえがある。",t:"Há uma carteira na sala. (existência \u2192 に)"}],
+  tip:"<b>Teste r\u00e1pido:</b> tem a\u00e7\u00e3o rolando no lugar? <b>で</b>. \u00c9 exist\u00eancia, destino, tempo ou \u201cvirar algo\u201d? <b>に</b>."},
+
+ {t:"As outras partículas de caso", jc:"を・の・と・へ・から・まで",
+  body:"<p><span class='jw'>を</span> = objeto direto: <span class='jw'>本を読む</span>.</p>"+
+       "<p><span class='jw'>の</span> = liga dois nomes, \u201cde\u201d: <span class='jw'>私の本</span> (meu livro), <span class='jw'>日本語の辞書</span> (dicion\u00e1rio de japon\u00eas).</p>"+
+       "<p><span class='jw'>と</span> = \u201ccom\u201d (parceiro) e \u201ce\u201d (entre nomes): <span class='jw'>友達と話す</span>; <span class='jw'>本とノート</span>.</p>"+
+       "<p><span class='jw'>へ</span> = dire\u00e7\u00e3o \u201cpara\u201d: <span class='jw'>日本へ行く</span>.</p>"+
+       "<p><span class='jw'>から\u2026まで</span> = \u201cde\u2026at\u00e9\u201d (espa\u00e7o ou tempo): <span class='jw'>二時から六時まで</span>.</p>",
+  ex:[{j:"友達<b>と</b>大学<b>の</b>近く<b>で</b>ビール<b>を</b>飲む。",k:"ともだちとだいがくのちかくでビールをのむ。",t:"Bebo cerveja com o amigo perto da universidade."}],
+  tip:"<b>の e と</b> s\u00e3o os mais frequentes: <b>の</b> cola nomes (\u201cde\u201d), <b>と</b> soma nomes (\u201ce\u201d) ou marca companhia (\u201ccom\u201d)."},
+
+ {t:"こそあど \u2014 este / esse / aquele / qual", jc:"指示語",
+  body:"<p>Muda s\u00f3 a <span class='hl'>primeira s\u00edlaba</span>: <span class='hl'>こ</span> (perto de mim) \u00b7 <span class='hl'>そ</span> (perto de voc\u00ea) \u00b7 <span class='hl'>あ</span> (longe dos dois) \u00b7 <span class='hl'>ど</span> (pergunta).</p>"+
+       "<p>O resto diz o <span class='hl'>tipo</span>: <span class='jw'>これ/それ/あれ/どれ</span> (coisa), <span class='jw'>ここ/そこ/あそこ/どこ</span> (lugar), <span class='jw'>この/その/あの</span> (antes de um nome).</p>"+
+       "<p>Diferen\u00e7a que derruba muita gente: <span class='jw'>これ</span> = \u201cisto\u201d sozinho (pronome); <span class='jw'>この</span> precisa de um nome depois \u2014 <span class='jw'>この本</span> = este livro. Nunca <span style='color:var(--rose)'>これ本</span>.</p>",
+  ex:[{j:"これ<b>は</b>私<b>の</b>本だ。",k:"これはわたしのほんだ。",t:"Isto é o meu livro."},
+      {j:"この本<b>は</b>新しい。",k:"このほんはあたらしい。",t:"Este livro é novo."}],
+  tip:"<b>Regra de bolso:</b> termina em \u2011<b>れ</b> \u2192 fica sozinho; \u00e9 <b>この/その/あの</b> \u2192 precisa de substantivo grudado."},
+
+ {t:"Adjetivos: tipo 1 (い) e tipo 2 (な)", jc:"形容詞",
+  body:"<p><span class='hl'>Adjetivo-1</span> termina em <span class='jw'>い</span> e flexiona sozinho:<br><span class='jw'>高い</span> \u2192 <span class='jw'>高くない</span> (n\u00e3o \u00e9 caro) \u2192 <span class='jw'>高かった</span> (era caro) \u2192 <span class='jw'>高くなかった</span>.</p>"+
+       "<p><span class='hl'>Adjetivo-2</span> (os \u201cな\u201d) se comporta como nome e usa <span class='jw'>だ/ではない</span>:<br><span class='jw'>きれいだ</span> \u2192 <span class='jw'>きれいではない</span> \u2192 <span class='jw'>きれいだった</span>.</p>"+
+       "<p>Antes do nome: adj-1 gruda direto (<span class='jw'>新しい車</span>); adj-2 entra com <span class='jw'>な</span> (<span class='jw'>きれいな車</span>).</p>"+
+       "<p><span class='hl'>Pegadinha:</span> <span class='jw'>大きい/小さい</span> s\u00e3o adj-1 (flexionam), mas <span class='jw'>大きな/小さな</span> s\u00e3o <span class='hl'>adnomes</span> \u2014 s\u00f3 v\u00e3o antes do nome e n\u00e3o flexionam: <span class='jw'>大きな犬</span>.</p>",
+  ex:[{j:"新しい車<b>は</b>高い。",k:"あたらしいくるまはたかい。",t:"O carro novo é caro."},
+      {j:"大学<b>は</b>静かだ。",k:"だいがくはしずかだ。",t:"A universidade é silenciosa. (adj-2 + だ)"}],
+  tip:"<b>Atalho:</b> v\u00ea um <b>い</b> no fim? Quase sempre \u00e9 adj-1 e flexiona sozinho. Sen\u00e3o, trate como nome com <b>だ</b>."},
+
+ {t:"Ligando qualidades e ações com て", jc:"て",
+  body:"<p>Para juntar duas qualidades (ou a\u00e7\u00f5es) numa frase, usa-se a forma <span class='hl'>て</span> \u2014 \u00e9 o \u201ce\u201d que conecta dentro do enunciado.</p>"+
+       "<p>adj-1: troca <span class='jw'>い</span> por <span class='jw'>くて</span> \u2192 <span class='jw'>広い \u2192 広くて</span>.</p>"+
+       "<p>adj-2 / nome: usa <span class='jw'>で</span> \u2192 <span class='jw'>きれいで静か</span>.</p>",
+  ex:[{j:"この海<b>は</b>青くて広い。",k:"このうみはあおくてひろい。",t:"Este mar é azul e amplo."},
+      {j:"大学<b>は</b>静かで便利だ。",k:"だいがくはしずかでべんりだ。",t:"A universidade é silenciosa e prática."}],
+  tip:"<b>Resumo:</b> adj-1 \u2192 <b>\u2011くて</b>; adj-2/nome \u2192 <b>で</b>. A \u00faltima palavra da cadeia \u00e9 que carrega o tempo."},
+
+ {t:"Tempo e polidez do verbo", jc:"た・ない・ます",
+  body:"<p>O <span class='hl'>tempo</span> e a <span class='hl'>polidez</span> moram no fim da frase, no verbo/auxiliar.</p>"+
+       "<p>Dicion\u00e1rio = presente/futuro: <span class='jw'>食べる, 行く</span>.</p>"+
+       "<p>Passado (auxiliar <span class='jw'>た</span>): <span class='jw'>食べた</span> (comeu), <span class='jw'>見た</span> (viu).</p>"+
+       "<p>Nega\u00e7\u00e3o (<span class='jw'>ない</span>): <span class='jw'>行かない</span>; passado negativo <span class='jw'>なかった</span> \u2192 <span class='jw'>行かなかった</span>.</p>"+
+       "<p>Forma <span class='hl'>polida</span> (<span class='jw'>ます</span>): <span class='jw'>食べます, 行きます</span>; passado <span class='jw'>ました</span>; negativo <span class='jw'>ません</span>.</p>"+
+       "<p>Para nomes/adj-2, o \u201cser\u201d \u00e9 <span class='jw'>だ</span> \u2192 <span class='jw'>だった \u00b7 ではない \u00b7 ではなかった</span>.</p>",
+  ex:[{j:"きのう映画<b>を</b>見た。",k:"きのうえいがをみた。",t:"Ontem vi um filme."},
+      {j:"毎日大学<b>で</b>勉強します。",k:"まいにちだいがくでべんきょうします。",t:"Estudo na universidade todos os dias. (polido)"}],
+  tip:"<b>Onde olhar:</b> presente/passado e neutro/educado se decidem na \u00faltima palavra. Mude o fim, muda o tempo e o tom."}
+];
+const lesList=document.getElementById('lesList');
+LESSONS.forEach(L=>{
+  const d=document.createElement('div');d.className='les';
+  let exH=(L.ex||[]).map(e=>`<div class="exrow"><div class="j jp-sans">${e.j}</div><div class="k jp-sans">${e.k}</div><div class="t">${e.t}</div></div>`).join('');
+  d.innerHTML=`<button class="lhead"><span class="lt">${L.t}<span class="jc jp-sans">${L.jc}</span></span><span class="arw">\u203a</span></button>`+
+    `<div class="lbody">${L.body}${exH}${L.tip?`<div class="tipbox">${L.tip}</div>`:''}</div>`;
+  d.querySelector('.lhead').addEventListener('click',()=>d.classList.toggle('open'));
+  lesList.appendChild(d);
+});
+</script>
+</body>
+</html>
