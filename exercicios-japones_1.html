@@ -163,6 +163,9 @@ const VERBS_L={
     {s:"泳ぐ",r:"およぐ",g:1,pt:"nadar"},
     {s:"待つ",r:"まつ",g:1,pt:"esperar"},
     {s:"送る",r:"おくる",g:1,pt:"enviar"},
+    {s:"降る",r:"ふる",g:1,pt:"cair (chuva/neve)"},
+    {s:"吹く",r:"ふく",g:1,pt:"soprar (vento)"},
+    {s:"咲く",r:"さく",g:1,pt:"florescer"},
   ],
   3:[
     {s:"遊ぶ",r:"あそぶ",g:1,pt:"brincar"},
@@ -175,6 +178,8 @@ const VERBS_L={
     {s:"入れる",r:"いれる",g:2,pt:"pôr dentro"},
     {s:"出す",r:"だす",g:1,pt:"tirar / enviar"},
     {s:"呼ぶ",r:"よぶ",g:1,pt:"chamar"},
+    {s:"閉まる",r:"しまる",g:1,pt:"fechar (intrans.)"},
+    {s:"出る",r:"でる",g:2,pt:"sair / nascer"},
   ],
   4:[
     {s:"止まる",r:"とまる",g:1,pt:"parar"},
@@ -187,6 +192,10 @@ const VERBS_L={
     {s:"飛ぶ",r:"とぶ",g:1,pt:"voar"},
     {s:"死ぬ",r:"しぬ",g:1,pt:"morrer"},
     {s:"急ぐ",r:"いそぐ",g:1,pt:"apressar-se"},
+    {s:"泣く",r:"なく",g:1,pt:"chorar"},
+    {s:"始まる",r:"はじまる",g:1,pt:"começar (intrans.)"},
+    {s:"流れる",r:"ながれる",g:2,pt:"fluir"},
+    {s:"吠える",r:"ほえる",g:2,pt:"latir"},
   ],
   5:[
     {s:"勝つ",r:"かつ",g:1,pt:"vencer"},
@@ -523,31 +532,44 @@ function genCounterProd(){
 }
 
 const INTRANS=[
-  ["子供が","遊ぶ","A criança brinca."],["雨が","降る","Chove."],
-  ["授業が","終わる","A aula termina."],["魚が","泳ぐ","O peixe nada."],
-  ["マラソンランナーが","走る","O maratonista corre."],["風が","吹く","O vento sopra."],
-  ["鳥が","飛ぶ","O pássaro voa."],["ドアが","閉まる","A porta fecha."],
-  ["学生が","勉強する","O estudante estuda."],["机が","ある","Há uma carteira."],
-  ["バスが","止まる","O ônibus para."],["先生が","来る","O professor vem."],
-  ["友達が","帰る","O amigo volta."],["花が","咲く","A flor desabrocha."],
-  ["人が","立つ","A pessoa se levanta."],["子供が","寝る","A criança dorme."],
-  ["猫が","走る","O gato corre."],["電車が","止まる","O trem para."],
-  ["赤ちゃんが","泣く","O bebê chora."],["授業が","始まる","A aula começa."],
+  /* L1 */
+  ["学生が","歩く","O estudante anda."],["友達が","来る","O amigo vem."],
+  ["先生が","帰る","O professor volta."],["子供が","寝る","A criança dorme."],
   ["母が","来る","A mãe vem."],["父が","帰る","O pai volta."],
-  ["太陽が","出る","O sol nasce."],["雪が","降る","Neva."],
-  ["試合が","終わる","O jogo termina."],["犬が","吠える","O cachorro late."],
-  ["エレベーターが","止まる","O elevador para."],["音楽が","流れる","A música toca."],
-  ["春が","来る","A primavera chega."],["時間が","終わる","O tempo acaba."],
-  ["電気が","ある","Tem luz."],["子供たちが","走る","As crianças correm."],
+  ["机が","ある","Há uma carteira."],["電気が","ある","Tem luz."],
+  ["先生が","来る","O professor vem."],["春が","来る","A primavera chega."],
+  ["友達が","帰る","O amigo volta."],["子供が","起きる","A criança acorda."],
+  ["猫が","いる","Há um gato."],["犬が","いる","Há um cachorro."],
+  /* L2 */
+  ["雨が","降る","Chove."],["雪が","降る","Neva."],
+  ["風が","吹く","O vento sopra."],["花が","咲く","A flor desabrocha."],
+  ["授業が","終わる","A aula termina."],["試合が","終わる","O jogo termina."],
+  ["時間が","終わる","O tempo acaba."],["魚が","泳ぐ","O peixe nada."],
+  ["マラソンランナーが","走る","O maratonista corre."],
+  ["猫が","走る","O gato corre."],["子供たちが","走る","As crianças correm."],
+  /* L3 */
+  ["ドアが","閉まる","A porta fecha."],["太陽が","出る","O sol nasce."],
+  /* L4 */
+  ["鳥が","飛ぶ","O pássaro voa."],
+  ["バスが","止まる","O ônibus para."],["電車が","止まる","O trem para."],
+  ["エレベーターが","止まる","O elevador para."],
+  ["人が","立つ","A pessoa se levanta."],
+  ["赤ちゃんが","泣く","O bebê chora."],["犬が","吠える","O cachorro late."],
+  ["授業が","始まる","A aula começa."],["音楽が","流れる","A música toca."],
+  /* L5 */
+  ["学生が","勉強する","O estudante estuda."],
 ];
 const INTRANS_POOL=[...new Set(INTRANS.map(x=>x[1]))];
 
 function genCompleteVerb(lnum){
   const verbs=vUpTo(lnum);
-  const valid=INTRANS.filter(it=>verbs.some(v=>v.s===it[1]));
+  const vSet=new Set(verbs.map(v=>v.s));
+  const valid=INTRANS.filter(it=>vSet.has(it[1]));
   const pool=valid.length>=3?valid:INTRANS;
   const it=rnd(pool);
-  const d=shuf(INTRANS_POOL.filter(v=>v!==it[1])).slice(0,2);
+  /* distratores filtrados pela lição atual */
+  const dAll=INTRANS_POOL.filter(v=>v!==it[1]&&vSet.has(v));
+  const d=dAll.length>=2?shuf(dAll).slice(0,2):shuf(INTRANS_POOL.filter(v=>v!==it[1])).slice(0,2);
   return{jp:`${it[0]} ＿。`,pt:it[2],options:shuf([it[1],d[0],d[1]]),answer:it[1],_k:"cv:"+it[0]};
 }
 
